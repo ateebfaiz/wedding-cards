@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { GuestAccessTier } from '@/lib/audience';
 import { copyToClipboard } from '@/lib/utils';
+import { HeirloomAmbientBackground } from '@/components/backgrounds/HeirloomAmbientBackground';
 import {
   Copy,
   Check,
@@ -89,7 +90,10 @@ export default function AdminInvitePage() {
 
   return (
     <div className="min-h-screen bg-[#F8F5EE] text-[#342C26] py-8 sm:py-12 px-4 flex flex-col items-center select-none overflow-x-hidden relative selection:bg-[#B5965A]/25">
-      <div className="relative w-full max-w-lg bg-[#FCFAF6] border border-[#B5965A]/40 rounded-3xl p-5 sm:p-8 shadow-[0_12px_40px_rgba(52,44,38,0.08)]">
+      {/* Ambient Rotating Mandala Background */}
+      <HeirloomAmbientBackground opacityMultiplier={0.6} />
+
+      <div className="relative z-10 w-full max-w-lg bg-[#FCFAF6]/95 backdrop-blur-md border border-[#B5965A]/40 rounded-3xl p-5 sm:p-8 shadow-[0_12px_40px_rgba(52,44,38,0.08)]">
         {/* Header with Royal Shield Seal Logo */}
         <div className="flex items-center justify-between border-b border-[#B5965A]/25 pb-4 mb-5">
           <div className="flex items-center gap-3">

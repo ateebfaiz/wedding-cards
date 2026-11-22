@@ -13,6 +13,7 @@ class WeddingAudioManager {
   private isMuted: boolean = false;
   private sequenceTimer: number | null = null;
   private droneOscillators: OscillatorNode[] = [];
+  private bgAudio: HTMLAudioElement | null = null;
 
   constructor() {
     // Context will initialize on first user gesture
@@ -223,74 +224,42 @@ class WeddingAudioManager {
   }
 
   /**
-   * Starts the traditional celebratory Raag melody sequence
+   * Starts the celebratory wedding music track
    */
   public startTraditionalMusic(): void {
     if (this.isPlaying || this.isMuted) return;
     this.unlockAudio();
-    if (!this.ctx || !this.musicGain) return;
-
     this.isPlaying = true;
-    this.startTanpuraDrone();
 
-    // Traditional wedding scale notes (D, F#, G, A, B, C#5, D5)
-    // Frequencies:
-    const D4 = 293.66;
-    const E4 = 329.63;
-    const Fs4 = 369.99;
-    const G4 = 392.0;
-    const A4 = 440.0;
-    const B4 = 493.88;
-    const Cs5 = 554.37;
-    const D5 = 587.33;
-
-    // Celebratory Shehnai melody motif:
-    // [frequency, duration in seconds]
-    const melody: Array<[number, number]> = [
-      [D4, 0.45],
-      [Fs4, 0.45],
-      [A4, 0.7],
-      [B4, 0.4],
-      [A4, 0.45],
-      [D5, 0.8],
-      [Cs5, 0.4],
-      [B4, 0.45],
-      [A4, 0.9],
-      // Second phrase
-      [Fs4, 0.45],
-      [G4, 0.4],
-      [A4, 0.6],
-      [B4, 0.4],
-      [A4, 0.5],
-      [Fs4, 0.6],
-      [E4, 0.4],
-      [D4, 1.2],
-    ];
-
-    let currentStep = 0;
-    const playNext = () => {
-      if (!this.isPlaying || !this.ctx || this.isMuted) return;
-
-      const [freq, dur] = melody[currentStep];
-      const now = this.ctx.currentTime;
-
-      // Downbeat bell chime on first note
-      if (currentStep === 0 || currentStep === 5) {
-        this.playGoldenBell(now);
+    if (typeof window !== 'undefined') {
+      try {
+        if (!this.bgAudio) {
+          this.bgAudio = new Audio('/assets/audio/wedding-song-opt.mp3');
+          this.bgAudio.loop = true;
+          this.bgAudio.preload = 'auto';
+        }
+        this.bgAudio.volume = this.isMuted ? 0 : 0.65;
+        const playPromise = this.bgAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn('Audio play restricted by browser autoplay policy:', err);
+          });
+        }
+      } catch (e) {
+        console.warn('Failed to start wedding audio:', e);
       }
-
-      this.playShehnaiNote(freq, now, dur);
-
-      currentStep = (currentStep + 1) % melody.length;
-      this.sequenceTimer = window.setTimeout(playNext, dur * 1000 + 40);
-    };
-
-    // Kick off melody after tanpura drone establishes (600ms)
-    this.sequenceTimer = window.setTimeout(playNext, 600);
+    }
   }
 
   public stopTraditionalMusic(): void {
     this.isPlaying = false;
+    if (this.bgAudio) {
+      try {
+        this.bgAudio.pause();
+      } catch (e) {
+        console.warn('Error pausing audio:', e);
+      }
+    }
     if (this.sequenceTimer) {
       clearTimeout(this.sequenceTimer);
       this.sequenceTimer = null;
@@ -311,6 +280,10 @@ class WeddingAudioManager {
 
   public toggleMute(): boolean {
     this.isMuted = !this.isMuted;
+    if (this.bgAudio) {
+      this.bgAudio.muted = this.isMuted;
+      this.bgAudio.volume = this.isMuted ? 0 : 0.65;
+    }
     if (this.ctx && this.masterGain) {
       const t = this.ctx.currentTime;
       this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : 0.65, t);

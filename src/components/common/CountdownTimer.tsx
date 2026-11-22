@@ -10,16 +10,19 @@ interface CountdownTimerProps {
 }
 
 export function CountdownTimer({ targetDateISO, lang }: CountdownTimerProps) {
+  const [isMounted, setIsMounted] = useState(false);
   const [countdown, setCountdown] = useState<CountdownState>(() => calculateCountdown(targetDateISO));
 
   useEffect(() => {
+    setIsMounted(true);
+    setCountdown(calculateCountdown(targetDateISO));
     const timer = setInterval(() => {
       setCountdown(calculateCountdown(targetDateISO));
     }, 1000);
     return () => clearInterval(timer);
   }, [targetDateISO]);
 
-  if (countdown.isPast) {
+  if (isMounted && countdown.isPast) {
     return (
       <div className="my-6 px-5 py-3 bg-[#FAF7F2] border-2 border-[#DFBF73]/60 rounded-2xl text-center shadow-xs">
         <span className="text-xs uppercase tracking-[0.2em] text-[#8B0000] font-cinzel font-bold">
@@ -61,7 +64,10 @@ export function CountdownTimer({ targetDateISO, lang }: CountdownTimerProps) {
       <div className="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-sm w-full text-center">
         {/* Days */}
         <div className="bg-[#FAF7F2] border-2 border-[#DFBF73]/60 rounded-2xl py-2.5 px-1.5 flex flex-col items-center shadow-xs">
-          <span className="font-cinzel text-2xl sm:text-3xl text-[#35050C] font-extrabold leading-tight">
+          <span
+            suppressHydrationWarning
+            className="font-cinzel text-2xl sm:text-3xl text-[#35050C] font-extrabold leading-tight"
+          >
             {countdown.days.toString().padStart(2, '0')}
           </span>
           <span className="text-[10px] sm:text-xs text-[#8B6B38] font-cinzel font-bold uppercase tracking-wider mt-0.5">
@@ -71,7 +77,10 @@ export function CountdownTimer({ targetDateISO, lang }: CountdownTimerProps) {
 
         {/* Hours */}
         <div className="bg-[#FAF7F2] border-2 border-[#DFBF73]/60 rounded-2xl py-2.5 px-1.5 flex flex-col items-center shadow-xs">
-          <span className="font-cinzel text-2xl sm:text-3xl text-[#35050C] font-extrabold leading-tight">
+          <span
+            suppressHydrationWarning
+            className="font-cinzel text-2xl sm:text-3xl text-[#35050C] font-extrabold leading-tight"
+          >
             {countdown.hours.toString().padStart(2, '0')}
           </span>
           <span className="text-[10px] sm:text-xs text-[#8B6B38] font-cinzel font-bold uppercase tracking-wider mt-0.5">
@@ -81,7 +90,10 @@ export function CountdownTimer({ targetDateISO, lang }: CountdownTimerProps) {
 
         {/* Minutes */}
         <div className="bg-[#FAF7F2] border-2 border-[#DFBF73]/60 rounded-2xl py-2.5 px-1.5 flex flex-col items-center shadow-xs">
-          <span className="font-cinzel text-2xl sm:text-3xl text-[#35050C] font-extrabold leading-tight">
+          <span
+            suppressHydrationWarning
+            className="font-cinzel text-2xl sm:text-3xl text-[#35050C] font-extrabold leading-tight"
+          >
             {countdown.minutes.toString().padStart(2, '0')}
           </span>
           <span className="text-[10px] sm:text-xs text-[#8B6B38] font-cinzel font-bold uppercase tracking-wider mt-0.5">
@@ -91,7 +103,10 @@ export function CountdownTimer({ targetDateISO, lang }: CountdownTimerProps) {
 
         {/* Seconds */}
         <div className="bg-[#FAF7F2] border-2 border-[#DFBF73]/60 rounded-2xl py-2.5 px-1.5 flex flex-col items-center shadow-xs">
-          <span className="font-cinzel text-2xl sm:text-3xl text-[#8B0000] font-extrabold leading-tight">
+          <span
+            suppressHydrationWarning
+            className="font-cinzel text-2xl sm:text-3xl text-[#8B0000] font-extrabold leading-tight"
+          >
             {countdown.seconds.toString().padStart(2, '0')}
           </span>
           <span className="text-[10px] sm:text-xs text-[#8B6B38] font-cinzel font-bold uppercase tracking-wider mt-0.5">

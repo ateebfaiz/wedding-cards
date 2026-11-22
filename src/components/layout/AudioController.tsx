@@ -32,27 +32,27 @@ export function AudioController() {
         type="button"
         onClick={handleToggle}
         aria-label={isPlaying ? 'Pause ceremonial music' : 'Play ceremonial music'}
-        className={`group flex items-center gap-2 p-2 sm:px-3 sm:py-2 rounded-full border border-[#DFBF73]/60 bg-[#2C050B]/90 text-[#FFDF73] shadow-[0_8px_25px_rgba(0,0,0,0.6)] backdrop-blur-md hover:border-[#FFDF73] hover:scale-105 transition-all cursor-pointer ${
-          isPlaying ? 'ring-2 ring-[#DFBF73]/50' : 'opacity-80'
+        className={`group flex items-center gap-2 p-2 sm:px-3 sm:py-2 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6]/90 text-[#342C26] shadow-[0_8px_25px_rgba(52,44,38,0.12)] backdrop-blur-md hover:border-[#B5965A] hover:scale-105 transition-all cursor-pointer ${
+          isPlaying ? 'ring-2 ring-[#B5965A]/50' : 'opacity-85'
         }`}
       >
         {/* Spinning Gold Music Disc */}
         <div
-          className={`w-6 h-6 rounded-full border border-[#DFBF73] bg-gradient-to-tr from-[#8B0000] to-[#DFBF73] flex items-center justify-center shadow-inner ${
+          className={`w-6 h-6 rounded-full border border-[#B5965A] bg-gradient-to-tr from-[#545B43] to-[#B5965A] flex items-center justify-center shadow-inner ${
             isPlaying ? 'animate-disc-spin' : ''
           }`}
         >
-          <Music className="w-3 h-3 text-[#FFDF73]" />
+          <Music className="w-3 h-3 text-[#F8F5EE]" />
         </div>
 
-        <span className="text-[11px] font-cinzel tracking-wider text-[#FFDF73] hidden sm:inline">
+        <span className="text-[11px] font-sans font-medium text-[#342C26] hidden sm:inline">
           {isPlaying ? 'Music Playing' : 'Play Music'}
         </span>
 
         {isPlaying ? (
-          <Volume2 className="w-3.5 h-3.5 text-[#FFDF73] animate-pulse" />
+          <Volume2 className="w-3.5 h-3.5 text-[#545B43] animate-pulse" />
         ) : (
-          <VolumeX className="w-3.5 h-3.5 text-[#A68850]" />
+          <VolumeX className="w-3.5 h-3.5 text-[#81776B]" />
         )}
       </button>
     </div>

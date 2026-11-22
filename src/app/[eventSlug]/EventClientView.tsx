@@ -14,6 +14,7 @@ import { MeetingPointCard } from '@/components/events/MeetingPointCard';
 import { BaraatStatusCard } from '@/components/events/BaraatStatusCard';
 import { ActionRow } from '@/components/events/ActionRow';
 import { filterEventsForTier } from '@/lib/audience';
+import { HeirloomAmbientBackground } from '@/components/backgrounds/HeirloomAmbientBackground';
 import { ShieldAlert, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface EventClientViewProps {
@@ -26,6 +27,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
   const [lang, setLang] = useState<SupportedLanguage>(config.meta.defaultLanguage || 'en');
 
   const tier = (searchParams.get('invite') as any) || 'all';
+  const isAllEvents = tier === 'all';
   const { allowedOrder } = filterEventsForTier(config, tier);
   const isAllowed = allowedOrder.includes(event.id) || allowedOrder.includes(event.slug);
 
@@ -38,21 +40,25 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   return (
     <div
-      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center relative overflow-x-hidden"
+      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
-      {/* 1. Independent Top Navigation Header */}
+      {/* Dynamic Heirloom Ambient Background with Dual Rotating Mandalas & Frosted Light Flares */}
+      <HeirloomAmbientBackground />
+
+      {/* 1. Top Navigation Header (Tabs only visible if invited to all events) */}
       <EventNavigationHeader
         currentSlug={event.slug}
         lang={lang}
         onToggleLang={() => setLang(lang === 'en' ? 'ur' : 'en')}
+        showEventTabs={isAllEvents}
       />
 
-      {/* 2. Main Independent Content Area (Generous & Breathing) */}
-      <main className="w-full max-w-2xl px-4 py-8 sm:py-12 flex flex-col items-center">
+      {/* 2. Main Full-Fledged Content Area (Unwrapped & Breathing) */}
+      <main className="w-full max-w-3xl px-4 sm:px-8 py-8 sm:py-14 flex flex-col items-center relative z-10">
         {/* Audience Gate Check (If tier does not include this event) */}
         {!isAllowed ? (
-          <div className="w-full my-8 text-center p-8 rounded-3xl bg-[#FCFAF6] border border-[#B5965A]/40 shadow-sm">
+          <div className="w-full my-8 text-center p-8 rounded-3xl bg-[#FCFAF6]/90 border border-[#B5965A]/40 shadow-sm backdrop-blur-xs">
             <div className="w-12 h-12 rounded-full bg-[#702F3D]/10 text-[#702F3D] flex items-center justify-center mx-auto mb-4 border border-[#702F3D]/30">
               <ShieldAlert className="w-6 h-6" />
             </div>
@@ -84,11 +90,8 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
             </Link>
           </div>
         ) : (
-          /* Independent Heirloom Ceremony Folio */
-          <div className="w-full bg-[#FCFAF6] rounded-3xl border border-[#B5965A]/35 p-6 sm:p-10 shadow-[0_20px_60px_rgba(52,44,38,0.08)] relative overflow-hidden">
-            {/* Inner Decorative Hairline Border */}
-            <div className="absolute inset-2 sm:inset-3 border border-[#B5965A]/20 rounded-2xl pointer-events-none" />
-
+          /* Full Independent Stationery Canvas */
+          <div className="w-full flex flex-col items-center space-y-6">
             {/* Event Hero */}
             <EventHero event={event} lang={lang} />
 
@@ -100,59 +103,73 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
             {/* Ceremonial Progression Milestones (Baraat only) */}
             {event.baraatStatus && (
-              <BaraatStatusCard status={event.baraatStatus} lang={lang} />
+              <div className="w-full">
+                <BaraatStatusCard status={event.baraatStatus} lang={lang} />
+              </div>
             )}
 
             {/* Meeting Point Card (Baraat only) */}
             {event.meetingPoint && (
-              <MeetingPointCard meetingPoint={event.meetingPoint} lang={lang} />
+              <div className="w-full">
+                <MeetingPointCard meetingPoint={event.meetingPoint} lang={lang} />
+              </div>
             )}
 
             {/* Ceremony Schedule Timeline */}
-            <ScheduleTimeline schedule={event.schedule} lang={lang} />
+            <div className="w-full">
+              <ScheduleTimeline schedule={event.schedule} lang={lang} />
+            </div>
 
             {/* Venue & Directions Card */}
-            <VenueCard venue={event.venue} lang={lang} />
+            <div className="w-full">
+              <VenueCard venue={event.venue} lang={lang} />
+            </div>
 
             {/* Travel Guidance & Highway Advisories (Nikkah only) */}
             {event.travelGuidance && (
-              <TravelGuide guidance={event.travelGuidance} lang={lang} />
+              <div className="w-full">
+                <TravelGuide guidance={event.travelGuidance} lang={lang} />
+              </div>
             )}
 
-            {/* 3. Bottom Event Switcher: Other Ceremonies Overview */}
-            <div className="mt-10 pt-6 border-t border-[#B5965A]/25 text-center">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#81776B] font-sans font-bold block mb-4">
-                {lang === 'ur' ? 'دیگر تقریباتِ شادی' : 'Explore Other Ceremonies'}
-              </span>
+            {/* 3. Bottom Event Switcher: ONLY shown when invited to all events */}
+            {isAllEvents && (
+              <div className="w-full mt-10 pt-8 border-t border-[#B5965A]/25 text-center">
+                <span className="text-[11px] uppercase tracking-[0.25em] text-[#81776B] font-sans font-bold block mb-4">
+                  {lang === 'ur' ? 'دیگر تقریباتِ شادی' : 'Explore Other Ceremonies'}
+                </span>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-left">
-                {otherEvents.map((oEvent) => (
-                  <Link
-                    key={oEvent.slug}
-                    href={`/${oEvent.slug}`}
-                    className="p-4 rounded-xl border border-[#B5965A]/30 bg-[#F8F5EE] hover:border-[#B5965A] hover:bg-[#EFE8DA]/50 transition-all flex items-center justify-between group shadow-2xs"
-                  >
-                    <div>
-                      <span className="text-[10px] uppercase tracking-wider text-[#81776B] font-sans font-bold block">
-                        {oEvent.ceremonyType[lang]}
-                      </span>
-                      <h4
-                        className={`text-base font-bold text-[#342C26] ${
-                          lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
-                        }`}
-                      >
-                        {oEvent.title[lang]}
-                      </h4>
-                      <span className="text-xs text-[#545B43] font-medium block mt-0.5">
-                        {oEvent.formattedDate[lang]}
-                      </span>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-[#B5965A] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform shrink-0" />
-                  </Link>
-                ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-left">
+                  {otherEvents.map((oEvent) => (
+                    <Link
+                      key={oEvent.slug}
+                      href={`/${oEvent.slug}`}
+                      className="p-4 rounded-2xl border border-[#B5965A]/30 bg-[#FCFAF6]/90 backdrop-blur-xs hover:border-[#B5965A] hover:bg-[#EFE8DA]/50 transition-all flex items-center justify-between group shadow-2xs"
+                    >
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-[#81776B] font-sans font-bold block">
+                          {oEvent.ceremonyType[lang]}
+                        </span>
+                        <h4
+                          className={`text-base font-bold text-[#342C26] ${
+                            lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                          }`}
+                        >
+                          {oEvent.title[lang]}
+                        </h4>
+                        <span className="text-xs text-[#545B43] font-medium block mt-0.5">
+                          {oEvent.formattedDate[lang]}
+                        </span>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-[#B5965A] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform shrink-0" />
+                    </Link>
+                  ))}
+                </div>
               </div>
+            )}
 
-              {/* Link back to Main Invitation Card */}
+            {/* Link back to Main Invitation Card */}
+            <div className="pt-6 text-center">
               <Link
                 href="/"
                 className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#342C26] hover:text-[#702F3D] transition-colors"

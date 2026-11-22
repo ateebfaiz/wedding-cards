@@ -28,13 +28,13 @@ export function EventHero({ event, lang }: EventHeroProps) {
 
   return (
     <div className="flex flex-col items-center text-center my-4 sm:my-6">
-      {/* 1. Golden Bismillah Banner Asset */}
-      <div className="relative w-56 sm:w-68 aspect-[934/225] mx-auto mb-3">
+      {/* 1. Golden Bismillah Banner Asset (Enlarged) */}
+      <div className="relative w-72 sm:w-96 md:w-[440px] aspect-[934/225] mx-auto mb-4 drop-shadow-xs">
         <Image
           src="/assets/calligraphy/bismillah-islamic-vector.webp"
           alt="Bismillah Al-Rahman Al-Raheem"
           fill
-          sizes="(max-width: 640px) 224px, 272px"
+          sizes="(max-width: 640px) 288px, (max-width: 1024px) 384px, 440px"
           className="object-contain"
           priority
         />

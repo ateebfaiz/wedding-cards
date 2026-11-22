@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { WeddingConfig, SupportedLanguage } from '@/types/wedding';
 import { AudioController } from './AudioController';
 import { WaxSealEnvelope } from '../envelope/WaxSealEnvelope';
+import { HeirloomAmbientBackground } from '../backgrounds/HeirloomAmbientBackground';
 import { resolveGuestContext, filterEventsForTier, GuestContext } from '@/lib/audience';
 import { Globe } from 'lucide-react';
 
@@ -46,9 +47,12 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
 
   return (
     <div
-      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center justify-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
+      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center justify-start relative overflow-x-hidden selection:bg-[#B5965A]/25"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
+      {/* Dynamic Heirloom Background with Rotating Complementary Mandalas & Frosted Light Flares */}
+      {isOpened && <HeirloomAmbientBackground />}
+
       {/* Interactive Wax-Sealed Opening Experience (With Skip Button) */}
       {!isOpened && (
         <WaxSealEnvelope
@@ -72,8 +76,8 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
         </button>
       </div>
 
-      {/* Main Wedding Card Viewport (Contemporary Heirloom Folio) */}
-      <main className="w-full max-w-xl px-3 py-6 sm:py-10 z-10 flex flex-col items-center justify-center">
+      {/* Full-Fledged Unwrapped Wedding Invitation Viewport */}
+      <main className="w-full z-10 flex flex-col items-center">
         {children(lang, guestContext)}
       </main>
 
