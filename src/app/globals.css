@@ -1,47 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #F8F5EE;
-  --foreground: #342C26;
-  --ivory: #F8F5EE;
-  --warm-paper: #EFE8DA;
-  --antique-gold: #B5965A;
-  --deep-olive: #545B43;
-  --dark-espresso: #342C26;
-  --muted-taupe: #8A8074;
-  --burgundy: #702F3D;
+  /* Contemporary Heirloom Wedding Stationery Palette */
+  --color-paper: #F8F5EE;          /* Primary ivory background */
+  --color-paper-deep: #EFE8DA;     /* Secondary warm parchment */
+  --color-paper-card: #FCFAF6;     /* Card surface */
+  --color-ink: #342C26;            /* Primary deep espresso text */
+  --color-ink-muted: #81776B;      /* Warm taupe body/labels */
+  --color-antique-gold: #B5965A;   /* Restrained antique gold rules/accents */
+  --color-gold-light: #DFBF73;
+  --color-olive: #545B43;          /* Nikkah restrained accent */
+  --color-burgundy: #702F3D;       /* Baraat accent */
+  --color-champagne: #CBB994;      /* Walima champagne accent */
+
+  --color-border: rgba(181, 150, 90, 0.32);
+  --color-surface: rgba(255, 255, 255, 0.65);
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
+/* English Editorial Serif Typography */
 .font-serif {
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Urdu Typography Hierarchy - Strictly No Artificial Letter Spacing */
+/* Grand Display Nastaliq for Names & Headings */
+.font-nastaliq-display {
+  font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  line-height: 2.1 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* High-Legibility Body Nastaliq for Venues & Schedules */
+.font-nastaliq-body {
+  font-family: 'Noto Nastaliq Urdu', 'Gulzar', serif;
+  line-height: 1.95 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
 .font-nastaliq {
-  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
-  line-height: 2.2 !important;
+  font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  line-height: 2.1 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
 }
 
+/* Sacred Arabic / Classical Naskh */
 .font-arabic {
-  font-family: 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', serif;
+  font-family: 'Amiri', serif;
+  line-height: 2.0 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
 }
 
-/* 3D Envelope perspective */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-/* Print utilities */
-@media print {
-  header, footer, nav, button, .no-print {
-    display: none !important;
+/* Restrained Stationery Animations */
+@keyframes slowDrift {
+  0% {
+    transform: scale(1) translate(0, 0);
   }
+  50% {
+    transform: scale(1.02) translate(-0.5%, -0.8%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.animate-slow-drift {
+  animation: slowDrift 28s ease-in-out infinite;
+}
+
+/* Slow Counter-Rotation */
+@keyframes spinClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow-cw {
+  animation: spinClockwise 80s linear infinite;
 }
