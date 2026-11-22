@@ -5,14 +5,12 @@ import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { GuestAccessTier } from '@/lib/audience';
 import { copyToClipboard } from '@/lib/utils';
-import { InteractiveArabicBackground } from '@/components/backgrounds/InteractiveArabicBackground';
 import {
   Copy,
   Check,
   Share2,
   QrCode,
   Eye,
-  ArrowLeft,
 } from 'lucide-react';
 import { QRCodeModal } from '@/components/modals/QRCodeModal';
 
@@ -79,10 +77,10 @@ export default function AdminInvitePage() {
     const greetingUr = guestName.trim()
       ? `بخدمتِ گرامی قدر ${guestName.trim()} و اہلِ خانہ،\n\n`
       : '';
-    const messageUr = `${greetingUr}السلام علیکم و رحمتہ اللہ\n\nاللہ تعالیٰ کے فضل و کرم سے ${coupleNamesUr} کی شادی خانہ آبادی کی مبارک تقریب طے پائی ہے۔\n\nہم آپ کو ${currentTierInfo.titleUr} میں شرکت اور دعاؤں کے لیے پُرخلوص دعوت دیتے ہیں۔\n\nبراہِ کرم اپنا مخصوص ڈیجیٹل کارڈ ملاحظہ فرمائیں:\n${guestUrl}\n\nطالبِ دعا:\nجناب و محترمہ سرفراز اعظم`;
+    const messageUr = `${greetingUr}السلام علیکم و رحمتہ اللہ\n\nاللہ تعالیٰ کے فضل و کرم سے ${coupleNamesUr} کی شادی خانہ آبادی کی مبارک تقریب طے پائی ہے۔\n\nہم آپ کو ${currentTierInfo.titleUr} میں شرکت اور دعاؤں کے لیے پُرخلوص دعوت دیتے ہیں۔\n\nبراہِ کرم اپنا مخصوص ڈیجیٹل کارڈ ملاحظہ فرمائیں:\n${guestUrl}\n\nطالبِ دعا:\nجناب و محترمہ فیض رسول چیمہ`;
 
     const greetingEn = guestName.trim() ? `Dear ${guestName.trim()} & Family,\n\n` : '';
-    const messageEn = `${greetingEn}With the blessings of Almighty Allah, we cordially invite you to celebrate the wedding festivities of ${coupleNamesEn}.\n\nInvitation: ${currentTierInfo.titleEn}\n\nPlease tap to open your personalized digital wedding invitation:\n${guestUrl}\n\nWarm regards,\nMr. & Mrs. Sarfraz Azam`;
+    const messageEn = `${greetingEn}With the blessings of Almighty Allah, we cordially invite you to celebrate the wedding festivities of ${coupleNamesEn}.\n\nInvitation: ${currentTierInfo.titleEn}\n\nPlease tap to open your personalized digital wedding invitation:\n${guestUrl}\n\nWarm regards,\nMr. & Mrs. Faiz Rasool Cheema`;
 
     const message = langPref === 'ur' ? messageUr : messageEn;
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
@@ -90,13 +88,10 @@ export default function AdminInvitePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#140205] text-[#F8F5EE] py-6 sm:py-10 px-3 sm:px-4 flex flex-col items-center select-none overflow-x-hidden relative">
-      {/* Interactive Full Bleed Arabic Background */}
-      <InteractiveArabicBackground showDiscAnimation={false} />
-
-      <div className="relative w-full max-w-lg bg-[#200408]/95 border-2 border-[#DFBF73]/50 rounded-3xl p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-md">
+    <div className="min-h-screen bg-[#F8F5EE] text-[#342C26] py-8 sm:py-12 px-4 flex flex-col items-center select-none overflow-x-hidden relative selection:bg-[#B5965A]/25">
+      <div className="relative w-full max-w-lg bg-[#FCFAF6] border border-[#B5965A]/40 rounded-3xl p-5 sm:p-8 shadow-[0_12px_40px_rgba(52,44,38,0.08)]">
         {/* Header with Royal Shield Seal Logo */}
-        <div className="flex items-center justify-between border-b border-[#DFBF73]/30 pb-4 mb-5">
+        <div className="flex items-center justify-between border-b border-[#B5965A]/25 pb-4 mb-5">
           <div className="flex items-center gap-3">
             <div className="relative w-12 h-12 shrink-0">
               <Image
@@ -108,10 +103,10 @@ export default function AdminInvitePage() {
               />
             </div>
             <div>
-              <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-cinzel font-bold block">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-[#B5965A] font-sans font-semibold block">
                 Host Private Portal
               </span>
-              <h1 className="text-lg sm:text-xl font-cinzel font-bold text-[#FFDF73] whitespace-nowrap">
+              <h1 className="text-lg sm:text-xl font-serif text-[#342C26] whitespace-nowrap">
                 Guest Invitation Manager
               </h1>
             </div>
@@ -122,7 +117,7 @@ export default function AdminInvitePage() {
         <div className="space-y-4">
           {/* Guest / Family Name */}
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-cinzel font-bold mb-1.5 whitespace-nowrap">
+            <label className="block text-xs uppercase tracking-wider text-[#5A4D41] font-sans font-semibold mb-1.5 whitespace-nowrap">
               1. Guest / Family Name
             </label>
             <input
@@ -130,13 +125,13 @@ export default function AdminInvitePage() {
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
               placeholder="e.g. Dr. & Mrs. Farooq Khan"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#DFBF73]/50 bg-[#35050C] text-[#FFF] placeholder-[#A68850] text-sm focus:outline-hidden focus:border-[#FFDF73] focus:ring-1 focus:ring-[#FFDF73]"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[#B5965A]/35 bg-white text-[#342C26] placeholder-[#81776B]/60 text-sm focus:outline-hidden focus:border-[#B5965A] focus:ring-1 focus:ring-[#B5965A] shadow-2xs"
             />
           </div>
 
           {/* Invitation Tier Selection (No awkward wraps) */}
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-cinzel font-bold mb-1.5 whitespace-nowrap">
+            <label className="block text-xs uppercase tracking-wider text-[#5A4D41] font-sans font-semibold mb-1.5 whitespace-nowrap">
               2. Invited Ceremony Access
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -151,14 +146,14 @@ export default function AdminInvitePage() {
                     onClick={() => setTier(tKey)}
                     className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? 'border-[#FFDF73] bg-[#8B0000]/60 ring-1 ring-[#FFDF73]'
-                        : 'border-[#DFBF73]/30 bg-[#2C050B]/60 hover:border-[#DFBF73]/60'
+                        ? 'border-[#545B43] bg-[#545B43]/10 ring-1 ring-[#545B43]'
+                        : 'border-[#B5965A]/25 bg-white hover:border-[#B5965A]/50 shadow-2xs'
                     }`}
                   >
-                    <span className="text-xs font-bold text-[#FFDF73] block mb-0.5 whitespace-nowrap truncate">
+                    <span className="text-xs font-semibold text-[#342C26] block mb-0.5 whitespace-nowrap truncate">
                       {info.titleEn}
                     </span>
-                    <span className="text-[11px] font-nastaliq text-[#EFE8DA]/85 block whitespace-nowrap truncate">
+                    <span className="text-[11px] font-nastaliq text-[#5A4D41] block whitespace-nowrap truncate">
                       {info.titleUr}
                     </span>
                   </button>
@@ -167,17 +162,17 @@ export default function AdminInvitePage() {
             </div>
           </div>
 
-          {/* WhatsApp Language Preference (No wrap) */}
+          {/* WhatsApp Language Preference */}
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-cinzel font-bold mb-1.5 whitespace-nowrap">
+            <label className="block text-xs uppercase tracking-wider text-[#5A4D41] font-sans font-semibold mb-1.5 whitespace-nowrap">
               3. WhatsApp Message Language
             </label>
-            <div className="inline-flex rounded-xl border border-[#DFBF73]/40 p-1 bg-[#2C050B]">
+            <div className="inline-flex rounded-xl border border-[#B5965A]/30 p-1 bg-[#EFE8DA]/60">
               <button
                 type="button"
                 onClick={() => setLangPref('ur')}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-nastaliq transition-colors cursor-pointer whitespace-nowrap ${
-                  langPref === 'ur' ? 'bg-[#8B0000] text-[#FFDF73] font-bold shadow-xs' : 'text-[#EFE8DA]/70'
+                  langPref === 'ur' ? 'bg-[#545B43] text-white font-medium shadow-xs' : 'text-[#5A4D41]'
                 }`}
               >
                 اردو دعوت نامہ
@@ -185,8 +180,8 @@ export default function AdminInvitePage() {
               <button
                 type="button"
                 onClick={() => setLangPref('en')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-cinzel transition-colors cursor-pointer whitespace-nowrap ${
-                  langPref === 'en' ? 'bg-[#8B0000] text-[#FFDF73] font-bold shadow-xs' : 'text-[#EFE8DA]/70'
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-sans transition-colors cursor-pointer whitespace-nowrap ${
+                  langPref === 'en' ? 'bg-[#545B43] text-white font-medium shadow-xs' : 'text-[#5A4D41]'
                 }`}
               >
                 English Text
@@ -195,16 +190,16 @@ export default function AdminInvitePage() {
           </div>
 
           {/* Generated URL Box */}
-          <div className="p-3.5 rounded-xl bg-[#180205] border border-[#DFBF73]/40 space-y-1.5">
-            <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-bold block whitespace-nowrap">
+          <div className="p-3.5 rounded-xl bg-[#EFE8DA]/40 border border-[#B5965A]/30 space-y-1.5">
+            <span className="text-[10px] uppercase tracking-widest text-[#B5965A] font-bold block whitespace-nowrap">
               Personalized Guest Link:
             </span>
-            <p className="text-xs font-mono text-[#FFDF73] break-all select-all leading-relaxed">
+            <p className="text-xs font-mono text-[#342C26] break-all select-all leading-relaxed bg-white/70 p-2 rounded-lg border border-[#B5965A]/20">
               {guestUrl}
             </p>
-            <div className="text-[10px] text-[#A68850] flex flex-wrap items-center gap-1 pt-1">
-              <span className="whitespace-nowrap">Included:</span>
-              <span className="text-[#EFE8DA] font-medium">{currentTierInfo.events.join(' · ')}</span>
+            <div className="text-[10px] text-[#81776B] flex flex-wrap items-center gap-1 pt-1">
+              <span className="whitespace-nowrap font-medium">Included:</span>
+              <span className="text-[#342C26]">{currentTierInfo.events.join(' · ')}</span>
             </div>
           </div>
 
@@ -214,16 +209,16 @@ export default function AdminInvitePage() {
             <button
               type="button"
               onClick={handleCopyLink}
-              className="w-full sm:flex-1 py-3 px-4 rounded-xl border border-[#DFBF73] text-[#FFDF73] font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:bg-[#8B0000]/40 transition-colors cursor-pointer shadow-md whitespace-nowrap shrink-0"
+              className="w-full sm:flex-1 py-3 px-4 rounded-xl border border-[#B5965A] bg-white text-[#342C26] font-sans text-xs font-semibold flex items-center justify-center gap-2 hover:bg-[#EFE8DA] transition-colors cursor-pointer shadow-2xs whitespace-nowrap shrink-0"
             >
               {copied ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span className="whitespace-nowrap">Link Copied!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-[#DFBF73] shrink-0" />
+                  <Copy className="w-4 h-4 text-[#B5965A] shrink-0" />
                   <span className="whitespace-nowrap">Copy Private Link</span>
                 </>
               )}
@@ -233,7 +228,7 @@ export default function AdminInvitePage() {
             <button
               type="button"
               onClick={handleShareWhatsApp}
-              className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-lg cursor-pointer whitespace-nowrap shrink-0"
+              className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-sans text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer whitespace-nowrap shrink-0"
             >
               <Share2 className="w-4 h-4 shrink-0" />
               <span className="whitespace-nowrap">Send WhatsApp</span>
@@ -243,11 +238,11 @@ export default function AdminInvitePage() {
             <button
               type="button"
               onClick={() => setShowQR(true)}
-              className="w-full sm:w-auto py-3 px-4 rounded-xl border border-[#DFBF73]/60 bg-[#2C050B] text-[#DFBF73] hover:text-[#FFDF73] hover:border-[#FFDF73] flex items-center justify-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0"
+              className="w-full sm:w-auto py-3 px-4 rounded-xl border border-[#B5965A]/50 bg-white text-[#5A4D41] hover:text-[#342C26] hover:border-[#B5965A] flex items-center justify-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0 shadow-2xs"
               title="Generate QR code"
             >
               <QrCode className="w-4 h-4 shrink-0" />
-              <span className="text-xs font-cinzel font-bold sm:hidden whitespace-nowrap">View QR</span>
+              <span className="text-xs font-sans font-semibold sm:hidden whitespace-nowrap">View QR</span>
             </button>
           </div>
 
@@ -257,7 +252,7 @@ export default function AdminInvitePage() {
               href={guestUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-[#DFBF73] hover:text-[#FFDF73] hover:underline whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 text-xs text-[#B5965A] hover:text-[#342C26] hover:underline whitespace-nowrap font-medium"
             >
               <Eye className="w-3.5 h-3.5 shrink-0" />
               <span>Test Live Card exactly as this guest will see it ↗</span>

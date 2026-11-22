@@ -1,42 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #180306;
-  --foreground: #342C26;
-  --ivory: #FDFBF7;
-  --warm-paper: #F5EFEB;
-  --antique-gold: #B5965A;
-  --bright-gold: #DFBF73;
-  --deep-olive: #545B43;
-  --dark-espresso: #2A201A;
-  --muted-taupe: #7D7266;
-  --burgundy: #702F3D;
-  --royal-red: #8B0000;
+  /* Contemporary Heirloom Wedding Stationery Palette */
+  --color-paper: #F8F5EE;          /* Primary ivory background */
+  --color-paper-deep: #EFE8DA;     /* Secondary warm parchment */
+  --color-paper-card: #FCFAF6;     /* Card surface */
+  --color-ink: #342C26;            /* Primary deep espresso text */
+  --color-ink-muted: #81776B;      /* Warm taupe body/labels */
+  --color-antique-gold: #B5965A;   /* Restrained antique gold rules/accents */
+  --color-gold-light: #DFBF73;
+  --color-olive: #545B43;          /* Nikkah restrained accent */
+  --color-burgundy: #702F3D;       /* Baraat accent */
+  --color-champagne: #CBB994;      /* Walima champagne accent */
+
+  --color-border: rgba(181, 150, 90, 0.32);
+  --color-surface: rgba(255, 255, 255, 0.65);
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* English Regal Serif Typography Hierarchy */
-.font-playfair {
-  font-family: 'Playfair Display', Georgia, serif;
+/* English Editorial Serif Typography */
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-cinzel {
   font-family: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
 }
 
-.font-serif {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
 .font-sans {
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* Urdu Typography Hierarchy - Strictly No Artificial Letter Spacing */
@@ -51,7 +58,7 @@ body {
 /* High-Legibility Body Nastaliq for Venues & Schedules */
 .font-nastaliq-body {
   font-family: 'Noto Nastaliq Urdu', 'Gulzar', serif;
-  line-height: 1.9 !important;
+  line-height: 1.95 !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
 }
@@ -71,57 +78,13 @@ body {
   word-spacing: normal !important;
 }
 
-/* Disc rotating in rounds and circles */
-@keyframes spinDisc {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.025);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
-
-.animate-spin-disc {
-  animation: spinDisc 45s linear infinite;
-}
-
-/* Counter-rotating SVG animation classes */
-@keyframes spinClockwise {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spinCounterClockwise {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-
-.animate-spin-slow-cw {
-  animation: spinClockwise 60s linear infinite;
-}
-
-.animate-spin-slow-ccw {
-  animation: spinCounterClockwise 45s linear infinite;
-}
-
-/* Animated Background Slow Pan */
+/* Restrained Stationery Animations */
 @keyframes slowDrift {
   0% {
     transform: scale(1) translate(0, 0);
   }
   50% {
-    transform: scale(1.05) translate(-1%, -1.5%);
+    transform: scale(1.02) translate(-0.5%, -0.8%);
   }
   100% {
     transform: scale(1) translate(0, 0);
@@ -132,8 +95,8 @@ body {
   animation: slowDrift 28s ease-in-out infinite;
 }
 
-/* Rotating Mandala Accent */
-@keyframes spinSlow {
+/* Slow Counter-Rotation */
+@keyframes spinClockwise {
   from {
     transform: rotate(0deg);
   }
@@ -142,20 +105,6 @@ body {
   }
 }
 
-.animate-spin-slow {
-  animation: spinSlow 90s linear infinite;
-}
-
-/* Vinyl Music Disc Spin */
-@keyframes discSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-disc-spin {
-  animation: discSpin 4s linear infinite;
+.animate-spin-slow-cw {
+  animation: spinClockwise 80s linear infinite;
 }

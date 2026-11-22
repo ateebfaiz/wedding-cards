@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import { WeddingConfig, SupportedLanguage } from '@/types/wedding';
 import { AudioController } from './AudioController';
 import { WaxSealEnvelope } from '../envelope/WaxSealEnvelope';
-import { InteractiveArabicBackground } from '../backgrounds/InteractiveArabicBackground';
 import { resolveGuestContext, filterEventsForTier, GuestContext } from '@/lib/audience';
 import { Globe } from 'lucide-react';
 
@@ -42,18 +41,15 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
   };
 
   if (!hasCheckedStorage) {
-    return <div className="min-h-screen bg-[#180306]" />;
+    return <div className="min-h-screen bg-[#F8F5EE]" />;
   }
 
   return (
     <div
-      className="min-h-screen bg-[#160205] text-[#342C26] flex flex-col items-center justify-center relative overflow-x-hidden selection:bg-[#DFBF73]/30"
+      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center justify-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
-      {/* Interactive Full Bleed Arabic Background on All Pages (Except Envelope) */}
-      {isOpened && <InteractiveArabicBackground showDiscAnimation={true} />}
-
-      {/* Interactive Wax-Sealed Opening Experience (NO SKIP BUTTON) */}
+      {/* Interactive Wax-Sealed Opening Experience (With Skip Button) */}
       {!isOpened && (
         <WaxSealEnvelope
           config={config}
@@ -63,20 +59,20 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
         />
       )}
 
-      {/* Floating Unobtrusive Language Toggle in Corner (No Website Header) */}
+      {/* Floating Unobtrusive Language Toggle in Corner */}
       <div className="fixed top-4 right-4 z-40 select-none">
         <button
           type="button"
           onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
           aria-label="Toggle Language"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#DFBF73]/60 bg-[#2C050B]/90 text-[#FFDF73] text-xs font-cinzel tracking-wider shadow-lg backdrop-blur-md hover:border-[#FFDF73] hover:scale-105 transition-all cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6]/90 text-[#342C26] text-xs font-sans font-medium tracking-wide shadow-xs backdrop-blur-md hover:border-[#B5965A] hover:bg-[#EFE8DA] transition-all cursor-pointer"
         >
-          <Globe className="w-3.5 h-3.5 text-[#DFBF73]" />
+          <Globe className="w-3.5 h-3.5 text-[#B5965A]" />
           <span>{lang === 'en' ? 'اردو' : 'English'}</span>
         </button>
       </div>
 
-      {/* Main Wedding Card Viewport (Mobile-Optimized Heirloom Folio) */}
+      {/* Main Wedding Card Viewport (Contemporary Heirloom Folio) */}
       <main className="w-full max-w-xl px-3 py-6 sm:py-10 z-10 flex flex-col items-center justify-center">
         {children(lang, guestContext)}
       </main>
@@ -89,7 +85,7 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
 
 export function InvitationShell(props: InvitationShellProps) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#180306]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#F8F5EE]" />}>
       <InvitationShellInner {...props} />
     </Suspense>
   );

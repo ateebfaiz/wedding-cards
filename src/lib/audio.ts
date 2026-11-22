@@ -329,6 +329,10 @@ class WeddingAudioManager {
       isMuted: this.isMuted,
     };
   }
+
+  public isMusicPlaying(): boolean {
+    return this.isPlaying;
+  }
 }
 
 export const weddingAudio = typeof window !== 'undefined' ? new WeddingAudioManager() : ({} as WeddingAudioManager);

@@ -39,35 +39,35 @@ export function ActionRow({ event, coupleNames, lang }: ActionRowProps) {
   };
 
   return (
-    <div className="w-full my-6 flex flex-wrap items-center justify-center gap-3">
+    <div className="w-full my-5 flex flex-wrap items-center justify-center gap-3 select-none">
       {/* Calendar Action with Dropdown */}
       <div className="relative">
         <button
           type="button"
           onClick={() => setShowCalendarMenu(!showCalendarMenu)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-[#DFBF73] bg-[#FDFBF7] text-[#2E050B] text-xs font-cinzel font-bold tracking-wide hover:bg-[#FAF7F2] transition-colors shadow-xs cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6] text-[#342C26] text-xs font-sans font-medium tracking-wide hover:border-[#B5965A] hover:bg-[#EFE8DA]/50 transition-colors shadow-2xs cursor-pointer"
         >
-          <Calendar className="w-4 h-4 text-[#B5965A]" />
+          <Calendar className="w-3.5 h-3.5 text-[#B5965A]" />
           <span>{lang === 'ur' ? 'کیلنڈر میں شامل کریں' : 'Add to Calendar'}</span>
         </button>
 
         {showCalendarMenu && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-48 rounded-xl bg-[#FAF7F2] border-2 border-[#DFBF73] shadow-lg py-1.5 z-30 text-xs font-cinzel font-semibold">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-48 rounded-xl bg-[#FCFAF6] border border-[#B5965A]/40 shadow-md py-1.5 z-30 text-xs font-sans">
             <button
               type="button"
               onClick={handleGoogleCalendar}
-              className="w-full px-4 py-2 flex items-center justify-between text-left text-[#35050C] hover:bg-[#F5EFEB] transition-colors cursor-pointer"
+              className="w-full px-4 py-2 flex items-center justify-between text-left text-[#342C26] hover:bg-[#EFE8DA] transition-colors cursor-pointer"
             >
               <span>Google Calendar</span>
-              <ExternalLink className="w-3 h-3 text-[#B5965A]" />
+              <ExternalLink className="w-3 h-3 text-[#81776B]" />
             </button>
             <button
               type="button"
               onClick={handleDownloadICS}
-              className="w-full px-4 py-2 flex items-center justify-between text-left text-[#35050C] hover:bg-[#F5EFEB] transition-colors cursor-pointer"
+              className="w-full px-4 py-2 flex items-center justify-between text-left text-[#342C26] hover:bg-[#EFE8DA] transition-colors cursor-pointer"
             >
               <span>Apple / Outlook (.ics)</span>
-              <Download className="w-3 h-3 text-[#B5965A]" />
+              <Download className="w-3 h-3 text-[#81776B]" />
             </button>
           </div>
         )}
@@ -77,9 +77,9 @@ export function ActionRow({ event, coupleNames, lang }: ActionRowProps) {
       <button
         type="button"
         onClick={handleShareWhatsApp}
-        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white text-xs font-cinzel font-bold tracking-wide hover:opacity-95 transition-opacity shadow-sm cursor-pointer"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#25D366] text-white text-xs font-sans font-medium tracking-wide hover:opacity-95 transition-opacity shadow-2xs cursor-pointer"
       >
-        <Share2 className="w-4 h-4" />
+        <Share2 className="w-3.5 h-3.5" />
         <span>{lang === 'ur' ? 'واٹس ایپ پر شیئر کریں' : 'Share on WhatsApp'}</span>
       </button>
 
@@ -87,9 +87,9 @@ export function ActionRow({ event, coupleNames, lang }: ActionRowProps) {
       <button
         type="button"
         onClick={() => setShowQR(true)}
-        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-[#DFBF73] bg-[#2E050B] text-[#FFDF73] text-xs font-cinzel font-bold tracking-wide hover:bg-[#450912] transition-colors shadow-xs cursor-pointer"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6] text-[#81776B] hover:text-[#342C26] hover:border-[#B5965A] text-xs font-sans font-medium tracking-wide transition-colors shadow-2xs cursor-pointer"
       >
-        <QrCode className="w-4 h-4 text-[#DFBF73]" />
+        <QrCode className="w-3.5 h-3.5 text-[#B5965A]" />
         <span>{lang === 'ur' ? 'کیو آر کوڈ' : 'Event QR'}</span>
       </button>
 
