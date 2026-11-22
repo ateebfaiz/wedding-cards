@@ -79,8 +79,8 @@ export function WaxSealEnvelope({
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_20%,rgba(5,11,20,0.92)_100%] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-radial-[circle,rgba(223,191,115,0.18)_0%,transparent_70%] pointer-events-none blur-2xl animate-pulse" />
 
-      {/* The Postcard / Envelope Composition (Luminous Gold Mandala on Navy, true landscape) */}
-      <div className="relative w-full max-w-[460px] sm:max-w-[560px] md:max-w-[640px] flex flex-col items-center justify-center">
+      {/* The Postcard / Envelope Composition (Luminous Gold Mandala on Navy, tailored for desktop and mobile) */}
+      <div className="relative w-full max-w-[340px] sm:max-w-[580px] md:max-w-[650px] flex flex-col items-center justify-center">
         {/* Personalized Invitee Callout Badge on Envelope */}
         {guestName && (
           <div
@@ -104,7 +104,7 @@ export function WaxSealEnvelope({
 
         {/* Luminous Gold Mandala Artwork Display with Interactive Glow */}
         <div
-          className={`relative w-full aspect-[1672/941] filter transition-all duration-700 ease-out group ${
+          className={`relative w-full filter transition-all duration-700 ease-out group ${
             stage === 'cracking'
               ? 'scale-103 drop-shadow-[0_0_50px_rgba(255,223,115,0.7)]'
               : stage === 'opening'
@@ -114,13 +114,27 @@ export function WaxSealEnvelope({
               : 'scale-100 hover:scale-[1.02] drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:drop-shadow-[0_0_40px_rgba(223,191,115,0.55)]'
           }`}
         >
-          {/* Main Envelope Image Asset */}
-          <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+          {/* Desktop Version: Landscape (1672x941) */}
+          <div className="hidden sm:block relative w-full aspect-[1672/941] rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/assets/envelope/luminous-gold-mandala.webp"
-              alt="Luminous Gold Mandala Wedding Seal Envelope"
+              src="/assets/envelope/mandala-envelope-desktop.webp"
+              alt="Luminous Gold Mandala Wedding Seal Envelope Desktop"
               fill
-              sizes="(max-width: 640px) 360px, (max-width: 768px) 520px, 640px"
+              sizes="(max-width: 1024px) 580px, 650px"
+              className="object-cover"
+              priority
+            />
+            {/* Ambient Radial Golden Shimmer Overlay */}
+            <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(8,18,38,0.4)_100%] pointer-events-none group-hover:opacity-60 transition-opacity" />
+          </div>
+
+          {/* Mobile Version: Vertical Optimized (941x1672) */}
+          <div className="block sm:hidden relative w-full aspect-[941/1672] rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="/assets/envelope/mandala-envelope-mobile.webp"
+              alt="Luminous Gold Mandala Wedding Seal Envelope Mobile"
+              fill
+              sizes="340px"
               className="object-cover"
               priority
             />
