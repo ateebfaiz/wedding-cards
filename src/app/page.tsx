@@ -53,9 +53,9 @@ function HomeCardContent() {
               </div>
             </div>
 
-            {/* 3. Dedicated Personalized Invitee Heading Section (Left-Aligned, Big & Bold, Zero Overlap) */}
+            {/* 3. Dedicated Personalized Invitee Heading Section (Left-Aligned, Big & Bold, Zero Overlap, Natural Stationery) */}
             {guest.guestName && (
-              <div className="my-5 p-6 sm:p-8 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/50 shadow-[0_12px_40px_rgba(52,44,38,0.1)] backdrop-blur-md flex flex-col items-start text-left transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+              <div className="w-full my-4 py-4 border-b border-[#B5965A]/35 flex flex-col items-start text-left transition-all animate-in fade-in slide-in-from-top-4 duration-700">
                 <span className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black flex items-center gap-2 mb-2">
                   <Sparkles className="w-4 h-4 text-[#B5965A]" />
                   <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}</span>
@@ -85,8 +85,8 @@ function HomeCardContent() {
               </p>
             </div>
 
-            {/* 5. Grand Couple Presentation (Distinct Fonts for Headings vs Subheadings) */}
-            <div className="my-6 py-6 border-y border-[#B5965A]/35 space-y-4 bg-[#FCFAF6]/90 backdrop-blur-xs rounded-3xl shadow-[0_8px_30px_rgba(52,44,38,0.06)] border border-[#B5965A]/25 px-4 sm:px-8">
+            {/* 5. Grand Couple Presentation (Distinct Fonts for Headings vs Subheadings, Natural Stationery) */}
+            <div className="my-6 py-6 border-y border-[#B5965A]/35 space-y-4">
               {/* Groom Presentation */}
               <div>
                 <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block mb-1">
@@ -229,18 +229,18 @@ function HomeCardContent() {
               })}
             </div>
 
-            {/* 7. Important Event Instructions Card */}
+            {/* 7. Important Event Instructions */}
             {config.eventInstructions && (
-              <div className="my-6 p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+              <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-left">
                 <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
                   <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
-                  <span className="text-xs uppercase tracking-wider font-sans font-bold">
+                  <span className="text-xs uppercase tracking-wider font-cinzel font-black">
                     {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
                   </span>
                 </div>
                 <p
-                  className={`text-xs sm:text-sm text-[#5A4D41] leading-relaxed ${
-                    lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-sans'
+                  className={`text-sm sm:text-base text-[#5A4D41] leading-relaxed font-bold ${
+                    lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-serif italic'
                   }`}
                 >
                   {config.eventInstructions[lang]}
@@ -248,49 +248,49 @@ function HomeCardContent() {
               </div>
             )}
 
-            {/* 8. Contact & Information RSVP Card */}
+            {/* 8. Contact & Information RSVP Section */}
             {config.contacts && config.contacts.length > 0 && (
-              <div className="my-6 p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
-                <div className="mb-3">
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold block">
+              <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-left">
+                <div className="mb-4">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block">
                     {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
                   </span>
                   <h3
-                    className={`text-lg font-bold text-[#342C26] ${
-                      lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                    className={`text-xl sm:text-2xl font-black text-[#2E050B] mt-1 ${
+                      lang === 'ur' ? 'font-sameer-zikran text-3xl' : 'font-playfair'
                     }`}
                   >
-                    {lang === 'ur' ? 'کسی بھی سوال یا رہنمائی کے لیے رابطہ فرمائیں' : 'For Inquiries & Guidance'}
+                    {lang === 'ur' ? 'کسی بھی رہنمائی کے لیے رابطہ فرمائیں' : 'For Inquiries & Guidance'}
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#B5965A]/20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   {config.contacts.map((contact, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-xl border border-[#B5965A]/25 bg-white/70 flex flex-col justify-between"
+                      className="p-4 rounded-2xl border border-[#B5965A]/30 bg-[#FCFAF6]/70 backdrop-blur-xs flex flex-col justify-between shadow-2xs"
                     >
                       <div>
                         <div className="flex items-center justify-between gap-1 mb-1">
                           <span
-                            className={`text-sm font-bold text-[#342C26] ${
-                              lang === 'ur' ? 'font-nastaliq-body text-base' : 'font-sans'
+                            className={`text-sm sm:text-base font-bold text-[#2E050B] ${
+                              lang === 'ur' ? 'font-sameer-zikran text-lg' : 'font-sans'
                             }`}
                           >
                             {contact.name[lang]}
                           </span>
                           {contact.relation && (
-                            <span className="text-[10px] text-[#81776B] font-sans font-medium px-2 py-0.5 rounded-full bg-[#FAF7F2]">
+                            <span className="text-[10px] text-[#702F3D] font-sans font-bold px-2 py-0.5 rounded-full bg-[#FAF7F2] border border-[#B5965A]/25">
                               {contact.relation[lang]}
                             </span>
                           )}
                         </div>
-                        <span className="text-xs text-[#5A4D41] font-mono tracking-wide block mb-3">
+                        <span className="text-xs text-[#5A4D41] font-mono tracking-wide block mb-3 font-semibold">
                           {contact.phone}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-2 pt-2 border-t border-[#B5965A]/15">
+                      <div className="flex items-center gap-2 pt-2 border-t border-[#B5965A]/20">
                         <a
                           href={`tel:${contact.phone}`}
                           className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#342C26] text-[#F8F5EE] text-[11px] font-sans font-semibold hover:bg-[#545B43] transition-colors"

@@ -40,13 +40,13 @@ export function BaraatStatusCard({ status, lang }: BaraatStatusCardProps) {
   ];
 
   return (
-    <div className="w-full my-6 p-5 sm:p-6 rounded-2xl border-2 border-[#DFBF73]/60 bg-[#FAF7F2] shadow-sm text-center">
+    <div className="w-full my-6 py-6 border-y border-[#B5965A]/35 text-center">
       <div className="flex items-center justify-center gap-2 mb-4">
-        <span className="w-8 h-[1px] bg-[#DFBF73]" />
-        <h3 className="text-xs uppercase tracking-[0.25em] text-[#8B0000] font-cinzel font-black">
+        <span className="w-8 h-[1px] bg-[#B5965A]" />
+        <h3 className="text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black">
           {lang === 'ur' ? 'بارات کے روایتی مراحل' : 'Baraat Ceremonial Progression'}
         </h3>
-        <span className="w-8 h-[1px] bg-[#DFBF73]" />
+        <span className="w-8 h-[1px] bg-[#B5965A]" />
       </div>
 
       {/* 4 Dignified Ceremonial Progression Milestones (No Live Gimmicks) */}
@@ -57,13 +57,13 @@ export function BaraatStatusCard({ status, lang }: BaraatStatusCardProps) {
           return (
             <div
               key={stage.id}
-              className="flex flex-col items-center p-3 rounded-xl border border-[#DFBF73]/40 bg-[#FDFBF7] shadow-2xs"
+              className="flex flex-col items-center p-3 rounded-2xl border border-[#B5965A]/30 bg-[#FCFAF6]/60 backdrop-blur-xs shadow-2xs"
             >
-              <div className="w-8 h-8 rounded-full bg-[#2E050B] text-[#FFDF73] flex items-center justify-center mb-2 shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#702F3D] text-[#FFDF73] flex items-center justify-center mb-2 shadow-xs">
                 <Icon className="w-4 h-4" />
               </div>
               <span
-                className={`text-xs font-bold text-[#35050C] ${
+                className={`text-xs font-bold text-[#2E050B] ${
                   lang === 'ur' ? 'font-nastaliq-body text-sm' : 'font-cinzel'
                 }`}
               >
@@ -75,7 +75,7 @@ export function BaraatStatusCard({ status, lang }: BaraatStatusCardProps) {
       </div>
 
       <p
-        className={`text-xs text-[#7A6A5D] mt-2 font-medium ${
+        className={`text-xs text-[#5A4D41] mt-2 font-medium ${
           lang === 'ur' ? 'font-nastaliq-body text-sm' : 'font-serif italic'
         }`}
       >
