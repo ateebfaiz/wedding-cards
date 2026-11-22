@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { WeddingConfig, SupportedLanguage } from '@/types/wedding';
 import { weddingAudio } from '@/lib/audio';
 import { fireWeddingConfetti } from '@/lib/confetti';
-import { Sparkles } from 'lucide-react';
 
 interface WaxSealEnvelopeProps {
   config: WeddingConfig;
@@ -90,22 +89,22 @@ export function WaxSealEnvelope({
             }`}
           >
             <span
-              className={`text-xs sm:text-sm text-[#FFDF73] font-medium tracking-wide flex items-center justify-center gap-1.5 ${
-                lang === 'ur' ? 'font-nastaliq-display' : 'font-cinzel'
+              className={`text-xs sm:text-sm text-[#FFDF73] font-medium tracking-wide flex items-center justify-center gap-2 ${
+                lang === 'ur' ? 'font-sameer-zikran text-lg' : 'font-cinzel'
               }`}
             >
-              <Sparkles className="w-3 h-3 text-[#DFBF73]" />
+              <span className="text-[#DFBF73]">✦</span>
               {lang === 'ur'
                 ? `بخدمتِ گرامی قدر: ${guestName} و اہلِ خانہ`
                 : `Invited with Honor: ${guestName} & Family`}
-              <Sparkles className="w-3 h-3 text-[#DFBF73]" />
+              <span className="text-[#DFBF73]">✦</span>
             </span>
           </div>
         )}
 
         {/* Physical Luxurious Navy & Gold Envelope Display Card */}
         <div
-          className={`relative w-full aspect-[1157/1112] filter transition-all duration-700 ease-out ${
+          className={`relative w-full aspect-[2282/1388] filter transition-all duration-700 ease-out ${
             stage === 'cracking'
               ? 'scale-103 drop-shadow-[0_30px_70px_rgba(223,191,115,0.45)]'
               : stage === 'opening'
@@ -121,7 +120,7 @@ export function WaxSealEnvelope({
               src="/assets/envelope/luxurious-navy-envelope.webp"
               alt="Luxurious Navy Gold Wedding Envelope"
               fill
-              sizes="(max-width: 640px) 360px, (max-width: 768px) 460px, 500px"
+              sizes="(max-width: 640px) 360px, (max-width: 768px) 480px, 540px"
               className="object-contain"
               priority
             />
@@ -129,7 +128,7 @@ export function WaxSealEnvelope({
 
           {/* Interactive Center Seal Hotspot */}
           <div
-            className="absolute top-[49%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center group"
+            className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center group"
             title="Click to open invitation"
           >
             {/* Luminous Pulsing Seal Halo */}

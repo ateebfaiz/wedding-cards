@@ -13,7 +13,6 @@ import {
   Clock,
   Phone,
   MessageCircle,
-  Sparkles,
 } from 'lucide-react';
 
 function HomeCardContent() {
@@ -27,12 +26,12 @@ function HomeCardContent() {
         return (
           <div className="w-full max-w-3xl mx-auto px-4 sm:px-8 py-8 sm:py-14 text-center relative z-10">
             {/* 1. Authentic Golden Bismillah Banner Asset (Prominent & Enlarged) */}
-            <div className="relative w-72 sm:w-96 md:w-[460px] aspect-[934/225] mx-auto my-3 drop-shadow-xs">
+            <div className="relative w-72 sm:w-96 md:w-[480px] aspect-[2000/1648] mx-auto my-3 drop-shadow-xs">
               <Image
                 src="/assets/calligraphy/bismillah-islamic-vector.webp"
                 alt="Bismillah Al-Rahman Al-Raheem"
                 fill
-                sizes="(max-width: 640px) 288px, (max-width: 1024px) 384px, 460px"
+                sizes="(max-width: 640px) 288px, (max-width: 1024px) 384px, 480px"
                 className="object-contain"
                 priority
               />
@@ -53,11 +52,15 @@ function HomeCardContent() {
               </div>
             </div>
 
-            {/* 3. Dedicated Personalized Invitee Heading Section (Left-Aligned, Big & Bold, Zero Overlap, Natural Stationery) */}
+            {/* 3. Dedicated Personalized Invitee Heading Section (Natural Stationery, RTL-aware) */}
             {guest.guestName && (
-              <div className="w-full my-4 py-4 border-b border-[#B5965A]/35 flex flex-col items-start text-left transition-all animate-in fade-in slide-in-from-top-4 duration-700">
-                <span className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black flex items-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-[#B5965A]" />
+              <div className="w-full my-4 py-4 border-b border-[#B5965A]/35 flex flex-col items-start text-start transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#702F3D] font-black flex items-center gap-2 mb-2 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
+                  <span className="text-[#B5965A] text-sm">✦</span>
                   <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}</span>
                 </span>
                 <h2
@@ -73,7 +76,11 @@ function HomeCardContent() {
 
             {/* 4. Family Invitation Announcement */}
             <div className="my-4 space-y-1.5">
-              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block">
+              <span
+                className={`text-xs sm:text-sm tracking-[0.15em] text-[#702F3D] font-black block ${
+                  lang === 'ur' ? 'font-sameer-zikran text-base sm:text-lg' : 'font-cinzel uppercase tracking-[0.25em]'
+                }`}
+              >
                 {config.invitationIntro.hostsLine[lang]}
               </span>
               <p
@@ -89,7 +96,11 @@ function HomeCardContent() {
             <div className="my-6 py-6 border-y border-[#B5965A]/35 space-y-4">
               {/* Groom Presentation */}
               <div>
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block mb-1">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#702F3D] font-black block mb-1 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
                   {lang === 'ur' ? 'دولہا' : 'The Groom'}
                 </span>
                 <h1
@@ -123,7 +134,11 @@ function HomeCardContent() {
 
               {/* Bride Presentation */}
               <div>
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block mb-1">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#702F3D] font-black block mb-1 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
                   {lang === 'ur' ? 'دلہن' : 'The Bride'}
                 </span>
                 <h1
@@ -148,7 +163,7 @@ function HomeCardContent() {
             </div>
 
             {/* 6. Wedding Event Overview (Distinct Event Invitation Cards in Chronological Order) */}
-            <div className="my-8 space-y-4 text-left">
+            <div className="my-8 space-y-4 text-start">
               <div className="text-center mb-4">
                 <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold">
                   {lang === 'ur' ? 'تقریباتِ شادی' : 'Wedding Ceremonies'}
@@ -231,16 +246,20 @@ function HomeCardContent() {
 
             {/* 7. Important Event Instructions */}
             {config.eventInstructions && (
-              <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-left">
+              <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-start">
                 <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
                   <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
-                  <span className="text-xs uppercase tracking-wider font-cinzel font-black">
+                  <span
+                    className={`text-xs tracking-[0.15em] font-black ${
+                      lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-wider'
+                    }`}
+                  >
                     {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
                   </span>
                 </div>
                 <p
                   className={`text-sm sm:text-base text-[#5A4D41] leading-relaxed font-bold ${
-                    lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-serif italic'
+                    lang === 'ur' ? 'font-alqalam-taj text-base leading-loose' : 'font-serif italic'
                   }`}
                 >
                   {config.eventInstructions[lang]}
@@ -250,9 +269,13 @@ function HomeCardContent() {
 
             {/* 8. Contact & Information RSVP Section */}
             {config.contacts && config.contacts.length > 0 && (
-              <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-left">
+              <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-start">
                 <div className="mb-4">
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block">
+                  <span
+                    className={`text-xs tracking-[0.15em] text-[#702F3D] font-black block ${
+                      lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                    }`}
+                  >
                     {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
                   </span>
                   <h3

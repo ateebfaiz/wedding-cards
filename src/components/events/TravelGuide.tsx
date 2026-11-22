@@ -13,11 +13,11 @@ export function TravelGuide({ guidance, lang }: TravelGuideProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-left">
+    <div className="w-full my-6 py-6 border-t border-[#B5965A]/35 text-start">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between text-left cursor-pointer select-none group"
+        className="w-full flex items-center justify-between text-start cursor-pointer select-none group"
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-3.5">

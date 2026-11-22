@@ -24,7 +24,6 @@ import {
   Phone,
   MessageCircle,
   Clock,
-  Sparkles,
 } from 'lucide-react';
 
 interface EventClientViewProps {
@@ -143,11 +142,15 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
         ) : (
           /* Full Independent Stationery Canvas */
           <div className="w-full flex flex-col items-center space-y-6">
-            {/* Dedicated Personalized Invitee Heading Section (Left-Aligned, Big & Bold, Zero Overlap, Natural Stationery) */}
+            {/* Dedicated Personalized Invitee Heading Section (Natural Stationery, RTL-aware) */}
             {guestName && (
-              <div className="w-full my-4 py-4 border-b border-[#B5965A]/35 flex flex-col items-start text-left transition-all animate-in fade-in slide-in-from-top-4 duration-700">
-                <span className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black flex items-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-[#B5965A]" />
+              <div className="w-full my-4 py-4 border-b border-[#B5965A]/35 flex flex-col items-start text-start transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#702F3D] font-black flex items-center gap-2 mb-2 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
+                  <span className="text-[#B5965A] text-sm">✦</span>
                   <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}</span>
                 </span>
                 <h2
@@ -203,16 +206,20 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
             {/* Important Event Instructions */}
             {config.eventInstructions && (
-              <div className="w-full my-4 py-6 border-t border-[#B5965A]/35 text-left">
+              <div className="w-full my-4 py-6 border-t border-[#B5965A]/35 text-start">
                 <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
                   <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
-                  <span className="text-xs uppercase tracking-wider font-cinzel font-black">
+                  <span
+                    className={`text-xs tracking-[0.15em] font-black ${
+                      lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-wider'
+                    }`}
+                  >
                     {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
                   </span>
                 </div>
                 <p
                   className={`text-sm sm:text-base text-[#5A4D41] leading-relaxed font-bold ${
-                    lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-serif italic'
+                    lang === 'ur' ? 'font-alqalam-taj text-base leading-loose' : 'font-serif italic'
                   }`}
                 >
                   {config.eventInstructions[lang]}
@@ -222,9 +229,13 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
             {/* Contact & Info RSVP Section */}
             {config.contacts && config.contacts.length > 0 && (
-              <div className="w-full my-4 py-6 border-t border-[#B5965A]/35 text-left">
+              <div className="w-full my-4 py-6 border-t border-[#B5965A]/35 text-start">
                 <div className="mb-4">
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block">
+                  <span
+                    className={`text-xs tracking-[0.15em] text-[#702F3D] font-black block ${
+                      lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                    }`}
+                  >
                     {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
                   </span>
                   <h3
@@ -291,11 +302,15 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
             {/* 3. Bottom Event Switcher: ONLY shown when allowNavigation is true */}
             {allowNavigation && (
               <div className="w-full mt-10 pt-8 border-t border-[#B5965A]/25 text-center">
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold block mb-4">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#DFBF73] font-bold block mb-4 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
                   {lang === 'ur' ? 'دیگر تقریباتِ شادی' : 'Explore Other Ceremonies'}
                 </span>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-left">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-start">
                   {otherEvents.map((oEvent) => (
                     <Link
                       key={oEvent.slug}
@@ -303,7 +318,11 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                       className="p-4 rounded-2xl border border-[#B5965A]/35 bg-[#FCFAF6]/95 backdrop-blur-md hover:border-[#DFBF73] hover:bg-[#EFE8DA]/80 transition-all flex items-center justify-between group shadow-2xs"
                     >
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#702F3D] font-cinzel font-bold block">
+                        <span
+                          className={`text-[10px] tracking-wider text-[#702F3D] font-bold block ${
+                            lang === 'ur' ? 'font-sameer-zikran text-xs' : 'font-cinzel uppercase'
+                          }`}
+                        >
                           {oEvent.ceremonyType[lang]}
                         </span>
                         <h4

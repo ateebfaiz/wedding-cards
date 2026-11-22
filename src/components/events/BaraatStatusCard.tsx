@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { BaraatStatus, SupportedLanguage } from '@/types/wedding';
-import { Users, Sparkles, Utensils, Heart } from 'lucide-react';
+import { Users, Utensils, Heart } from 'lucide-react';
 
 interface BaraatStatusCardProps {
   status: BaraatStatus;
@@ -23,7 +23,7 @@ export function BaraatStatusCard({ status, lang }: BaraatStatusCardProps) {
       id: 'Welcome',
       labelEn: '2. Arrival & Welcome',
       labelUr: '2. آمدِ بارات',
-      icon: Sparkles,
+      icon: Users,
     },
     {
       id: 'Dinner',
@@ -43,7 +43,11 @@ export function BaraatStatusCard({ status, lang }: BaraatStatusCardProps) {
     <div className="w-full my-6 py-6 border-y border-[#B5965A]/35 text-center">
       <div className="flex items-center justify-center gap-2 mb-4">
         <span className="w-8 h-[1px] bg-[#B5965A]" />
-        <h3 className="text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black">
+        <h3
+          className={`text-xs tracking-[0.15em] text-[#702F3D] font-black ${
+            lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+          }`}
+        >
           {lang === 'ur' ? 'بارات کے روایتی مراحل' : 'Baraat Ceremonial Progression'}
         </h3>
         <span className="w-8 h-[1px] bg-[#B5965A]" />

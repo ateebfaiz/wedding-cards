@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ScheduleItem, SupportedLanguage } from '@/types/wedding';
-import { Clock, Utensils, Heart, Sparkles, Moon, Users, CalendarCheck } from 'lucide-react';
+import { Clock, Utensils, Heart, Moon, Users, CalendarCheck } from 'lucide-react';
 
 interface ScheduleTimelineProps {
   schedule: ScheduleItem[];
@@ -21,15 +21,19 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
       case 'departure':
         return <Moon className="w-4 h-4 text-[#702F3D]" />;
       default:
-        return <Sparkles className="w-4 h-4 text-[#B5965A]" />;
+        return <Clock className="w-4 h-4 text-[#B5965A]" />;
     }
   };
 
   return (
-    <div className="w-full my-6 text-left">
-      {/* Left-Aligned Clean Section Header */}
+    <div className="w-full my-6 text-start">
+      {/* Clean Section Header */}
       <div className="flex flex-col items-start mb-6">
-        <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black flex items-center gap-1.5 mb-1.5">
+        <span
+          className={`text-xs tracking-[0.15em] text-[#702F3D] font-black flex items-center gap-1.5 mb-1.5 ${
+            lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+          }`}
+        >
           <CalendarCheck className="w-3.5 h-3.5 text-[#B5965A]" />
           <span>{lang === 'ur' ? 'تقریب کے اوقات کار' : 'Ceremony Schedule'}</span>
         </span>

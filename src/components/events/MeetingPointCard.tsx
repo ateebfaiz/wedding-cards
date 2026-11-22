@@ -19,7 +19,11 @@ export function MeetingPointCard({ meetingPoint, lang }: MeetingPointCardProps) 
           <Compass className="w-5 h-5" />
         </div>
         <div>
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block">
+          <span
+            className={`text-xs tracking-[0.15em] text-[#702F3D] font-black block ${
+              lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+            }`}
+          >
             {meetingPoint.title[lang]}
           </span>
           <h4

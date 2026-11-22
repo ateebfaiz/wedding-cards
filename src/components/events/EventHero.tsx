@@ -29,20 +29,22 @@ export function EventHero({ event, lang }: EventHeroProps) {
   return (
     <div className="w-full flex flex-col items-center text-center my-3 sm:my-5">
       {/* 1. Golden Bismillah Banner Asset (Prominent & Sized) */}
-      <div className="relative w-72 sm:w-96 md:w-[460px] aspect-[934/225] mx-auto mb-4 drop-shadow-xs">
+      <div className="relative w-72 sm:w-96 md:w-[480px] aspect-[2000/1648] mx-auto mb-4 drop-shadow-xs">
         <Image
           src="/assets/calligraphy/bismillah-islamic-vector.webp"
           alt="Bismillah Al-Rahman Al-Raheem"
           fill
-          sizes="(max-width: 640px) 288px, (max-width: 1024px) 384px, 460px"
+          sizes="(max-width: 640px) 288px, (max-width: 1024px) 384px, 480px"
           className="object-contain"
           priority
         />
       </div>
 
-      {/* 2. Ceremony Type Subheading (Distinct Font) */}
+      {/* 2. Ceremony Type Subheading (Distinct Font, AA Sameer Zikran / AlQalam Taj for Urdu) */}
       <span
-        className={`text-xs sm:text-sm uppercase tracking-[0.25em] font-cinzel font-black my-1 ${accentColor}`}
+        className={`text-sm sm:text-base tracking-[0.15em] font-black my-1 ${accentColor} ${
+          lang === 'ur' ? 'font-sameer-zikran text-xl sm:text-2xl' : 'font-cinzel uppercase'
+        }`}
       >
         {event.ceremonyType[lang]}
       </span>
