@@ -15,11 +15,11 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
       case 'reception':
         return <Users className="w-4 h-4 text-[#B5965A]" />;
       case 'ceremony':
-        return <Heart className="w-4 h-4 text-[#702F3D]" />;
+        return <Heart className="w-4 h-4 text-[#8B0000]" />;
       case 'dinner':
         return <Utensils className="w-4 h-4 text-[#545B43]" />;
       case 'departure':
-        return <Moon className="w-4 h-4 text-[#B5965A]" />;
+        return <Moon className="w-4 h-4 text-[#8B0000]" />;
       default:
         return <Sparkles className="w-4 h-4 text-[#B5965A]" />;
     }
@@ -46,11 +46,11 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
                 {getIcon(item.iconName)}
               </div>
 
-              {/* Time Label (Desktop offset or Mobile stacked) */}
+              {/* Time Label */}
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
                 <h3
                   className={`text-base md:text-lg text-[#342C26] font-medium ${
-                    lang === 'ur' ? 'font-nastaliq leading-loose' : 'font-serif'
+                    lang === 'ur' ? 'font-nastaliq-display text-lg md:text-xl text-[#5E0C12]' : 'font-serif'
                   }`}
                 >
                   {item.title[lang]}
@@ -69,7 +69,7 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
               {item.description && (
                 <p
                   className={`text-xs md:text-sm text-[#8A8074] ${
-                    lang === 'ur' ? 'font-nastaliq leading-loose' : 'font-sans font-light'
+                    lang === 'ur' ? 'font-nastaliq-body' : 'font-sans font-light'
                   }`}
                 >
                   {item.description[lang]}

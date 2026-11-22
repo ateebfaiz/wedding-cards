@@ -24,8 +24,8 @@ export function VenueCard({ venue, lang }: VenueCardProps) {
   };
 
   return (
-    <div className="w-full my-6 p-6 rounded-lg border border-[#B5965A]/35 bg-[#EFE8DA]/40 shadow-xs flex flex-col items-center text-center">
-      <div className="w-9 h-9 rounded-full bg-[#B5965A]/15 border border-[#B5965A]/40 flex items-center justify-center mb-3 text-[#B5965A]">
+    <div className="w-full my-6 p-6 rounded-lg border border-[#B5965A]/40 bg-[#EFE8DA]/50 shadow-xs flex flex-col items-center text-center">
+      <div className="w-9 h-9 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/30 flex items-center justify-center mb-3 text-[#8B0000]">
         <MapPin className="w-5 h-5" />
       </div>
 
@@ -35,19 +35,27 @@ export function VenueCard({ venue, lang }: VenueCardProps) {
 
       <h3
         className={`text-xl md:text-2xl text-[#342C26] font-medium ${
-          lang === 'ur' ? 'font-nastaliq leading-[2.2]' : 'font-serif'
+          lang === 'ur' ? 'font-nastaliq-display text-2xl md:text-3xl text-[#5E0C12] leading-relaxed' : 'font-serif'
         }`}
       >
         {venue.name[lang]}
       </h3>
 
       {venue.hallOrSection && (
-        <span className="text-xs text-[#545B43] font-medium uppercase tracking-wider mb-1">
+        <span
+          className={`text-xs text-[#545B43] font-medium uppercase tracking-wider mb-1 ${
+            lang === 'ur' ? 'font-nastaliq-body' : ''
+          }`}
+        >
           {venue.hallOrSection[lang]}
         </span>
       )}
 
-      <p className="text-xs md:text-sm text-[#8A8074] max-w-md mt-1 mb-4 font-light">
+      <p
+        className={`text-xs md:text-sm text-[#8A8074] max-w-md mt-1 mb-4 font-light ${
+          lang === 'ur' ? 'font-nastaliq-body' : ''
+        }`}
+      >
         {venue.address[lang]}, {venue.city[lang]}
       </p>
 
@@ -66,12 +74,12 @@ export function VenueCard({ venue, lang }: VenueCardProps) {
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#B5965A]/40 bg-[#F8F5EE] text-[#342C26] text-xs font-medium tracking-wide hover:border-[#B5965A] hover:bg-[#EFE8DA]/40 transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#B5965A]/40 bg-[#F8F5EE] text-[#342C26] text-xs font-medium tracking-wide hover:border-[#8B0000] hover:bg-[#EFE8DA]/40 transition-colors cursor-pointer"
         >
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-[#545B43]" />
-              <span>{lang === 'ur' ? 'پتہ محفوظ ہو گیا' : 'Address Copied!'}</span>
+              <span>{lang === 'ur' ? 'پتہ کاپی ہو گیا' : 'Address Copied!'}</span>
             </>
           ) : (
             <>

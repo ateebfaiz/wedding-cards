@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Gulzar&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -11,6 +11,7 @@
   --dark-espresso: #342C26;
   --muted-taupe: #8A8074;
   --burgundy: #702F3D;
+  --royal-red: #8B0000;
 }
 
 body {
@@ -21,17 +22,34 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* English Editorial Fonts */
 .font-serif {
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
-.font-nastaliq {
-  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+/* Urdu Typography Hierarchy */
+/* Display Nastaliq for Grand Headings & Couple Names */
+.font-nastaliq-display {
+  font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  line-height: 2.4 !important;
+  letter-spacing: 0.02em;
+}
+
+/* Body Nastaliq for Schedules, Venues, Notes */
+.font-nastaliq-body {
+  font-family: 'Noto Nastaliq Urdu', 'Gulzar', serif;
   line-height: 2.2 !important;
 }
 
+/* Fallback general nastaliq */
+.font-nastaliq {
+  font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  line-height: 2.3 !important;
+}
+
+/* Sacred Arabic / Classical Naskh */
 .font-arabic {
-  font-family: 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', serif;
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
 }
 
 /* 3D Envelope perspective */
