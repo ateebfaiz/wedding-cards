@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { InvitationShell } from '@/components/layout/InvitationShell';
 import { filterEventsForTier } from '@/lib/audience';
+import { weddingAudio } from '@/lib/audio';
+import { calculateCountdown } from '@/lib/utils';
 import {
   Calendar,
   ArrowRight,
@@ -25,30 +27,37 @@ function HomeCardContent() {
 
         return (
           <div className="w-full max-w-3xl mx-auto px-4 sm:px-8 py-8 sm:py-14 text-center relative z-10">
-            {/* 1. Authentic Golden Bismillah Banner Asset (Prominent & Enlarged) */}
-            <div className="relative w-72 sm:w-96 md:w-[480px] aspect-[2000/1648] mx-auto my-3 drop-shadow-xs">
+            {/* 1. Authentic Golden Bismillah Banner Asset (Full-Bleed, Interactive Glow & Sound) */}
+            <div
+              onClick={() => weddingAudio.playSacredChime(432)}
+              className="relative w-full max-w-[580px] sm:max-w-[700px] aspect-[2000/1648] mx-auto mb-0 cursor-pointer group transition-all duration-500 filter drop-shadow-md hover:drop-shadow-[0_0_35px_rgba(223,191,115,0.7)] active:scale-98"
+              title="Touch to receive sacred barakah chime"
+            >
               <Image
                 src="/assets/calligraphy/bismillah-islamic-vector.webp"
                 alt="Bismillah Al-Rahman Al-Raheem"
                 fill
-                sizes="(max-width: 640px) 288px, (max-width: 1024px) 384px, 480px"
-                className="object-contain"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 580px, 700px"
+                className="object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                 priority
               />
             </div>
 
-            {/* 2. Sacred Marriage Verse Sticker (Enlarged & Prominent Physical Sticker) */}
-            <div className="relative mx-auto my-5 flex items-center justify-center">
-              <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-56 md:h-56 rounded-3xl overflow-hidden border-2 border-[#B5965A]/50 shadow-[0_14px_36px_rgba(52,44,38,0.14)] -rotate-1 hover:rotate-0 transition-transform duration-300 bg-[#FAF7F2] p-2.5 cursor-default">
+            {/* 2. Sacred Marriage Verse (Independent, Floating & Larger without Box Wrapper, Interactive Glow & Sound) */}
+            <div
+              onClick={() => weddingAudio.playSacredChime(528)}
+              className="relative mx-auto mt-0 mb-6 flex flex-col items-center justify-center cursor-pointer group transition-all duration-500"
+              title="Surah Ar-Rum (30:21) - Click to listen"
+            >
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 transition-all duration-500 filter drop-shadow-[0_12px_30px_rgba(52,44,38,0.12)] group-hover:drop-shadow-[0_0_40px_rgba(181,150,90,0.65)] group-hover:scale-105 active:scale-95">
                 <Image
                   src="/assets/calligraphy/quranic-marriage-verse.webp"
                   alt="Surah Ar-Rum: 21 Marriage Verse"
                   fill
-                  sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 224px"
-                  className="object-contain p-1"
+                  sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, 384px"
+                  className="object-contain"
                   priority
                 />
-                <div className="absolute inset-0 rounded-2xl border border-white/60 pointer-events-none" />
               </div>
             </div>
 
@@ -193,52 +202,79 @@ function HomeCardContent() {
                     key={event.id}
                     className={`p-6 rounded-2xl border bg-[#FCFAF6]/90 backdrop-blur-xs transition-all shadow-[0_6px_20px_rgba(52,44,38,0.05)] ${accentBorder}`}
                   >
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] uppercase tracking-[0.2em] text-[#81776B] font-sans font-bold">
-                        {event.ceremonyType[lang]}
-                      </span>
-                      <span className={`text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-0.5 rounded-full ${badgeBg}`}>
-                        {event.slug.toUpperCase()}
-                      </span>
-                    </div>
+                    {(() => {
+                      const countdown = calculateCountdown(event.dateISO);
+                      return (
+                        <>
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-[11px] uppercase tracking-[0.2em] text-[#81776B] font-sans font-bold">
+                              {event.ceremonyType[lang]}
+                            </span>
+                            <span className={`text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-0.5 rounded-full ${badgeBg}`}>
+                              {event.slug.toUpperCase()}
+                            </span>
+                          </div>
 
-                    <h3
-                      className={`text-xl sm:text-2xl font-bold text-[#342C26] mb-1.5 ${
-                        lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
-                      }`}
-                    >
-                      {event.title[lang]}
-                    </h3>
-
-                    <div className="flex items-center gap-2 text-xs sm:text-sm text-[#545B43] font-medium my-2">
-                      <Calendar className="w-4 h-4 text-[#B5965A] shrink-0" />
-                      <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
-                        {event.formattedDate[lang]}
-                      </span>
-                    </div>
-
-                    <div className="flex items-start gap-2 text-xs sm:text-sm text-[#5A4D41] my-2">
-                      <MapPin className="w-4 h-4 text-[#B5965A] shrink-0 mt-0.5" />
-                      <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
-                        {event.venue.name[lang]}, {event.venue.city[lang]}
-                      </span>
-                    </div>
-
-                    <div className="pt-3.5 mt-3.5 border-t border-[#B5965A]/25 flex items-center justify-end">
-                      {(() => {
-                        const isSingle = guest.tier === 'walima' || guest.tier === 'nikkah' || guest.tier === 'baraat';
-                        const targetParams = `?invite=${guest.tier}${guest.guestName ? `&to=${encodeURIComponent(guest.guestName)}` : ''}${isSingle ? '&nav=0' : ''}`;
-                        return (
-                          <Link
-                            href={`/${event.slug}${targetParams}`}
-                            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-semibold hover:bg-[#545B43] transition-colors shadow-2xs"
+                          <h3
+                            className={`text-xl sm:text-2xl font-bold text-[#342C26] mb-1.5 ${
+                              lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                            }`}
                           >
-                            <span>{lang === 'ur' ? 'دعوت نامہ دیکھیں' : 'View Invitation'}</span>
-                            <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                          </Link>
-                        );
-                      })()}
-                    </div>
+                            {event.title[lang]}
+                          </h3>
+
+                          {/* Live Status Pill: Happening Now / Happily Ever After */}
+                          {countdown.status === 'happening_now' && (
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-600/30 text-emerald-800 text-[10px] font-sans font-bold uppercase tracking-wider my-1.5 shadow-2xs">
+                              <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+                              </span>
+                              <span>{lang === 'ur' ? 'آج کی مبارک تقریب • جاری ہے' : 'Happening Now • Today'}</span>
+                            </div>
+                          )}
+                          {countdown.status === 'happened' && (
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DFBF73]/20 border border-[#DFBF73]/60 text-[#8B0000] text-[10px] font-sans font-bold uppercase tracking-wider my-1.5 shadow-2xs">
+                              <span>✨</span>
+                              <span>{lang === 'ur' ? 'بحسن و خوبی پایہ تکمیل • سدا شاد و آباد' : 'Happily Ever After • Concluded'}</span>
+                            </div>
+                          )}
+
+                          <div className="flex items-center gap-2 text-xs sm:text-sm text-[#545B43] font-medium my-2">
+                            <Calendar className="w-4 h-4 text-[#B5965A] shrink-0" />
+                            <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
+                              {event.formattedDate[lang]}
+                            </span>
+                          </div>
+
+                          <div className="flex items-start gap-2 text-xs sm:text-sm text-[#5A4D41] my-2">
+                            <MapPin className="w-4 h-4 text-[#B5965A] shrink-0 mt-0.5" />
+                            <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
+                              {event.venue.name[lang]}, {event.venue.city[lang]}
+                            </span>
+                          </div>
+
+                          <div className="pt-3.5 mt-3.5 border-t border-[#B5965A]/25 flex items-center justify-end">
+                            {(() => {
+                              const isSingle = guest.tier === 'walima' || guest.tier === 'nikkah' || guest.tier === 'baraat';
+                              const targetParams = `?invite=${guest.tier}${guest.guestName ? `&to=${encodeURIComponent(guest.guestName)}` : ''}${isSingle ? '&nav=0' : ''}`;
+                              const buttonText = countdown.status === 'happened'
+                                ? (lang === 'ur' ? 'دعوت نامہ و یادگار دیکھیں' : 'View Memories & Invitation')
+                                : (lang === 'ur' ? 'دعوت نامہ دیکھیں' : 'View Invitation');
+                              return (
+                                <Link
+                                  href={`/${event.slug}${targetParams}`}
+                                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-semibold hover:bg-[#545B43] transition-colors shadow-2xs"
+                                >
+                                  <span>{buttonText}</span>
+                                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                                </Link>
+                              );
+                            })()}
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                 );
               })}

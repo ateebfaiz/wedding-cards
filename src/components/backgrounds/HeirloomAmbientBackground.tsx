@@ -87,8 +87,8 @@ export function HeirloomAmbientBackground({
         </div>
       </div>
 
-      {/* 5. Soft Frosted Translucent Blur Overlay for Superior Text Readability */}
-      <div className="absolute inset-0 bg-[#F8F5EE]/45 backdrop-blur-[2px]" />
+      {/* 5. Delicate Translucent Veil for Subtle Readability Without Smudging Patterns */}
+      <div className="absolute inset-0 bg-[#F8F5EE]/28 backdrop-blur-[1px]" />
 
       {/* 6. Soft Frosted Vignette for Flawless Readability */}
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_40%,rgba(248,245,238,0.72)_80%,rgba(248,245,238,0.92)_100%]" />

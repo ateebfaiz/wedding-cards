@@ -79,8 +79,8 @@ export function WaxSealEnvelope({
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_20%,rgba(5,11,20,0.92)_100%] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-radial-[circle,rgba(223,191,115,0.18)_0%,transparent_70%] pointer-events-none blur-2xl animate-pulse" />
 
-      {/* The Postcard / Envelope Composition (True Landscape format with natural shadow depth) */}
-      <div className="relative w-full max-w-[480px] sm:max-w-[580px] md:max-w-[650px] flex flex-col items-center justify-center">
+      {/* The Postcard / Envelope Composition (Luminous Gold Mandala on Navy, tailored for desktop and mobile) */}
+      <div className="relative w-full max-w-[340px] sm:max-w-[580px] md:max-w-[650px] flex flex-col items-center justify-center">
         {/* Personalized Invitee Callout Badge on Envelope */}
         {guestName && (
           <div
@@ -102,41 +102,65 @@ export function WaxSealEnvelope({
           </div>
         )}
 
-        {/* Physical Luxurious Navy & Gold Envelope Display Card */}
+        {/* Luminous Gold Mandala Artwork Display with Interactive Glow */}
         <div
-          className={`relative w-full aspect-[2282/1388] filter transition-all duration-700 ease-out ${
+          className={`relative w-full filter transition-all duration-700 ease-out group ${
             stage === 'cracking'
-              ? 'scale-103 drop-shadow-[0_30px_70px_rgba(223,191,115,0.45)]'
+              ? 'scale-103 drop-shadow-[0_0_50px_rgba(255,223,115,0.7)]'
               : stage === 'opening'
-              ? 'scale-110 opacity-80 blur-[1px] drop-shadow-[0_40px_90px_rgba(255,223,115,0.6)]'
+              ? 'scale-110 opacity-80 blur-[1px] drop-shadow-[0_0_80px_rgba(255,223,115,0.9)]'
               : stage === 'revealed'
               ? 'scale-125 opacity-0'
-              : 'scale-100 hover:scale-[1.02] drop-shadow-[0_25px_60px_rgba(0,0,0,0.85)] hover:drop-shadow-[0_30px_70px_rgba(223,191,115,0.3)]'
+              : 'scale-100 hover:scale-[1.02] drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:drop-shadow-[0_0_40px_rgba(223,191,115,0.55)]'
           }`}
         >
-          {/* Main Envelope Image Asset */}
-          <div className="relative w-full h-full">
+          {/* Desktop Version: Landscape (1672x941) */}
+          <div className="hidden sm:block relative w-full aspect-[1672/941] rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/assets/envelope/luxurious-navy-envelope.webp"
-              alt="Luxurious Navy Gold Wedding Envelope"
+              src="/assets/envelope/mandala-envelope-desktop.webp"
+              alt="Luminous Gold Mandala Wedding Seal Envelope Desktop"
               fill
-              sizes="(max-width: 640px) 360px, (max-width: 768px) 480px, 540px"
-              className="object-contain"
+              sizes="(max-width: 1024px) 580px, 650px"
+              className="object-cover"
               priority
             />
+            {/* Ambient Radial Golden Shimmer Overlay */}
+            <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(8,18,38,0.4)_100%] pointer-events-none group-hover:opacity-60 transition-opacity" />
           </div>
 
-          {/* Interactive Center Seal Hotspot */}
+          {/* Mobile Version: Vertical Optimized (941x1672) */}
+          <div className="block sm:hidden relative w-full aspect-[941/1672] rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="/assets/envelope/mandala-envelope-mobile.webp"
+              alt="Luminous Gold Mandala Wedding Seal Envelope Mobile"
+              fill
+              sizes="340px"
+              className="object-cover"
+              priority
+            />
+            {/* Ambient Radial Golden Shimmer Overlay */}
+            <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(8,18,38,0.4)_100%] pointer-events-none group-hover:opacity-60 transition-opacity" />
+          </div>
+
+          {/* Interactive Center Seal Hotspot with Multi-Tier Radiant Glow */}
           <div
-            className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center group"
-            title="Click to open invitation"
+            className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 rounded-full flex items-center justify-center cursor-pointer"
+            title="Click or tap to open invitation"
           >
-            {/* Luminous Pulsing Seal Halo */}
+            {/* Expanding Pulsing Ring */}
             <div
-              className={`absolute inset-0 rounded-full border border-[#DFBF73]/50 transition-all duration-500 ${
+              className={`absolute inset-0 rounded-full border-2 border-[#DFBF73]/70 transition-all duration-500 ${
                 stage === 'cracking'
-                  ? 'scale-125 border-[#FFDF73] bg-[#FFDF73]/20 shadow-[0_0_30px_#FFDF73]'
-                  : 'group-hover:scale-110 group-hover:border-[#FFDF73]/80 animate-ping opacity-25'
+                  ? 'scale-150 border-[#FFDF73] bg-[#FFDF73]/30 shadow-[0_0_50px_#FFDF73]'
+                  : 'group-hover:scale-115 group-hover:border-[#FFDF73] animate-ping opacity-35'
+              }`}
+            />
+            {/* Radiant Inner Glow Aura */}
+            <div
+              className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-radial-[circle,rgba(255,223,115,0.35)_0%,transparent_75%] transition-all duration-300 ${
+                stage === 'cracking'
+                  ? 'scale-125 bg-radial-[circle,rgba(255,223,115,0.7)_0%,transparent_70%]'
+                  : 'group-hover:scale-125 group-hover:bg-radial-[circle,rgba(255,223,115,0.55)_0%,transparent_70%]'
               }`}
             />
           </div>

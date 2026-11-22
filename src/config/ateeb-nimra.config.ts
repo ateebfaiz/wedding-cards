@@ -242,10 +242,6 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
             en: 'From Sialkot & Sambrial: Travel via Sialkot-Wazirabad Road connecting to GT Road junction towards Veroke Cheema.',
             ur: 'سیالکوٹ اور سمبڑیال سے: براستہ سیالکوٹ-وزیرآباد روڈ تا جی ٹی روڈ جنکشن ویروکے چیمہ۔',
           },
-          {
-            en: 'Ample guest parking is arranged within the compound premises.',
-            ur: 'احاطے اور اسکول گراؤنڈ میں تمام معزز مہمانوں کے لیے کشادہ کار پارکنگ کی بہترین سہولت موجود ہے۔',
-          },
         ],
       },
     },

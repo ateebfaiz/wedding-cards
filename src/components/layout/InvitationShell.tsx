@@ -23,10 +23,16 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
   const [hasCheckedStorage, setHasCheckedStorage] = useState(false);
 
   useEffect(() => {
-    // Check if opened during current session or requested via query parameter
+    // If a guest link is provided (e.g. ?to= or ?invite=), ALWAYS begin with the glowing envelope experience
     const autoOpen = searchParams.get('opened') === 'true';
-    const stored = sessionStorage.getItem(`envelope_opened_${config.meta.id}`);
-    if (stored === 'true' || autoOpen) {
+    const isDirectGuestLink = searchParams.has('to') || searchParams.has('invite');
+
+    if (!isDirectGuestLink) {
+      const stored = sessionStorage.getItem(`envelope_opened_${config.meta.id}`);
+      if (stored === 'true' || autoOpen) {
+        setIsOpened(true);
+      }
+    } else if (autoOpen) {
       setIsOpened(true);
     }
     setHasCheckedStorage(true);
