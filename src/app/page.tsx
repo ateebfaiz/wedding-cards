@@ -53,58 +53,57 @@ function HomeCardContent() {
               </div>
             </div>
 
-            {/* 3. Dedicated Personalized Invitee Heading (If provided in link) */}
+            {/* 3. Dedicated Personalized Invitee Heading Section (Left-Aligned, Big & Bold, Zero Overlap) */}
             {guest.guestName && (
-              <div className="my-5 p-5 sm:p-6 rounded-3xl bg-[#FCFAF6]/95 border border-[#B5965A]/45 shadow-[0_8px_30px_rgba(52,44,38,0.06)] backdrop-blur-md text-center transition-all animate-in fade-in slide-in-from-top-4 duration-700">
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold flex items-center justify-center gap-1.5 mb-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
-                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Specially Invited with Honor'}</span>
-                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
+              <div className="my-5 p-6 sm:p-8 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/50 shadow-[0_12px_40px_rgba(52,44,38,0.1)] backdrop-blur-md flex flex-col items-start text-left transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-[#B5965A]" />
+                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}</span>
                 </span>
                 <h2
-                  className={`text-2xl sm:text-3xl lg:text-4xl text-[#342C26] font-bold ${
-                    lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                  className={`text-3xl sm:text-4xl lg:text-5xl font-black text-[#2E050B] leading-tight ${
+                    lang === 'ur' ? 'font-sameer-zikran text-4xl sm:text-5xl' : 'font-playfair'
                   }`}
                 >
                   {lang === 'ur' ? `${guest.guestName} و اہلِ خانہ` : `${guest.guestName} & Family`}
                 </h2>
-                <div className="w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#B5965A] to-transparent mx-auto mt-3" />
+                <div className="w-20 h-1 bg-[#B5965A] mt-3 rounded-full" />
               </div>
             )}
 
             {/* 4. Family Invitation Announcement */}
             <div className="my-4 space-y-1.5">
-              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[#B5965A] font-sans font-bold block">
+              <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block">
                 {config.invitationIntro.hostsLine[lang]}
               </span>
               <p
-                className={`text-sm sm:text-base text-[#5A4D41] max-w-lg mx-auto leading-relaxed ${
-                  lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-serif italic'
+                className={`text-base sm:text-lg text-[#2E050B] font-bold max-w-xl mx-auto leading-relaxed ${
+                  lang === 'ur' ? 'font-alqalam-taj text-xl sm:text-2xl leading-loose' : 'font-serif'
                 }`}
               >
                 {config.invitationIntro.greetingLine[lang]}
               </p>
             </div>
 
-            {/* 5. Grand Couple Presentation */}
-            <div className="my-6 py-6 border-y border-[#B5965A]/35 space-y-4 bg-[#FCFAF6]/80 backdrop-blur-xs rounded-3xl shadow-[0_8px_30px_rgba(52,44,38,0.06)] border border-[#B5965A]/25 px-4 sm:px-8">
+            {/* 5. Grand Couple Presentation (Distinct Fonts for Headings vs Subheadings) */}
+            <div className="my-6 py-6 border-y border-[#B5965A]/35 space-y-4 bg-[#FCFAF6]/90 backdrop-blur-xs rounded-3xl shadow-[0_8px_30px_rgba(52,44,38,0.06)] border border-[#B5965A]/25 px-4 sm:px-8">
               {/* Groom Presentation */}
               <div>
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold block mb-1">
+                <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block mb-1">
                   {lang === 'ur' ? 'دولہا' : 'The Groom'}
                 </span>
                 <h1
                   className={`leading-tight ${
                     lang === 'ur'
-                      ? 'font-nastaliq-display text-4xl sm:text-6xl text-[#342C26] font-bold'
-                      : 'font-serif text-3xl sm:text-5xl font-bold text-[#342C26] tracking-normal'
+                      ? 'font-sameer-zikran text-4xl sm:text-6xl text-[#2E050B] font-black'
+                      : 'font-playfair text-3xl sm:text-5xl font-black text-[#2E050B] tracking-normal'
                   }`}
                 >
                   {config.couple.groom.fullName[lang]}
                 </h1>
                 <p
-                  className={`text-xs sm:text-sm text-[#5A4D41] font-medium mt-1.5 ${
-                    lang === 'ur' ? 'font-nastaliq-body text-sm' : 'font-serif italic'
+                  className={`text-sm sm:text-base text-[#5A4D41] font-bold mt-1.5 ${
+                    lang === 'ur' ? 'font-alqalam-taj text-lg sm:text-xl' : 'font-serif italic'
                   }`}
                 >
                   {lang === 'ur'
@@ -116,7 +115,7 @@ function HomeCardContent() {
               {/* Refined Amper-Knot Divider */}
               <div className="flex items-center justify-center gap-3 text-[#B5965A] my-2">
                 <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[#B5965A]/60" />
-                <span className={`text-2xl sm:text-3xl text-[#702F3D] ${lang === 'ur' ? 'font-nastaliq-display' : 'font-serif italic'}`}>
+                <span className={`text-2xl sm:text-3xl text-[#702F3D] ${lang === 'ur' ? 'font-sameer-zikran' : 'font-serif italic'}`}>
                   {lang === 'ur' ? 'اور' : '&'}
                 </span>
                 <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[#B5965A]/60" />
@@ -124,21 +123,21 @@ function HomeCardContent() {
 
               {/* Bride Presentation */}
               <div>
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold block mb-1">
+                <span className="text-[11px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black block mb-1">
                   {lang === 'ur' ? 'دلہن' : 'The Bride'}
                 </span>
                 <h1
                   className={`leading-tight ${
                     lang === 'ur'
-                      ? 'font-nastaliq-display text-4xl sm:text-6xl text-[#342C26] font-bold'
-                      : 'font-serif text-3xl sm:text-5xl font-bold text-[#342C26] tracking-normal'
+                      ? 'font-sameer-zikran text-4xl sm:text-6xl text-[#2E050B] font-black'
+                      : 'font-playfair text-3xl sm:text-5xl font-black text-[#2E050B] tracking-normal'
                   }`}
                 >
                   {config.couple.bride.fullName[lang]}
                 </h1>
                 <p
-                  className={`text-xs sm:text-sm text-[#5A4D41] font-medium mt-1.5 ${
-                    lang === 'ur' ? 'font-nastaliq-body text-sm' : 'font-serif italic'
+                  className={`text-sm sm:text-base text-[#5A4D41] font-bold mt-1.5 ${
+                    lang === 'ur' ? 'font-alqalam-taj text-lg sm:text-xl' : 'font-serif italic'
                   }`}
                 >
                   {lang === 'ur'

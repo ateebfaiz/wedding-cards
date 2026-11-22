@@ -68,10 +68,10 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   return (
     <div
-      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
+      className="min-h-screen text-[#342C26] flex flex-col items-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
-      {/* Dynamic Heirloom Ambient Background with Dual Rotating Mandalas & Islamic Arch Backdrop */}
+      {/* Full-Bleed Islamic Arch Backdrop Fill-In for Mobile & Desktop */}
       <HeirloomAmbientBackground variant="invitation" />
 
       {/* 1. Navigation Header: Rendered ONLY when navigation is permitted */}
@@ -83,39 +83,39 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
           showEventTabs={true}
         />
       ) : (
-        /* Floating Unobtrusive Corner Language Switcher (When Navigation is Disabled) */
+        /* Floating Unobtrusive Corner Language Switcher (Non-Overlapping) */
         <div className="fixed top-4 right-4 z-40 select-none">
           <button
             type="button"
             onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
             aria-label="Toggle Language"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6]/90 text-[#342C26] text-xs font-sans font-medium tracking-wide shadow-xs backdrop-blur-md hover:border-[#B5965A] hover:bg-[#EFE8DA] transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#DFBF73]/60 bg-[#081226]/85 text-[#F8F5EE] text-xs font-sans font-semibold tracking-wide shadow-md backdrop-blur-md hover:border-[#FFDF73] hover:bg-[#0D1B36] transition-all cursor-pointer"
           >
             <span>{lang === 'en' ? 'اردو' : 'English'}</span>
           </button>
         </div>
       )}
 
-      {/* 2. Main Full-Fledged Content Area (Unwrapped & Breathing) */}
-      <main className="w-full max-w-3xl px-4 sm:px-8 py-8 sm:py-14 flex flex-col items-center relative z-10">
+      {/* 2. Main Content Canvas with Generous Top Padding to Preempt Any Toggle Collision */}
+      <main className="w-full max-w-3xl px-4 sm:px-8 pt-16 sm:pt-20 pb-14 flex flex-col items-center relative z-10">
         {/* Audience Gate Check (If tier does not include this event) */}
         {!isAllowed ? (
-          <div className="w-full my-8 text-center p-8 rounded-3xl bg-[#FCFAF6]/90 border border-[#B5965A]/40 shadow-sm backdrop-blur-xs">
+          <div className="w-full my-8 text-center p-8 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/40 shadow-xl backdrop-blur-md">
             <div className="w-12 h-12 rounded-full bg-[#702F3D]/10 text-[#702F3D] flex items-center justify-center mx-auto mb-4 border border-[#702F3D]/30">
               <ShieldAlert className="w-6 h-6" />
             </div>
 
             <h2
-              className={`text-xl sm:text-2xl text-[#342C26] font-bold mb-3 ${
-                lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+              className={`text-xl sm:text-2xl text-[#2E050B] font-black mb-3 ${
+                lang === 'ur' ? 'font-sameer-zikran text-3xl' : 'font-playfair'
               }`}
             >
               {lang === 'ur' ? 'مخصوص تقریب کا دعوت نامہ' : 'Ceremony Specific Invitation'}
             </h2>
 
             <p
-              className={`text-sm text-[#81776B] max-w-md mx-auto mb-6 leading-relaxed ${
-                lang === 'ur' ? 'font-nastaliq-body text-sm leading-loose' : 'font-sans'
+              className={`text-sm text-[#5A4D41] max-w-md mx-auto mb-6 leading-relaxed ${
+                lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-sans'
               }`}
             >
               {lang === 'ur'
@@ -126,14 +126,14 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
             {isSingleEventTier ? (
               <Link
                 href={`/${tier}?invite=${tier}${guestName ? `&to=${encodeURIComponent(guestName)}` : ''}&nav=0`}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-bold hover:bg-[#545B43] transition-colors shadow-2xs"
               >
                 <span>{lang === 'ur' ? 'اپنے مخصوص دعوت نامے پر جائیں' : 'Go to Your Designated Ceremony'}</span>
               </Link>
             ) : (
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-bold hover:bg-[#545B43] transition-colors shadow-2xs"
               >
                 <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
                 <span>{lang === 'ur' ? 'مرکزی دعوت نامہ دیکھیں' : 'View Main Wedding Invitation'}</span>
@@ -143,22 +143,21 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
         ) : (
           /* Full Independent Stationery Canvas */
           <div className="w-full flex flex-col items-center space-y-6">
-            {/* Dedicated Personalized Invitee Heading Section */}
+            {/* Dedicated Personalized Invitee Heading Section (Left-Aligned, Big & Bold, Zero Overlap) */}
             {guestName && (
-              <div className="w-full my-2 p-5 rounded-3xl bg-[#FCFAF6]/95 border border-[#B5965A]/45 shadow-[0_8px_30px_rgba(52,44,38,0.06)] backdrop-blur-md text-center transition-all animate-in fade-in slide-in-from-top-4 duration-700">
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold flex items-center justify-center gap-1.5 mb-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
-                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Specially Invited with Honor'}</span>
-                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
+              <div className="w-full my-3 p-6 sm:p-8 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/50 shadow-[0_12px_40px_rgba(0,0,0,0.12)] backdrop-blur-md flex flex-col items-start text-left transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-black flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-[#B5965A]" />
+                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}</span>
                 </span>
                 <h2
-                  className={`text-2xl sm:text-3xl lg:text-4xl text-[#342C26] font-bold ${
-                    lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                  className={`text-3xl sm:text-4xl lg:text-5xl font-black text-[#2E050B] leading-tight ${
+                    lang === 'ur' ? 'font-sameer-zikran text-4xl sm:text-5xl' : 'font-playfair'
                   }`}
                 >
                   {lang === 'ur' ? `${guestName} و اہلِ خانہ` : `${guestName} & Family`}
                 </h2>
-                <div className="w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#B5965A] to-transparent mx-auto mt-3" />
+                <div className="w-20 h-1 bg-[#B5965A] mt-3 rounded-full" />
               </div>
             )}
 
@@ -168,7 +167,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
             {/* Countdown to the Event */}
             <CountdownTimer targetDateISO={event.dateISO} lang={lang} />
 
-            {/* Utility Actions (Add to Calendar, WhatsApp Share, Event QR) */}
+            {/* Utility Actions (Add to Calendar, WhatsApp Share — Zero QR Code) */}
             <ActionRow event={event} coupleNames={coupleNames} lang={lang} />
 
             {/* Ceremonial Progression Milestones (Baraat only) */}
@@ -185,12 +184,12 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
               </div>
             )}
 
-            {/* Ceremony Schedule Timeline */}
+            {/* Left-Aligned Pixel-Perfect Ceremony Schedule Timeline */}
             <div className="w-full">
               <ScheduleTimeline schedule={event.schedule} lang={lang} />
             </div>
 
-            {/* Venue & Directions Card */}
+            {/* Venue & Directions Card (Single-Line Bold Heading) */}
             <div className="w-full">
               <VenueCard venue={event.venue} lang={lang} />
             </div>
@@ -202,12 +201,12 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
               </div>
             )}
 
-            {/* Event Instructions Card */}
+            {/* Important Event Instructions Card */}
             {config.eventInstructions && (
-              <div className="w-full p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+              <div className="w-full p-5 sm:p-6 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/40 shadow-xs backdrop-blur-xs text-left">
                 <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
                   <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
-                  <span className="text-xs uppercase tracking-wider font-sans font-bold">
+                  <span className="text-xs uppercase tracking-wider font-cinzel font-bold">
                     {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
                   </span>
                 </div>
@@ -223,14 +222,14 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
             {/* Contact & Info RSVP Card */}
             {config.contacts && config.contacts.length > 0 && (
-              <div className="w-full p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+              <div className="w-full p-5 sm:p-6 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/40 shadow-xs backdrop-blur-xs text-left">
                 <div className="mb-3">
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold block">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-cinzel font-bold block">
                     {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
                   </span>
                   <h3
-                    className={`text-lg font-bold text-[#342C26] ${
-                      lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                    className={`text-lg sm:text-xl font-bold text-[#2E050B] ${
+                      lang === 'ur' ? 'font-sameer-zikran text-2xl' : 'font-playfair'
                     }`}
                   >
                     {lang === 'ur' ? 'کسی بھی سوال یا رہنمائی کے لیے رابطہ فرمائیں' : 'For Inquiries & Guidance'}
@@ -241,13 +240,13 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                   {config.contacts.map((contact, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-xl border border-[#B5965A]/25 bg-white/70 flex flex-col justify-between"
+                      className="p-3.5 rounded-2xl border border-[#B5965A]/25 bg-white/80 flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-center justify-between gap-1 mb-1">
                           <span
-                            className={`text-sm font-bold text-[#342C26] ${
-                              lang === 'ur' ? 'font-nastaliq-body text-base' : 'font-sans'
+                            className={`text-sm font-bold text-[#2E050B] ${
+                              lang === 'ur' ? 'font-sameer-zikran text-base' : 'font-sans'
                             }`}
                           >
                             {contact.name[lang]}
@@ -292,7 +291,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
             {/* 3. Bottom Event Switcher: ONLY shown when allowNavigation is true */}
             {allowNavigation && (
               <div className="w-full mt-10 pt-8 border-t border-[#B5965A]/25 text-center">
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#81776B] font-sans font-bold block mb-4">
+                <span className="text-[11px] uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold block mb-4">
                   {lang === 'ur' ? 'دیگر تقریباتِ شادی' : 'Explore Other Ceremonies'}
                 </span>
 
@@ -301,15 +300,15 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                     <Link
                       key={oEvent.slug}
                       href={`/${oEvent.slug}`}
-                      className="p-4 rounded-2xl border border-[#B5965A]/30 bg-[#FCFAF6]/90 backdrop-blur-xs hover:border-[#B5965A] hover:bg-[#EFE8DA]/50 transition-all flex items-center justify-between group shadow-2xs"
+                      className="p-4 rounded-2xl border border-[#B5965A]/35 bg-[#FCFAF6]/95 backdrop-blur-md hover:border-[#DFBF73] hover:bg-[#EFE8DA]/80 transition-all flex items-center justify-between group shadow-2xs"
                     >
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#81776B] font-sans font-bold block">
+                        <span className="text-[10px] uppercase tracking-wider text-[#702F3D] font-cinzel font-bold block">
                           {oEvent.ceremonyType[lang]}
                         </span>
                         <h4
-                          className={`text-base font-bold text-[#342C26] ${
-                            lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                          className={`text-base font-bold text-[#2E050B] ${
+                            lang === 'ur' ? 'font-sameer-zikran text-lg' : 'font-playfair'
                           }`}
                         >
                           {oEvent.title[lang]}
@@ -326,7 +325,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                 <div className="pt-4 text-center">
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#342C26] hover:text-[#702F3D] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#F8F5EE] hover:text-[#DFBF73] transition-colors drop-shadow-md"
                   >
                     <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
                     <span>{lang === 'ur' ? 'مرکزی کارڈ پر واپس جائیں' : 'Back to Main Wedding Card'}</span>
@@ -346,7 +345,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
 export function EventClientView(props: EventClientViewProps) {
   return (
-    <React.Suspense fallback={<div className="min-h-screen bg-[#F8F5EE]" />}>
+    <React.Suspense fallback={<div className="min-h-screen bg-[#060D1A]" />}>
       <EventClientViewContent {...props} />
     </React.Suspense>
   );

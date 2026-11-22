@@ -20,8 +20,8 @@ export function HeirloomAmbientBackground({
       const xPercent = (e.clientX / innerWidth - 0.5) * 2;
       const yPercent = (e.clientY / innerHeight - 0.5) * 2;
       setOffset({
-        x: xPercent * 14,
-        y: yPercent * 14,
+        x: xPercent * 12,
+        y: yPercent * 12,
       });
     };
 
@@ -29,52 +29,63 @@ export function HeirloomAmbientBackground({
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  return (
-    <div className="fixed inset-0 pointer-events-none select-none overflow-hidden z-0 bg-[#F8F5EE]">
-      {/* 1. Base Wallpaper Texture */}
-      {variant === 'homepage' ? (
-        /* Vertical Moroccan Pattern Background */
+  if (variant === 'invitation') {
+    return (
+      <div className="fixed inset-0 pointer-events-none select-none overflow-hidden z-0 bg-[#060D1A]">
+        {/* Full-Bleed Islamic Arch Backdrop Fill-In for Mobile and Desktop */}
         <div
-          className="absolute inset-0 opacity-[0.14] pointer-events-none mix-blend-multiply"
-          style={{
-            backgroundImage: 'url(/assets/backgrounds/moroccan-pattern-bg.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.14 * opacityMultiplier,
-          }}
-        />
-      ) : (
-        /* Islamic Arch & Arabesque Backdrop for Invitation Pages */
-        <div
-          className="absolute inset-0 opacity-[0.12] pointer-events-none mix-blend-multiply"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700"
           style={{
             backgroundImage: 'url(/assets/backgrounds/islamic-arch-backdrop.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center top',
-            opacity: 0.12 * opacityMultiplier,
+            opacity: 0.88 * opacityMultiplier,
           }}
         />
-      )}
 
-      {/* 2. Luminous Gold Mandala on Navy Highlight (Subtle Ambient Glow) */}
-      <div className="absolute -top-24 right-0 w-[420px] sm:w-[600px] h-[550px] sm:h-[800px] opacity-[0.08] pointer-events-none">
-        <Image
-          src="/assets/mandalas/luminous-navy-mandala.webp"
-          alt="Luminous Gold Mandala"
-          fill
-          sizes="(max-width: 640px) 420px, 600px"
-          className="object-contain object-top"
-          priority
-        />
+        {/* Ambient Radial Vignette for Content Framing & Flawless Legibility */}
+        <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(6,13,26,0.65)_85%,rgba(6,13,26,0.92)_100%]" />
+
+        {/* Subtle Dual Rotating Mandalas Concentric in Deep Navy Background */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ease-out pointer-events-none"
+          style={{
+            transform: `translate3d(calc(-50% + ${offset.x}px), calc(-50% + ${offset.y}px), 0)`,
+          }}
+        >
+          <div className="relative w-[700px] h-[700px] sm:w-[950px] sm:h-[950px] animate-[spin_140s_linear_infinite] opacity-[0.08]">
+            <Image
+              src="/assets/mandalas/gdj-arabesque-disc.webp"
+              alt="Rotating Disc"
+              fill
+              sizes="(max-width: 768px) 700px, 950px"
+              className="object-contain"
+            />
+          </div>
+        </div>
       </div>
+    );
+  }
 
-      {/* 3. Frosted & Blurred Ambient Light Flares */}
+  // Homepage: Vertical Moroccan Pattern with Rotating Mandalas & Warm Paper
+  return (
+    <div className="fixed inset-0 pointer-events-none select-none overflow-hidden z-0 bg-[#F8F5EE]">
+      {/* 1. Vertical Moroccan Pattern Background */}
+      <div
+        className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-multiply"
+        style={{
+          backgroundImage: 'url(/assets/backgrounds/moroccan-pattern-bg.webp)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.15 * opacityMultiplier,
+        }}
+      />
+
+      {/* 2. Frosted & Blurred Ambient Light Flares */}
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[400px] sm:h-[550px] bg-gradient-to-b from-[#ECD7B5]/65 via-[#F2E5CE]/35 to-transparent rounded-full blur-3xl" />
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#F5EAD4]/70 rounded-full blur-3xl animate-pulse" />
       <div className="absolute top-2/3 -right-40 w-96 h-96 bg-[#F1E0CE]/55 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-64 bg-gradient-to-t from-[#EFE8DA]/80 to-transparent blur-2xl" />
 
-      {/* 4. Rotating Mandala #1: GDJ Arabesque Disc (Clockwise, outer layer) */}
+      {/* 3. Rotating Mandala #1: GDJ Arabesque Disc (Clockwise) */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ease-out"
         style={{
@@ -94,7 +105,7 @@ export function HeirloomAmbientBackground({
         </div>
       </div>
 
-      {/* 5. Rotating Mandala #2: GDJ Mandala Ornament (Counter-Clockwise, concentric inner layer) */}
+      {/* 4. Rotating Mandala #2: GDJ Mandala Ornament (Counter-Clockwise) */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ease-out"
         style={{
@@ -114,7 +125,7 @@ export function HeirloomAmbientBackground({
         </div>
       </div>
 
-      {/* 6. Soft Frosted Vignette for Flawless Readability */}
+      {/* 5. Soft Frosted Vignette */}
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_40%,rgba(248,245,238,0.72)_80%,rgba(248,245,238,0.92)_100%]" />
     </div>
   );
