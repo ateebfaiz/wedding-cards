@@ -6,7 +6,6 @@ import { getWeddingConfig } from '@/config/default';
 import { InvitationShell } from '@/components/layout/InvitationShell';
 import { filterEventsForTier } from '@/lib/audience';
 import { downloadICS } from '@/lib/calendar';
-import { IslamicGeometricStar } from '@/components/ornaments/IslamicGeometricStar';
 import { Calendar, Navigation } from 'lucide-react';
 
 function HomeCardContent() {
@@ -19,16 +18,11 @@ function HomeCardContent() {
 
         const coupleNames =
           lang === 'ur'
-            ? `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`
-            : `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
+            ? `${config.couple.groom.fullName.ur} اور ${config.couple.bride.fullName.ur}`
+            : `${config.couple.groom.fullName.en} & ${config.couple.bride.fullName.en}`;
 
         return (
           <div className="w-full flex flex-col items-center relative">
-            {/* Background Animated Islamic Geometric Star (Replaced Bitmap Mandala) */}
-            <div className="fixed inset-0 flex items-center justify-center pointer-events-none opacity-25 -z-10 overflow-hidden">
-              <IslamicGeometricStar size={750} className="scale-75 sm:scale-100" />
-            </div>
-
             {/* The Heirloom Card Folio */}
             <div className="relative w-full max-w-[430px] sm:max-w-[500px] bg-[#FDFBF7] rounded-3xl shadow-[0_35px_90px_rgba(0,0,0,0.95)] border-2 border-[#DFBF73]/80 overflow-hidden p-5 sm:p-8 text-center">
               {/* Inner Luxury Gold Filigree Borders */}
@@ -59,7 +53,7 @@ function HomeCardContent() {
                 />
               </div>
 
-              {/* 2. Default Bismillah Banner Asset (Islamic-Vector-PNG-Clipart) Across All Pages */}
+              {/* 2. Default Bismillah Banner Asset Across All Pages */}
               <div className="relative w-64 sm:w-76 aspect-[934/225] mx-auto my-1.5 drop-shadow-[0_1px_3px_rgba(181,150,90,0.35)]">
                 <Image
                   src="/assets/calligraphy/bismillah-islamic-vector.webp"
@@ -71,31 +65,19 @@ function HomeCardContent() {
                 />
               </div>
 
-              {/* 3. Quranic Marriage Verse Artwork as an Illuminated Manuscript Sticker / Annotation */}
-              <div className="relative mx-auto my-3 max-w-[310px] sm:max-w-[350px] bg-[#FAF6F0] rounded-xl border border-[#DFBF73]/70 p-2 shadow-xs -rotate-1 hover:rotate-0 transition-transform duration-300 flex items-center gap-2.5 text-left rtl:text-right">
-                <div className="relative w-14 h-14 shrink-0 rounded-lg overflow-hidden border border-[#DFBF73]/50 shadow-xs bg-white">
+              {/* 3. Sacred Marriage Verse Sticker Applied on Its Own */}
+              <div className="relative mx-auto my-3 flex items-center justify-center">
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#DFBF73]/80 shadow-[0_10px_25px_rgba(0,0,0,0.25)] -rotate-2 hover:rotate-0 transition-transform duration-300 bg-[#FAF7F2] p-1.5 cursor-default group">
                   <Image
                     src="/assets/calligraphy/quranic-marriage-verse.webp"
-                    alt="Surah Ar-Rum: 21 Marriage Verse"
+                    alt="Surah Ar-Rum: 21 Marriage Verse Sticker"
                     fill
-                    sizes="56px"
-                    className="object-contain p-0.5"
+                    sizes="(max-width: 640px) 112px, 128px"
+                    className="object-contain p-1"
                     priority
                   />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[9px] uppercase tracking-widest text-[#A68850] font-cinzel font-bold block">
-                    {lang === 'ur' ? 'قرآنی مہرِ محبت' : 'Sacred Marriage Verse'}
-                  </span>
-                  <p
-                    className={`text-[11px] text-[#3D2C24] font-medium leading-tight ${
-                      lang === 'ur' ? 'font-nastaliq-body text-xs' : 'font-serif italic'
-                    }`}
-                  >
-                    {lang === 'ur'
-                      ? 'وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً — اور تمہارے درمیان محبت اور رحمت رکھ دی'
-                      : '“And He placed between you affection and mercy” (30:21)'}
-                  </p>
+                  {/* Subtle Gold Foil Sticker Bevel */}
+                  <div className="absolute inset-0 rounded-xl border border-white/40 pointer-events-none" />
                 </div>
               </div>
 
@@ -128,10 +110,23 @@ function HomeCardContent() {
                 </p>
               </div>
 
-              {/* 6. Grand Couple Presentation (Bold, Big Headings & Subheadings Layout) */}
-              <div className="my-4 py-4 border-y-2 border-[#DFBF73]/50 space-y-3 bg-[#FAF7F2]/60 rounded-xl">
+              {/* 6. Grand Couple Presentation (Bold, Big Headings & Subheadings Layout with Mandala Accent) */}
+              <div className="relative my-4 py-4 border-y-2 border-[#DFBF73]/50 space-y-3 bg-[#FAF7F2]/60 rounded-xl overflow-hidden">
+                {/* Decorative Mandala Watermark (gdj-mandala-5180247) */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+                  <div className="relative w-72 h-72 animate-spin-slow-cw">
+                    <Image
+                      src="/assets/mandalas/gdj-mandala-ornament.webp"
+                      alt=""
+                      fill
+                      sizes="288px"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+
                 {/* Groom Presentation */}
-                <div>
+                <div className="relative z-10">
                   <span className="text-[10px] uppercase tracking-[0.25em] text-[#8B0000] font-cinzel font-extrabold block mb-0.5">
                     {lang === 'ur' ? 'دولہا' : 'The Groom'}
                   </span>
@@ -155,8 +150,8 @@ function HomeCardContent() {
                   </p>
                 </div>
 
-                {/* Decorative Amper-Knot Divider with Islamic Geometric Accent */}
-                <div className="flex items-center justify-center gap-3 text-[#DFBF73] my-1">
+                {/* Decorative Amper-Knot Divider */}
+                <div className="relative z-10 flex items-center justify-center gap-3 text-[#DFBF73] my-1">
                   <span className="w-14 h-[1.5px] bg-gradient-to-r from-transparent to-[#DFBF73]" />
                   <span className={`text-2xl sm:text-3xl text-[#8B0000] font-bold ${lang === 'ur' ? 'font-nastaliq-display' : 'font-serif italic'}`}>
                     {lang === 'ur' ? 'اور' : '&'}
@@ -165,7 +160,7 @@ function HomeCardContent() {
                 </div>
 
                 {/* Bride Presentation */}
-                <div>
+                <div className="relative z-10">
                   <span className="text-[10px] uppercase tracking-[0.25em] text-[#8B0000] font-cinzel font-extrabold block mb-0.5">
                     {lang === 'ur' ? 'دلہن' : 'The Bride'}
                   </span>
@@ -289,7 +284,7 @@ function HomeCardContent() {
                   {config.invitationIntro.closingBlessing[lang]}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.25em] text-[#B5965A] font-cinzel font-bold">
-                  Ahmed & Arfa Wedding
+                  {config.meta.title[lang]}
                 </p>
               </div>
             </div>

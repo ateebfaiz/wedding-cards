@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { GuestAccessTier } from '@/lib/audience';
 import { copyToClipboard } from '@/lib/utils';
+import { InteractiveArabicBackground } from '@/components/backgrounds/InteractiveArabicBackground';
 import {
   Copy,
   Check,
@@ -33,8 +34,8 @@ export default function AdminInvitePage() {
   const nameQuery = guestName.trim() ? `&to=${encodeURIComponent(guestName.trim())}` : '';
   const guestUrl = `${origin}/?invite=${tier}${nameQuery}`;
 
-  const coupleNamesEn = `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
-  const coupleNamesUr = `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`;
+  const coupleNamesEn = `${config.couple.groom.fullName.en} & ${config.couple.bride.fullName.en}`;
+  const coupleNamesUr = `${config.couple.groom.fullName.ur} اور ${config.couple.bride.fullName.ur}`;
 
   const tierDescriptions: Record<GuestAccessTier, { titleEn: string; titleUr: string; events: string[] }> = {
     walima: {
@@ -45,7 +46,7 @@ export default function AdminInvitePage() {
     all: {
       titleEn: 'All Events (Family & Close Friends)',
       titleUr: 'تمام تقریبات (نکاح، بارات اور ولیمہ)',
-      events: ['Nikkah & Rasm-e-Hina (Faisalabad)', 'The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
+      events: ['Nikkah Ceremony (Veroke Cheema)', 'The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
     },
     reception: {
       titleEn: 'Baraat & Walima',
@@ -53,9 +54,9 @@ export default function AdminInvitePage() {
       events: ['The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
     },
     nikkah: {
-      titleEn: 'Nikkah & Rasm-e-Hina Only',
-      titleUr: 'صرف نکاح و رسمِ حنا',
-      events: ['Nikkah & Rasm-e-Hina (Farmhouse, Faisalabad)'],
+      titleEn: 'Nikkah Ceremony Only',
+      titleUr: 'صرف تقریبِ نکاح',
+      events: ['Nikkah Ceremony (Veroke Cheema)'],
     },
     baraat: {
       titleEn: 'Baraat Only',
@@ -89,15 +90,9 @@ export default function AdminInvitePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#140205] text-[#F8F5EE] py-6 sm:py-10 px-3 sm:px-4 flex flex-col items-center select-none overflow-x-hidden">
-      {/* Background Ambience */}
-      <div
-        className="fixed inset-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage: 'url(/assets/backgrounds/golden-arabesque-opt.webp)',
-          backgroundSize: 'cover',
-        }}
-      />
+    <div className="min-h-screen bg-[#140205] text-[#F8F5EE] py-6 sm:py-10 px-3 sm:px-4 flex flex-col items-center select-none overflow-x-hidden relative">
+      {/* Interactive Full Bleed Arabic Background */}
+      <InteractiveArabicBackground showDiscAnimation={false} />
 
       <div className="relative w-full max-w-lg bg-[#200408]/95 border-2 border-[#DFBF73]/50 rounded-3xl p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-md">
         {/* Header with Royal Shield Seal Logo */}

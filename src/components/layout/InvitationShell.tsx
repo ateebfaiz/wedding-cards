@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { WeddingConfig, SupportedLanguage } from '@/types/wedding';
 import { AudioController } from './AudioController';
 import { WaxSealEnvelope } from '../envelope/WaxSealEnvelope';
+import { InteractiveArabicBackground } from '../backgrounds/InteractiveArabicBackground';
 import { resolveGuestContext, filterEventsForTier, GuestContext } from '@/lib/audience';
 import { Globe } from 'lucide-react';
 
@@ -46,28 +47,11 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
 
   return (
     <div
-      className="min-h-screen bg-[#180306] text-[#342C26] flex flex-col items-center justify-center relative overflow-x-hidden selection:bg-[#DFBF73]/30"
+      className="min-h-screen bg-[#160205] text-[#342C26] flex flex-col items-center justify-center relative overflow-x-hidden selection:bg-[#DFBF73]/30"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
-      {/* Animated Deep Maroon & Gold Background with Slow Drift */}
-      <div
-        className="fixed inset-0 opacity-40 mix-blend-screen pointer-events-none animate-slow-drift"
-        style={{
-          backgroundImage: 'url(/assets/backgrounds/maroon-golden-opt.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-
-      {/* Secondary Arabesque Pattern Layer */}
-      <div
-        className="fixed inset-0 opacity-15 pointer-events-none"
-        style={{
-          backgroundImage: 'url(/assets/backgrounds/golden-arabesque-opt.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      {/* Interactive Full Bleed Arabic Background on All Pages (Except Envelope) */}
+      {isOpened && <InteractiveArabicBackground showDiscAnimation={true} />}
 
       {/* Interactive Wax-Sealed Opening Experience (NO SKIP BUTTON) */}
       {!isOpened && (

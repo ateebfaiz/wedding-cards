@@ -1,43 +1,43 @@
 import { WeddingConfig } from '@/types/wedding';
 
 /**
- * Ahmed & Arfa — The Heirloom Digital Wedding Invitation Configuration
- * Specific instance loaded on the ahmad-arfa-invitation branch.
+ * Ateeb & Nimra — The Heirloom Digital Wedding Invitation Configuration
+ * Configured with authentic family names, parentage, and ceremony details.
  */
 export const ahmedArfaWeddingConfig: WeddingConfig = {
   meta: {
-    id: 'ahmed-arfa-wedding',
+    id: 'ateeb-nimra-wedding',
     title: {
-      en: 'Ahmed & Arfa — Wedding Invitation',
-      ur: 'دعوتِ شادی — احمد و عرفہ',
+      en: 'Ateeb & Nimra — Wedding Invitation',
+      ur: 'دعوتِ شادی — عاطب و نمرہ',
     },
     description: {
-      en: 'The digital wedding invitation festivities of Ahmed Sarfraz Khan & Arfa Khawar.',
-      ur: 'احمد سرفراز خان اور عرفہ خاور کی شادی خانہ آبادی کا باوقار ڈیجیٹل دعوت نامہ۔',
+      en: 'The digital wedding invitation festivities of Ateeb Faiz & Nimra Javed.',
+      ur: 'عاطب فیض اور نمرہ جاوید کی شادی خانہ آبادی کا باوقار ڈیجیٹل دعوت نامہ۔',
     },
     url: 'https://ahmedarfa.com',
     defaultLanguage: 'en',
     theme: {
       palette: {
-        ivory: '#F8F5EE',
-        warmPaper: '#EFE8DA',
+        ivory: '#FDFBF7',
+        warmPaper: '#FAF7F2',
         antiqueGold: '#B5965A',
         deepOlive: '#545B43',
-        darkEspresso: '#342C26',
-        mutedTaupe: '#8A8074',
-        burgundy: '#702F3D',
+        darkEspresso: '#2E050B',
+        mutedTaupe: '#7D7266',
+        burgundy: '#8B0000',
       },
       typography: {
-        englishSerif: 'Cormorant Garamond',
-        englishSans: 'DM Sans',
-        urduNastaliq: 'Noto Nastaliq Urdu',
+        englishSerif: 'Playfair Display',
+        englishSans: 'Plus Jakarta Sans',
+        urduNastaliq: 'Gulzar',
       },
     },
   },
   seal: {
     monogram: {
-      en: 'A & A',
-      ur: 'الف & ع',
+      en: 'A & N',
+      ur: 'ع & ن',
     },
     sealSubtitle: {
       en: 'An invitation for you',
@@ -58,45 +58,45 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
   couple: {
     groom: {
       fullName: {
-        en: 'Ahmed Sarfraz Khan',
-        ur: 'احمد سرفراز خان',
+        en: 'Ateeb Faiz',
+        ur: 'عاطب فیض',
       },
       shortName: {
-        en: 'Ahmed',
-        ur: 'احمد',
+        en: 'Ateeb',
+        ur: 'عاطب',
       },
       parents: {
-        en: 'Mr. & Mrs. Sarfraz Azam',
-        ur: 'جناب و محترمہ سرفراز اعظم',
+        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira',
+        ur: 'محترم میاں فیض رسول چیمہ اور یاسمین طاہرہ',
       },
     },
     bride: {
       fullName: {
-        en: 'Arfa Khawar',
-        ur: 'عرفہ خاور',
+        en: 'Nimra Javed',
+        ur: 'نمرہ جاوید',
       },
       shortName: {
-        en: 'Arfa',
-        ur: 'عرفہ',
+        en: 'Nimra',
+        ur: 'نمرہ',
       },
       parents: {
-        en: 'Mr. & Mrs. Khawar Hussain',
-        ur: 'جناب و محترمہ خاور حسین',
+        en: 'Javed Iqbal Sultani & Zahida Parveen',
+        ur: 'میاں جاوید اقبال سلطانی اور زاہدہ پروین',
       },
     },
   },
   invitationIntro: {
     hostsLine: {
-      en: 'Mr. & Mrs. Sarfraz Azam',
-      ur: 'جناب و محترمہ سرفراز اعظم',
+      en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira',
+      ur: 'محترم میاں فیض رسول چیمہ اور یاسمین طاہرہ',
     },
     greetingLine: {
       en: 'Request the pleasure of your company and heartfelt prayers at the wedding festivities of their beloved son',
-      ur: 'مسرت کے اس مبارک موقع پر اپنے صاحبزادے کی تقریبِ مسرت میں آپ کی باوقار شرکت اور دعاؤں کے طلبگار ہیں',
+      ur: 'مسرت کے اس مبارک موقع پر اپنے فرزندِ ارجمند کی تقریبِ مسرت میں آپ کی باوقار شرکت اور دعاؤں کے طلبگار ہیں',
     },
     celebrationLine: {
       en: 'We invite you to celebrate our wedding festivities with your gracious presence',
-      ur: 'ہم آپ کو اپنے اس پرمسرت سفر کے آغاز میں خوش آمدید کہتے ہیں',
+      ur: 'ہم آپ کو اس مبارک اور پُرمسرت سفر کے آغاز میں خوش آمدید کہتے ہیں',
     },
     closingBlessing: {
       en: 'Your gracious presence and prayers are our greatest blessing',
@@ -108,121 +108,100 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
       id: 'nikkah',
       slug: 'nikkah',
       title: {
-        en: 'Nikkah & Rasm-e-Hina',
-        ur: 'رسمِ نکاح و حنا',
+        en: 'Nikkah Ceremony',
+        ur: 'رسمِ نکاح',
       },
       ceremonyType: {
-        en: 'Sacred Covenant & Festive Hina',
-        ur: 'رسمِ نکاح و تقریبِ حنا',
+        en: 'Sacred Covenant Ceremony',
+        ur: 'مبارک تقریبِ عقدِ نکاح',
       },
-      dateISO: '2026-11-15T18:30:00+05:00',
+      dateISO: '2026-12-01T15:00:00+05:00',
       formattedDate: {
-        en: 'Sunday, 15 November 2026',
-        ur: 'اتوار، 15 نومبر 2026',
+        en: 'Tuesday, 1 December 2026',
+        ur: 'منگل، 1 دسمبر 2026',
       },
       timezone: 'Asia/Karachi',
       invitationNote: {
-        en: 'Mr. & Mrs. Sarfraz Azam request the pleasure of your company at the Nikkah & Rasm-e-Hina of their son Ahmed Sarfraz Khan with Arfa Khawar, daughter of Mr. & Mrs. Khawar Hussain.',
-        ur: 'جناب و محترمہ سرفراز اعظم اپنے صاحبزادے احمد سرفراز خان کی رسمِ نکاح و حنا (عرفہ خاور دختر جناب و محترمہ خاور حسین) میں آپ کی شرکت اور دعاؤں کے متمنی ہیں۔',
+        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira and Javed Iqbal Sultani & Zahida Parveen request the honor of your presence and heartfelt prayers at the sacred Nikkah Ceremony of Ateeb Faiz and Nimra Javed.',
+        ur: 'محترم میاں فیض رسول چیمہ و یاسمین طاہرہ اور میاں جاوید اقبال سلطانی و زاہدہ پروین اپنے بچوں عاطب فیض اور نمرہ جاوید کے مبارک عقدِ نکاح کے پرمسرت موقع پر آپ کی باوقار شرکت اور دعاؤں کے متمنی ہیں۔',
       },
       venue: {
         name: {
-          en: 'Farmhouse opposite Bright Fabrics',
-          ur: 'برائٹ فیبرکس کے بالمقابل فارم ہاؤس',
+          en: 'Residence of Mian Javed Iqbal Sultani Sahib',
+          ur: 'رہائش گاہ میاں جاوید اقبال سلطانی صاحب',
         },
         address: {
-          en: 'Masjid Ismail Road, Near Ismail City',
-          ur: 'مسجد اسماعیل روڈ، بالمقابل اسماعیل سٹی',
+          en: 'Veroke Cheema',
+          ur: 'ویروکے چیمہ',
         },
         city: {
-          en: 'Faisalabad',
-          ur: 'فیصل آباد',
+          en: 'Veroke Cheema',
+          ur: 'ویروکے چیمہ',
         },
-        googleMapsUrl: 'https://maps.google.com/?q=Farmhouse+opposite+Bright+Fabrics+Faisalabad',
+        googleMapsUrl: 'https://maps.google.com/?q=Veroke+Cheema',
       },
       schedule: [
         {
-          time: '06:30 PM',
-          timeUrdu: 'شام 06:30 بجے',
+          time: '03:00 PM',
+          timeUrdu: 'سہ پہر 03:00 بجے',
           title: {
             en: 'Reception of Guests',
-            ur: 'مہمانوں کا استقبال',
+            ur: 'معزز مہمانوں کا استقبال',
           },
           description: {
-            en: 'Welcome drinks and gathering in the courtyard',
-            ur: 'خوش آمدید اور استقبالیہ مشروبات',
+            en: 'Warm welcome of family and esteemed guests',
+            ur: 'خوش آمدید اور استقبالیہ',
           },
           iconName: 'reception',
         },
         {
-          time: '07:00 PM',
-          timeUrdu: 'شام 07:00 بجے',
+          time: '03:45 PM',
+          timeUrdu: 'سہ پہر 03:45 بجے',
           title: {
-            en: 'Nikkah Ceremony',
-            ur: 'رسمِ نکاح',
+            en: 'Solemnization of Sacred Nikkah',
+            ur: 'رسمِ نکاح و ایجاب و قبول',
           },
           description: {
-            en: 'Solemnization of marriage covenant and prayers',
-            ur: 'نکاح کی مبارک تقریب و دعائے خیر',
+            en: 'Covenant of marriage and prayers for the couple',
+            ur: 'عقدِ نکاح اور نو بیاہتا جوڑے کے لیے دعائے خیر',
           },
           iconName: 'ceremony',
         },
         {
-          time: '07:30 PM',
-          timeUrdu: 'شام 07:30 بجے',
+          time: '04:30 PM',
+          timeUrdu: 'شام 04:30 بجے',
           title: {
-            en: 'Rasm-e-Hina',
-            ur: 'رسمِ حنا',
+            en: 'Festive High Tea & Refreshments',
+            ur: 'ضیافت و عصرانہ',
           },
           description: {
-            en: 'Traditional henna celebration and blessings',
-            ur: 'روایتی رسمِ حنا اور دعائیں',
-          },
-          iconName: 'celebration',
-        },
-        {
-          time: '08:30 PM',
-          timeUrdu: 'رات 08:30 بجے',
-          title: {
-            en: 'Dinner Banquet',
-            ur: 'ضیافتِ طعام',
-          },
-          description: {
-            en: 'Traditional feast with family and friends',
-            ur: 'پُرتکلف روایتی عشائیہ',
+            en: 'Traditional celebratory refreshments with family',
+            ur: 'پُرتکلف عصرانہ اور مٹھائی کی تقسیم',
           },
           iconName: 'dinner',
         },
       ],
       travelGuidance: {
         originCity: {
-          en: 'Lahore',
-          ur: 'لاہور',
+          en: 'Wazirabad / Gujranwala',
+          ur: 'وزیرآباد / گوجرانوالہ',
         },
         estimatedDuration: {
-          en: 'Approximately 3 hours via motorway',
-          ur: 'تقریباً 3 گھنٹے بذریعہ موٹروے',
+          en: 'Direct access to Veroke Cheema',
+          ur: 'براہِ راست ویروکے چیمہ',
         },
         routeTitle: {
-          en: 'M2 Motorway ➔ M3 Motorway (Faisalabad Interchange)',
-          ur: 'ایم-2 موٹروے تا ایم-3 فیصل آباد انٹرچینج',
+          en: 'Veroke Cheema Main Road',
+          ur: 'ویروکے چیمہ روڈ',
         },
         departureWindowNote: {
-          en: 'Recommended departure from Lahore by 3:00 PM - 3:30 PM to ensure punctual arrival before sunset.',
-          ur: 'لاہور سے سہ پہر 3:00 تا 3:30 بجے کے درمیان روانگی مناسب رہے گی تاکہ بروقت تشریف آوری ممکن ہو سکے۔',
+          en: 'Guests are kindly requested to arrive by 03:00 PM.',
+          ur: 'معزز مہمانوں سے گزارش ہے کہ سہ پہر 03:00 بجے تک تشریف لائیں۔',
         },
         advisories: [
           {
-            en: 'Mid-November seasonal fog can develop after 8:30 PM on the motorway. Ensure fog lights are operational.',
-            ur: 'نومبر کے وسط میں رات کے وقت موٹروے پر دھند کا امکان ہوتا ہے، لہٰذا گاڑی کی فوگ لائٹس درست حالت میں رکھیں۔',
-          },
-          {
-            en: 'Exit at Faisalabad Interchange and follow signage toward Masjid Ismail Road near Ismail City.',
-            ur: 'فیصل آباد انٹرچینج سے نکلنے کے بعد اسماعیل سٹی اور مسجد اسماعیل روڈ کے بینرز کی پیروی فرمائیں۔',
-          },
-          {
-            en: 'Dedicated secure valet parking is provided at the farmhouse premises.',
-            ur: 'فارم ہاؤس کے احاطے میں محفوظ والیٹ پارکنگ کا خصوصی انتظام موجود ہے۔',
+            en: 'Follow the main approach road to Veroke Cheema. Ample guest parking is available at the premises.',
+            ur: 'ویروکے چیمہ کی مرکزی سڑک کی پیروی فرمائیں۔ احاطے میں مہمانوں کے لیے پارکنگ کی وسیع جگہ موجود ہے۔',
           },
         ],
       },
@@ -238,15 +217,15 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
         en: 'Ceremonial Wedding Procession',
         ur: 'پُروقار تقریبِ بارات',
       },
-      dateISO: '2026-11-20T18:15:00+05:00',
+      dateISO: '2026-12-04T18:15:00+05:00',
       formattedDate: {
-        en: 'Friday, 20 November 2026',
-        ur: 'جمعۃ المبارک، 20 نومبر 2026',
+        en: 'Friday, 4 December 2026',
+        ur: 'جمعۃ المبارک، 4 دسمبر 2026',
       },
       timezone: 'Asia/Karachi',
       invitationNote: {
-        en: 'We invite you to join the wedding procession and celebrate the union of Ahmed and Arfa with love, prayers, and joy.',
-        ur: 'احمد اور عرفہ کی تقریبِ بارات میں شرکت فرما کر ہماری خوشیوں کو دوبالا کریں اور نو بیاہتا جوڑے کو اپنی دعاؤں سے نوازیں۔',
+        en: 'We warmly invite you to join the wedding procession and celebrate the marriage of Ateeb Faiz and Nimra Javed with heartfelt prayers and joy.',
+        ur: 'عاطب فیض اور نمرہ جاوید کی تقریبِ بارات میں شرکت فرما کر ہماری خوشیوں کو دوبالا کریں اور نو بیاہتا جوڑے کو اپنی دعاؤں سے نوازیں۔',
       },
       venue: {
         name: {
@@ -285,7 +264,7 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
             ur: 'بارات کا اجتماع',
           },
           description: {
-            en: 'Gathering of guests and family procession lineup',
+            en: 'Gathering of guests and procession lineup',
             ur: 'معزز مہمانوں کا باقاعدہ اجتماع',
           },
           iconName: 'reception',
@@ -299,7 +278,7 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
           },
           description: {
             en: 'Grand entrance and greeting by the bride’s family',
-            ur: 'دلہن کے اہلِ خانہ کی جانب سے خیر مقدم اور پھولوں کی نچھاور',
+            ur: 'دلہن کے اہلِ خانہ کی جانب سے خیر مقدم',
           },
           iconName: 'celebration',
         },
@@ -325,7 +304,7 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
           },
           description: {
             en: 'Departing blessings for the bride and groom',
-            ur: 'دلہن کی دعاؤں اور قرآنِ پاک کے سائے میں رخصتی',
+            ur: 'دلہن کی دعاؤں کے سائے میں رخصتی',
           },
           iconName: 'departure',
         },
@@ -351,15 +330,15 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
         en: 'Celebratory Luncheon Feast',
         ur: 'پُروقار ضیافتِ ولیمہ',
       },
-      dateISO: '2026-11-22T13:30:00+05:00',
+      dateISO: '2026-12-06T13:30:00+05:00',
       formattedDate: {
-        en: 'Sunday, 22 November 2026',
-        ur: 'اتوار، 22 نومبر 2026',
+        en: 'Sunday, 6 December 2026',
+        ur: 'اتوار، 6 دسمبر 2026',
       },
       timezone: 'Asia/Karachi',
       invitationNote: {
-        en: 'Mr. & Mrs. Sarfraz Azam solicit the honor of your presence and blessings at the Walima Reception of their son Ahmed Sarfraz Khan with Arfa Khawar.',
-        ur: 'جناب و محترمہ سرفراز اعظم اپنے فرزند احمد سرفراز خان کی دعوتِ ولیمہ میں آپ کی شرکت اور دعاؤں کے متمنی ہیں۔',
+        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira solicit the honor of your presence and blessings at the Walima Reception of their son Ateeb Faiz with Nimra Javed.',
+        ur: 'محترم میاں فیض رسول چیمہ اور یاسمین طاہرہ اپنے فرزند عاطب فیض کی دعوتِ ولیمہ (ہمراہ نمرہ جاوید) میں آپ کی شرکت اور دعاؤں کے متمنی ہیں۔',
       },
       venue: {
         name: {
