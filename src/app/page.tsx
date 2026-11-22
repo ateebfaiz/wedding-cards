@@ -1,120 +1,147 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { InvitationShell } from '@/components/layout/InvitationShell';
-import { IslamicIlluminatedFrame } from '@/components/svg/IslamicIlluminatedBorder';
-import { BismillahCalligraphySvg } from '@/components/svg/BismillahCalligraphySvg';
-import { IslamicCoverArt } from '@/components/svg/IslamicCoverArt';
 import { filterEventsForTier } from '@/lib/audience';
-import { Calendar, MapPin, ArrowRight, Heart } from 'lucide-react';
+import { downloadICS, buildGoogleCalendarUrl } from '@/lib/calendar';
+import { Calendar, Navigation, Clock, MapPin, Share2 } from 'lucide-react';
 
-function HomeContent() {
+function HomeCardContent() {
   const config = getWeddingConfig();
-  const searchParams = useSearchParams();
-  const queryString = searchParams.toString() ? `?${searchParams.toString()}` : '';
 
   return (
     <InvitationShell config={config}>
       {(lang, guest) => {
         const { allowedOrder } = filterEventsForTier(config, guest.tier);
 
+        const coupleNames =
+          lang === 'ur'
+            ? `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`
+            : `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
+
         return (
           <div className="w-full flex flex-col items-center">
-            {/* Main Illuminated Frontispiece Frame */}
-            <IslamicIlluminatedFrame className="w-full max-w-2xl my-2">
-              {/* Grand Islamic Mughal Cover Art */}
-              <IslamicCoverArt className="opacity-95" />
+            {/* The Heirloom Card Folio */}
+            <div className="relative w-full max-w-[440px] sm:max-w-lg bg-[#FDFBF7] rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.85)] border-2 border-[#DFBF73]/70 overflow-hidden p-6 sm:p-9 text-center">
+              {/* Subtle background mandala watermark with slow rotation */}
+              <div className="absolute -top-20 -right-20 w-80 h-80 opacity-10 pointer-events-none animate-spin-slow">
+                <Image
+                  src="/assets/mandalas/golden-mandala-arabesque.png"
+                  alt=""
+                  fill
+                  className="object-contain"
+                />
+              </div>
 
-              {/* Vector Arabic Thuluth Bismillah */}
-              <BismillahCalligraphySvg width="320" height="60" className="my-2" />
+              {/* Inner Fine Gold Hairline Frame */}
+              <div className="absolute inset-2 border border-[#DFBF73]/40 rounded-2xl pointer-events-none" />
+              <div className="absolute inset-3.5 border border-[#DFBF73]/20 rounded-xl pointer-events-none" />
 
-              {/* Personalized Guest Welcome Banner */}
+              {/* 1. Royal Wedding Shield Seal / Logo */}
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto -mt-2 mb-3 drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)]">
+                <Image
+                  src="/assets/seal/wedding-seal-opt.webp"
+                  alt="Wedding Shield Crest"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {/* 2. Classical Bismillah Calligraphy Banner */}
+              <div className="relative w-64 sm:w-72 h-14 mx-auto my-1">
+                <Image
+                  src="/assets/calligraphy/bismillah-gold-banner.webp"
+                  alt="Bismillah Al-Rahman Al-Raheem"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {/* 3. Quranic Marriage Verse */}
+              <div className="my-3 px-2">
+                <p
+                  className="font-arabic text-[#7B1113] text-sm sm:text-base leading-relaxed tracking-wide font-semibold"
+                  dir="rtl"
+                >
+                  وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+                </p>
+                <p className="text-[11px] sm:text-xs text-[#7D7266] font-serif italic mt-1 max-w-sm mx-auto leading-normal">
+                  {lang === 'ur'
+                    ? 'اور اس کی نشانیوں میں سے یہ ہے کہ اس نے تمہارے لیے تمہاری ہی جنس سے جوڑے بنائے تاکہ تم ان کے پاس سکون پاؤ اور تمہارے درمیان محبت اور رحمت پیدا کی۔'
+                    : '“And of His signs is that He created for you mates from among yourselves, that you may find tranquility in them; and He placed between you affection and mercy.”'}
+                </p>
+              </div>
+
+              {/* 4. Personalized Guest Badge (If provided in link) */}
               {guest.guestName && (
-                <div className="my-4 mx-auto max-w-md p-3 rounded-lg bg-[#8B0000]/5 border border-[#8B0000]/20 text-center">
-                  <span className="text-[10px] uppercase tracking-widest text-[#8B0000] font-bold block mb-0.5">
-                    {lang === 'ur' ? 'خصوصی دعوت نامہ' : 'Personal Invitation'}
-                  </span>
+                <div className="my-3 mx-auto max-w-xs py-1.5 px-3.5 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/30">
                   <p
-                    className={`text-base md:text-lg text-[#342C26] font-medium ${
-                      lang === 'ur' ? 'font-nastaliq-display leading-relaxed' : 'font-serif'
+                    className={`text-xs sm:text-sm text-[#8B0000] font-semibold ${
+                      lang === 'ur' ? 'font-nastaliq-display leading-relaxed' : 'font-cinzel tracking-wider'
                     }`}
                   >
                     {lang === 'ur'
-                      ? `بخدمتِ محترم: ${guest.guestName} و اہلِ خانہ`
+                      ? `بخدمتِ گرامی قدر: ${guest.guestName} و اہلِ خانہ`
                       : `Specially Invited: ${guest.guestName} & Family`}
                   </p>
                 </div>
               )}
 
-              {/* Host Invitation Lines */}
-              <div className="text-center my-6 space-y-2">
-                <p className="text-xs uppercase tracking-[0.25em] text-[#B5965A] font-semibold">
+              {/* 5. Family Invitation Announcement */}
+              <div className="my-4 space-y-1">
+                <p className="text-xs uppercase tracking-[0.25em] text-[#B5965A] font-cinzel font-bold">
                   {config.invitationIntro.hostsLine[lang]}
                 </p>
-
                 <p
-                  className={`text-sm md:text-base text-[#8A8074] max-w-md mx-auto ${
-                    lang === 'ur' ? 'font-nastaliq-body leading-loose text-base' : 'font-light leading-relaxed'
+                  className={`text-xs sm:text-sm text-[#7D7266] max-w-sm mx-auto ${
+                    lang === 'ur' ? 'font-nastaliq-body leading-loose' : 'font-serif italic leading-relaxed'
                   }`}
                 >
                   {config.invitationIntro.greetingLine[lang]}
                 </p>
               </div>
 
-              {/* Couple Presentation with Calligraphic Contrast */}
-              <div className="my-8 text-center border-y border-[#B5965A]/25 py-8 space-y-5">
+              {/* 6. Grand Couple Presentation */}
+              <div className="my-5 py-4 border-y border-[#DFBF73]/35 space-y-3">
                 {/* Groom */}
                 <div>
                   <h2
-                    className={`text-3xl md:text-5xl text-[#342C26] font-normal ${
-                      lang === 'ur' ? 'font-nastaliq-display text-4xl md:text-5xl text-[#5E0C12]' : 'font-serif'
+                    className={`text-3xl sm:text-4xl text-[#35050C] font-normal ${
+                      lang === 'ur' ? 'font-nastaliq-display text-4xl sm:text-5xl text-[#5E0C12]' : 'font-cinzel font-bold text-[#35050C]'
                     }`}
                   >
                     {config.couple.groom.fullName[lang]}
                   </h2>
-                  <p
-                    className={`text-xs md:text-sm text-[#8A8074] mt-1 ${
-                      lang === 'ur' ? 'font-nastaliq-body' : ''
-                    }`}
-                  >
+                  <p className={`text-[11px] sm:text-xs text-[#7D7266] mt-0.5 ${lang === 'ur' ? 'font-nastaliq-body' : 'font-serif'}`}>
                     {lang === 'ur'
                       ? `فرزندِ ارجمند ${config.couple.groom.parents[lang]}`
                       : `Son of ${config.couple.groom.parents[lang]}`}
                   </p>
                 </div>
 
-                {/* Decorative Floral Nexus */}
-                <div className="flex items-center justify-center gap-3 text-[#B5965A]">
-                  <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#B5965A]/60" />
-                  <Heart className="w-4 h-4 text-[#8B0000] fill-[#8B0000]/20" />
-                  <span
-                    className={`italic text-xl md:text-2xl ${
-                      lang === 'ur' ? 'font-nastaliq-display text-[#8B0000]' : 'font-serif'
-                    }`}
-                  >
+                {/* Decorative Amper-knot with Gold Floral Ornament */}
+                <div className="flex items-center justify-center gap-2.5 text-[#B5965A]">
+                  <span className="w-10 h-[1px] bg-gradient-to-r from-transparent to-[#DFBF73]" />
+                  <span className={`text-xl sm:text-2xl text-[#8B0000] ${lang === 'ur' ? 'font-nastaliq-display' : 'font-serif italic'}`}>
                     {lang === 'ur' ? 'اور' : '&'}
                   </span>
-                  <Heart className="w-4 h-4 text-[#8B0000] fill-[#8B0000]/20" />
-                  <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#B5965A]/60" />
+                  <span className="w-10 h-[1px] bg-gradient-to-l from-transparent to-[#DFBF73]" />
                 </div>
 
                 {/* Bride */}
                 <div>
                   <h2
-                    className={`text-3xl md:text-5xl text-[#342C26] font-normal ${
-                      lang === 'ur' ? 'font-nastaliq-display text-4xl md:text-5xl text-[#5E0C12]' : 'font-serif'
+                    className={`text-3xl sm:text-4xl text-[#35050C] font-normal ${
+                      lang === 'ur' ? 'font-nastaliq-display text-4xl sm:text-5xl text-[#5E0C12]' : 'font-cinzel font-bold text-[#35050C]'
                     }`}
                   >
                     {config.couple.bride.fullName[lang]}
                   </h2>
-                  <p
-                    className={`text-xs md:text-sm text-[#8A8074] mt-1 ${
-                      lang === 'ur' ? 'font-nastaliq-body' : ''
-                    }`}
-                  >
+                  <p className={`text-[11px] sm:text-xs text-[#7D7266] mt-0.5 ${lang === 'ur' ? 'font-nastaliq-body' : 'font-serif'}`}>
                     {lang === 'ur'
                       ? `دخترِ نیک اختر ${config.couple.bride.parents[lang]}`
                       : `Daughter of ${config.couple.bride.parents[lang]}`}
@@ -122,74 +149,103 @@ function HomeContent() {
                 </div>
               </div>
 
-              {/* Celebration Note */}
-              <p
-                className={`text-xs md:text-sm text-[#8A8074] text-center max-w-md mx-auto my-4 ${
-                  lang === 'ur' ? 'font-nastaliq-body leading-loose text-sm' : 'font-light leading-relaxed'
-                }`}
-              >
-                {config.invitationIntro.celebrationLine[lang]}
-              </p>
-            </IslamicIlluminatedFrame>
+              {/* 7. Targeted Ceremony Cards (Only Invited Events) */}
+              <div className="my-5 space-y-4 text-left">
+                <div className="text-center mb-3">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#8B0000] font-cinzel font-bold">
+                    {lang === 'ur' ? 'تقریب کے اوقات و مقام' : 'Ceremony & Venue Details'}
+                  </span>
+                </div>
 
-            {/* Target-Specific Event Cards Section */}
-            <div className="w-full max-w-2xl mt-8 mb-4">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <span className="w-10 h-[1px] bg-[#B5965A]/40" />
-                <h3 className="text-xs uppercase tracking-[0.25em] text-[#8A8074] font-medium">
-                  {lang === 'ur' ? 'آپ کے لیے مخصوص تقاریب' : 'Your Invited Celebrations'}
-                </h3>
-                <span className="w-10 h-[1px] bg-[#B5965A]/40" />
-              </div>
-
-              <div className={`grid gap-4 ${allowedOrder.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'}`}>
                 {allowedOrder.map((eventId) => {
                   const event = config.events[eventId];
                   if (!event) return null;
 
                   return (
-                    <Link
+                    <div
                       key={event.id}
-                      href={`/${event.slug}${queryString}`}
-                      className="group p-6 rounded-lg border border-[#B5965A]/35 bg-[#EFE8DA]/50 hover:bg-[#EFE8DA]/90 hover:border-[#8B0000] transition-all shadow-xs flex flex-col justify-between"
+                      className="p-4 sm:p-5 rounded-2xl border border-[#DFBF73]/50 bg-[#F5EFEB]/90 shadow-sm text-center space-y-3"
                     >
-                      <div>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-[#8B0000] font-bold block mb-1">
-                          {event.ceremonyType[lang]}
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-[#8B0000] font-cinzel font-bold block">
+                        {event.ceremonyType[lang]}
+                      </span>
+
+                      <h3
+                        className={`text-xl sm:text-2xl text-[#35050C] font-medium ${
+                          lang === 'ur' ? 'font-nastaliq-display text-2xl text-[#5E0C12]' : 'font-cinzel font-bold'
+                        }`}
+                      >
+                        {event.title[lang]}
+                      </h3>
+
+                      {/* Date & Time Codes */}
+                      <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-[#545B43] font-medium">
+                        <span className="inline-flex items-center gap-1.5 bg-[#545B43]/10 px-3 py-1 rounded-full">
+                          <Calendar className="w-3.5 h-3.5 text-[#B5965A]" />
+                          <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
+                            {event.formattedDate[lang]}
+                          </span>
                         </span>
-                        <h4
-                          className={`text-xl md:text-2xl text-[#342C26] font-medium my-1 group-hover:text-[#8B0000] transition-colors ${
-                            lang === 'ur' ? 'font-nastaliq-display leading-relaxed' : 'font-serif'
-                          }`}
+                      </div>
+
+                      {/* Schedule Steps */}
+                      <div className="py-2 border-y border-[#DFBF73]/30 space-y-1.5 text-xs text-[#2A201A]">
+                        {event.schedule.map((step, sIdx) => (
+                          <div key={sIdx} className="flex items-center justify-between gap-2 px-2">
+                            <span className={lang === 'ur' ? 'font-nastaliq-body' : 'font-medium'}>
+                              {step.title[lang]}
+                            </span>
+                            <span dir="ltr" className="font-mono text-[11px] text-[#8B0000] font-semibold shrink-0">
+                              {step.time}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Venue Address */}
+                      <div className="space-y-1">
+                        <p className={`text-sm text-[#35050C] font-bold ${lang === 'ur' ? 'font-nastaliq-body text-base' : 'font-serif'}`}>
+                          {event.venue.name[lang]}
+                        </p>
+                        <p className="text-xs text-[#7D7266]">
+                          {event.venue.address[lang]}, {event.venue.city[lang]}
+                        </p>
+                      </div>
+
+                      {/* Action Buttons: Get Directions & Add Calendar */}
+                      <div className="flex items-center justify-center gap-2.5 pt-2">
+                        <a
+                          href={event.venue.googleMapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#545B43] text-[#FDFBF7] text-xs font-cinzel font-bold hover:bg-[#434935] transition-colors shadow-xs"
                         >
-                          {event.title[lang]}
-                        </h4>
+                          <Navigation className="w-3.5 h-3.5" />
+                          <span>{lang === 'ur' ? 'گوگل میپس' : 'Directions'}</span>
+                        </a>
 
-                        <div className="space-y-2 text-xs text-[#8A8074] mt-3">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-[#B5965A] shrink-0" />
-                            <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
-                              {event.formattedDate[lang]}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-[#B5965A] shrink-0" />
-                            <span className={`truncate ${lang === 'ur' ? 'font-nastaliq-body' : ''}`}>
-                              {event.venue.name[lang]}, {event.venue.city[lang]}
-                            </span>
-                          </div>
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => downloadICS(event, coupleNames, lang)}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#DFBF73] bg-[#FDFBF7] text-[#35050C] text-xs font-cinzel font-bold hover:bg-[#F5EFEB] transition-colors shadow-xs cursor-pointer"
+                        >
+                          <Calendar className="w-3.5 h-3.5 text-[#B5965A]" />
+                          <span>{lang === 'ur' ? 'کیلنڈر' : 'Calendar'}</span>
+                        </button>
                       </div>
-
-                      <div className="mt-5 pt-3 border-t border-[#B5965A]/20 flex items-center justify-between text-xs font-medium text-[#545B43]">
-                        <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
-                          {lang === 'ur' ? 'تفصیلات، وقت اور مقام کا نقشہ ↗' : 'View Schedule & Directions ↗'}
-                        </span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 text-[#8B0000]" />
-                      </div>
-                    </Link>
+                    </div>
                   );
                 })}
+              </div>
+
+              {/* 8. Closing Family Blessing */}
+              <div className="pt-3 border-t border-[#DFBF73]/30 text-center">
+                <p className={`text-xs text-[#7D7266] ${lang === 'ur' ? 'font-nastaliq-body text-sm' : 'font-serif italic'}`}>
+                  {config.invitationIntro.closingBlessing[lang]}
+                </p>
+                <p className="text-[10px] uppercase tracking-widest text-[#B5965A] font-cinzel font-bold mt-2">
+                  Ahmed & Arfa Wedding
+                </p>
               </div>
             </div>
           </div>
@@ -201,8 +257,8 @@ function HomeContent() {
 
 export default function HomePage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#F8F5EE]" />}>
-      <HomeContent />
+    <Suspense fallback={<div className="min-h-screen bg-[#180306]" />}>
+      <HomeCardContent />
     </Suspense>
   );
 }

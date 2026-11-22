@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F8F5EE;
+  --background: #180306;
   --foreground: #342C26;
-  --ivory: #F8F5EE;
-  --warm-paper: #EFE8DA;
+  --ivory: #FDFBF7;
+  --warm-paper: #F5EFEB;
   --antique-gold: #B5965A;
+  --bright-gold: #DFBF73;
   --deep-olive: #545B43;
-  --dark-espresso: #342C26;
-  --muted-taupe: #8A8074;
+  --dark-espresso: #2A201A;
+  --muted-taupe: #7D7266;
   --burgundy: #702F3D;
   --royal-red: #8B0000;
 }
@@ -21,26 +22,29 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* English Editorial Fonts */
+/* English Regal Serif Typography */
+.font-cinzel {
+  font-family: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+}
+
 .font-serif {
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 /* Urdu Typography Hierarchy */
-/* Display Nastaliq for Grand Headings & Couple Names */
+/* Grand Display Nastaliq for Names & Headings */
 .font-nastaliq-display {
   font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
-  line-height: 2.4 !important;
-  letter-spacing: 0.02em;
+  line-height: 2.3 !important;
+  letter-spacing: 0.01em;
 }
 
-/* Body Nastaliq for Schedules, Venues, Notes */
+/* High-Legibility Body Nastaliq for Venues & Schedules */
 .font-nastaliq-body {
   font-family: 'Noto Nastaliq Urdu', 'Gulzar', serif;
-  line-height: 2.2 !important;
+  line-height: 2.1 !important;
 }
 
-/* Fallback general nastaliq */
 .font-nastaliq {
   font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
   line-height: 2.3 !important;
@@ -49,16 +53,50 @@ body {
 /* Sacred Arabic / Classical Naskh */
 .font-arabic {
   font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  line-height: 2.0 !important;
 }
 
-/* 3D Envelope perspective */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-/* Print utilities */
-@media print {
-  header, footer, nav, button, .no-print {
-    display: none !important;
+/* Animated Background Slow Pan */
+@keyframes slowDrift {
+  0% {
+    transform: scale(1) translate(0, 0);
   }
+  50% {
+    transform: scale(1.05) translate(-1%, -1.5%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.animate-slow-drift {
+  animation: slowDrift 28s ease-in-out infinite;
+}
+
+/* Rotating Mandala Accent */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 90s linear infinite;
+}
+
+/* Vinyl Music Disc Spin */
+@keyframes discSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-disc-spin {
+  animation: discSpin 4s linear infinite;
 }

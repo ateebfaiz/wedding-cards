@@ -1,0 +1,294 @@
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { getWeddingConfig } from '@/config/default';
+import { GuestAccessTier } from '@/lib/audience';
+import { copyToClipboard } from '@/lib/utils';
+import {
+  Users,
+  Copy,
+  Check,
+  Share2,
+  ExternalLink,
+  Shield,
+  QrCode,
+  Sparkles,
+  Calendar,
+  Eye,
+} from 'lucide-react';
+import { QRCodeModal } from '@/components/modals/QRCodeModal';
+
+export default function AdminInvitePage() {
+  const config = getWeddingConfig();
+  const [guestName, setGuestName] = useState('');
+  const [tier, setTier] = useState<GuestAccessTier>('walima');
+  const [langPref, setLangPref] = useState<'ur' | 'en'>('ur');
+  const [copied, setCopied] = useState(false);
+  const [showQR, setShowQR] = useState(false);
+
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://ahmedarfa.com';
+  const nameQuery = guestName.trim() ? `&to=${encodeURIComponent(guestName.trim())}` : '';
+  const guestUrl = `${baseUrl}/?invite=${tier}${nameQuery}`;
+
+  const coupleNamesEn = `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
+  const coupleNamesUr = `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`;
+
+  const tierDescriptions: Record<GuestAccessTier, { titleEn: string; titleUr: string; events: string[] }> = {
+    all: {
+      titleEn: 'All Festivities (Family & Close Friends)',
+      titleUr: 'تمام تقریبات (نکاح، بارات اور ولیمہ)',
+      events: ['Nikkah & Rasm-e-Hina (Faisalabad)', 'The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
+    },
+    walima: {
+      titleEn: 'Walima Reception Only (Colleagues & Network)',
+      titleUr: 'صرف دعوتِ ولیمہ (احباب و رفقائے کار)',
+      events: ['Walima Reception (Hall 20, Garrison Club Lahore)'],
+    },
+    baraat: {
+      titleEn: 'Baraat Only',
+      titleUr: 'صرف تقریبِ بارات',
+      events: ['The Wedding Baraat (Lahore)'],
+    },
+    reception: {
+      titleEn: 'Baraat & Walima',
+      titleUr: 'بارات و ولیمہ',
+      events: ['The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
+    },
+    nikkah: {
+      titleEn: 'Nikkah & Rasm-e-Hina Only',
+      titleUr: 'صرف نکاح و رسمِ حنا',
+      events: ['Nikkah & Rasm-e-Hina (Farmhouse, Faisalabad)'],
+    },
+  };
+
+  const currentTierInfo = tierDescriptions[tier];
+
+  const handleCopyLink = async () => {
+    const success = await copyToClipboard(guestUrl);
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleShareWhatsApp = () => {
+    const greetingUr = guestName.trim()
+      ? `بخدمتِ گرامی قدر ${guestName.trim()} و اہلِ خانہ،\n\n`
+      : '';
+    const messageUr = `${greetingUr}السلام علیکم و رحمتہ اللہ\n\nاللہ تعالیٰ کے فضل و کرم سے ${coupleNamesUr} کی شادی خانہ آبادی کی مبارک تقریب طے پائی ہے۔\n\nہم آپ کو ${currentTierInfo.titleUr} میں شرکت اور دعاؤں کے لیے پُرخلوص دعوت دیتے ہیں۔\n\nبراہِ کرم اپنا مخصوص ڈیجیٹل کارڈ ملاحظہ فرمائیں:\n${guestUrl}\n\nطالبِ دعا:\nجناب و محترمہ سرفراز اعظم`;
+
+    const greetingEn = guestName.trim() ? `Dear ${guestName.trim()} & Family,\n\n` : '';
+    const messageEn = `${greetingEn}With the blessings of Almighty Allah, we cordially invite you to celebrate the wedding festivities of ${coupleNamesEn}.\n\nInvitation: ${currentTierInfo.titleEn}\n\nPlease tap to open your personalized digital wedding invitation:\n${guestUrl}\n\nWarm regards,\nMr. & Mrs. Sarfraz Azam`;
+
+    const message = langPref === 'ur' ? messageUr : messageEn;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  return (
+    <div className="min-h-screen bg-[#140205] text-[#F8F5EE] py-8 px-4 flex flex-col items-center select-none">
+      {/* Background Ambience */}
+      <div
+        className="fixed inset-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/assets/backgrounds/golden-arabesque-opt.webp)',
+          backgroundSize: 'cover',
+        }}
+      />
+
+      <div className="relative w-full max-w-xl bg-[#200408]/95 border-2 border-[#DFBF73]/50 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md">
+        {/* Header with Royal Shield Seal Logo */}
+        <div className="flex items-center justify-between border-b border-[#DFBF73]/30 pb-4 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="relative w-12 h-12">
+              <Image
+                src="/assets/seal/wedding-seal-opt.webp"
+                alt="Wedding Seal Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-cinzel font-bold block">
+                Host Private Portal
+              </span>
+              <h1 className="text-xl sm:text-2xl font-cinzel font-bold text-[#FFDF73]">
+                Guest Invitation AppClip
+              </h1>
+            </div>
+          </div>
+
+          <Link
+            href="/"
+            className="text-xs font-cinzel text-[#DFBF73] hover:text-[#FFDF73] border border-[#DFBF73]/40 rounded-full px-3 py-1 bg-[#8B0000]/30 transition-colors"
+          >
+            Open Card ↗
+          </Link>
+        </div>
+
+        {/* Instructions */}
+        <p className="text-xs text-[#EFE8DA]/80 leading-relaxed mb-6 font-light">
+          Generate confidential, targeted invitation links for individual guests or family circles. Guests will only see the exact ceremonies they are invited to attend.
+        </p>
+
+        {/* Input Form */}
+        <div className="space-y-5">
+          {/* Guest / Family Name */}
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-medium mb-1.5">
+              1. Guest / Family Name
+            </label>
+            <input
+              type="text"
+              value={guestName}
+              onChange={(e) => setGuestName(e.target.value)}
+              placeholder="e.g. Dr. & Mrs. Farooq Khan"
+              className="w-full px-4 py-3 rounded-xl border border-[#DFBF73]/50 bg-[#35050C] text-[#FFF] placeholder-[#A68850] text-sm focus:outline-hidden focus:border-[#FFDF73] focus:ring-1 focus:ring-[#FFDF73]"
+            />
+          </div>
+
+          {/* Invitation Tier Selection */}
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-medium mb-1.5">
+              2. Invited Ceremony Access
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {(['walima', 'all', 'reception', 'nikkah', 'baraat'] as GuestAccessTier[]).map((tKey) => {
+                const info = tierDescriptions[tKey];
+                const isSelected = tier === tKey;
+
+                return (
+                  <button
+                    key={tKey}
+                    type="button"
+                    onClick={() => setTier(tKey)}
+                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                      isSelected
+                        ? 'border-[#FFDF73] bg-[#8B0000]/60 ring-1 ring-[#FFDF73]'
+                        : 'border-[#DFBF73]/30 bg-[#2C050B]/60 hover:border-[#DFBF73]/60'
+                    }`}
+                  >
+                    <span className="text-xs font-bold text-[#FFDF73] block mb-0.5">
+                      {info.titleEn}
+                    </span>
+                    <span className="text-[11px] font-nastaliq text-[#EFE8DA]/80 block">
+                      {info.titleUr}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* WhatsApp Language Preference */}
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-medium mb-1.5">
+              3. WhatsApp Message Language
+            </label>
+            <div className="inline-flex rounded-lg border border-[#DFBF73]/40 p-1 bg-[#2C050B]">
+              <button
+                type="button"
+                onClick={() => setLangPref('ur')}
+                className={`px-4 py-1.5 rounded-md text-xs font-nastaliq transition-colors cursor-pointer ${
+                  langPref === 'ur' ? 'bg-[#8B0000] text-[#FFDF73]' : 'text-[#EFE8DA]/70'
+                }`}
+              >
+                اردو دعوت نامہ
+              </button>
+              <button
+                type="button"
+                onClick={() => setLangPref('en')}
+                className={`px-4 py-1.5 rounded-md text-xs font-cinzel transition-colors cursor-pointer ${
+                  langPref === 'en' ? 'bg-[#8B0000] text-[#FFDF73]' : 'text-[#EFE8DA]/70'
+                }`}
+              >
+                English Text
+              </button>
+            </div>
+          </div>
+
+          {/* Generated URL Box */}
+          <div className="p-4 rounded-xl bg-[#180205] border border-[#DFBF73]/40 space-y-2">
+            <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-bold block">
+              Personalized Guest Link:
+            </span>
+            <p className="text-xs font-mono text-[#FFDF73] break-all select-all">
+              {guestUrl}
+            </p>
+
+            <div className="pt-1 text-[11px] text-[#A68850] flex items-center gap-1.5">
+              <span>Included events:</span>
+              <span className="text-[#EFE8DA] font-medium">{currentTierInfo.events.join(' · ')}</span>
+            </div>
+          </div>
+
+          {/* Action Row */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+            {/* Copy Link */}
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="w-full sm:flex-1 py-3 rounded-full border border-[#DFBF73] text-[#FFDF73] font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:bg-[#8B0000]/40 transition-colors cursor-pointer shadow-md"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                  <span>Link Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4 text-[#DFBF73]" />
+                  <span>Copy Private Link</span>
+                </>
+              )}
+            </button>
+
+            {/* Share WhatsApp */}
+            <button
+              type="button"
+              onClick={handleShareWhatsApp}
+              className="w-full sm:flex-1 py-3 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg cursor-pointer"
+            >
+              <Share2 className="w-4 h-4" />
+              <span>Send WhatsApp</span>
+            </button>
+
+            {/* Show QR */}
+            <button
+              type="button"
+              onClick={() => setShowQR(true)}
+              className="p-3 rounded-full border border-[#DFBF73]/50 text-[#DFBF73] hover:text-[#FFDF73] hover:border-[#FFDF73] transition-colors cursor-pointer"
+              title="Generate QR code for card printing"
+            >
+              <QrCode className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Live Preview Button */}
+          <div className="text-center pt-2">
+            <a
+              href={guestUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-[#DFBF73] hover:text-[#FFDF73] hover:underline"
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>Test Live Card exactly as this guest will see it ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* QR Modal */}
+      <QRCodeModal
+        url={guestUrl}
+        title={guestName.trim() ? `Invitation for ${guestName}` : currentTierInfo.titleEn}
+        lang={langPref}
+        isOpen={showQR}
+        onClose={() => setShowQR(false)}
+      />
+    </div>
+  );
+}
