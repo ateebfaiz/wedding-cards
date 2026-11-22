@@ -6,7 +6,15 @@ import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { InvitationShell } from '@/components/layout/InvitationShell';
 import { filterEventsForTier } from '@/lib/audience';
-import { Calendar, ArrowRight, MapPin } from 'lucide-react';
+import {
+  Calendar,
+  ArrowRight,
+  MapPin,
+  Clock,
+  Phone,
+  MessageCircle,
+  Sparkles,
+} from 'lucide-react';
 
 function HomeCardContent() {
   const config = getWeddingConfig();
@@ -45,18 +53,22 @@ function HomeCardContent() {
               </div>
             </div>
 
-            {/* 3. Personalized Guest Badge (If provided in link) */}
+            {/* 3. Dedicated Personalized Invitee Heading (If provided in link) */}
             {guest.guestName && (
-              <div className="my-3 mx-auto max-w-sm py-1.5 px-4 rounded-full bg-[#545B43]/10 border border-[#545B43]/30 shadow-2xs">
-                <p
-                  className={`text-xs sm:text-sm text-[#545B43] font-semibold ${
-                    lang === 'ur' ? 'font-nastaliq-display' : 'font-sans tracking-wide'
+              <div className="my-5 p-5 sm:p-6 rounded-3xl bg-[#FCFAF6]/95 border border-[#B5965A]/45 shadow-[0_8px_30px_rgba(52,44,38,0.06)] backdrop-blur-md text-center transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold flex items-center justify-center gap-1.5 mb-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
+                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Specially Invited with Honor'}</span>
+                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
+                </span>
+                <h2
+                  className={`text-2xl sm:text-3xl lg:text-4xl text-[#342C26] font-bold ${
+                    lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
                   }`}
                 >
-                  {lang === 'ur'
-                    ? `بخدمتِ گرامی قدر: ${guest.guestName} و اہلِ خانہ`
-                    : `Specially Invited: ${guest.guestName} & Family`}
-                </p>
+                  {lang === 'ur' ? `${guest.guestName} و اہلِ خانہ` : `${guest.guestName} & Family`}
+                </h2>
+                <div className="w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#B5965A] to-transparent mx-auto mt-3" />
               </div>
             )}
 
@@ -136,7 +148,7 @@ function HomeCardContent() {
               </div>
             </div>
 
-            {/* 6. Wedding Event Overview (Distinct Event Invitation Cards) */}
+            {/* 6. Wedding Event Overview (Distinct Event Invitation Cards in Chronological Order) */}
             <div className="my-8 space-y-4 text-left">
               <div className="text-center mb-4">
                 <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold">
@@ -218,7 +230,94 @@ function HomeCardContent() {
               })}
             </div>
 
-            {/* 7. Family Closing Blessing */}
+            {/* 7. Important Event Instructions Card */}
+            {config.eventInstructions && (
+              <div className="my-6 p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+                <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
+                  <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
+                  <span className="text-xs uppercase tracking-wider font-sans font-bold">
+                    {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
+                  </span>
+                </div>
+                <p
+                  className={`text-xs sm:text-sm text-[#5A4D41] leading-relaxed ${
+                    lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-sans'
+                  }`}
+                >
+                  {config.eventInstructions[lang]}
+                </p>
+              </div>
+            )}
+
+            {/* 8. Contact & Information RSVP Card */}
+            {config.contacts && config.contacts.length > 0 && (
+              <div className="my-6 p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+                <div className="mb-3">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold block">
+                    {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
+                  </span>
+                  <h3
+                    className={`text-lg font-bold text-[#342C26] ${
+                      lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                    }`}
+                  >
+                    {lang === 'ur' ? 'کسی بھی سوال یا رہنمائی کے لیے رابطہ فرمائیں' : 'For Inquiries & Guidance'}
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#B5965A]/20">
+                  {config.contacts.map((contact, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl border border-[#B5965A]/25 bg-white/70 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-1 mb-1">
+                          <span
+                            className={`text-sm font-bold text-[#342C26] ${
+                              lang === 'ur' ? 'font-nastaliq-body text-base' : 'font-sans'
+                            }`}
+                          >
+                            {contact.name[lang]}
+                          </span>
+                          {contact.relation && (
+                            <span className="text-[10px] text-[#81776B] font-sans font-medium px-2 py-0.5 rounded-full bg-[#FAF7F2]">
+                              {contact.relation[lang]}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-xs text-[#5A4D41] font-mono tracking-wide block mb-3">
+                          {contact.phone}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-2 border-t border-[#B5965A]/15">
+                        <a
+                          href={`tel:${contact.phone}`}
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#342C26] text-[#F8F5EE] text-[11px] font-sans font-semibold hover:bg-[#545B43] transition-colors"
+                        >
+                          <Phone className="w-3 h-3" />
+                          <span>{lang === 'ur' ? 'کال کریں' : 'Call'}</span>
+                        </a>
+                        {contact.whatsappUrl && (
+                          <a
+                            href={contact.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#25D366] text-white text-[11px] font-sans font-semibold hover:bg-[#1EBE5D] transition-colors shadow-2xs"
+                          >
+                            <MessageCircle className="w-3 h-3" />
+                            <span>WhatsApp</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 9. Family Closing Blessing */}
             <div className="pt-6 border-t border-[#B5965A]/25 text-center space-y-1.5">
               <p className={`text-xs sm:text-sm text-[#5A4D41] ${lang === 'ur' ? 'font-nastaliq-body text-base' : 'font-serif italic'}`}>
                 {config.invitationIntro.closingBlessing[lang]}

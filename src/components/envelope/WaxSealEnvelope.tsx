@@ -4,15 +4,24 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { WeddingConfig, SupportedLanguage } from '@/types/wedding';
 import { weddingAudio } from '@/lib/audio';
+import { fireWeddingConfetti } from '@/lib/confetti';
+import { Sparkles } from 'lucide-react';
 
 interface WaxSealEnvelopeProps {
   config: WeddingConfig;
   lang: SupportedLanguage;
   guestName?: string;
   onOpenComplete: () => void;
+  triggerConfetti?: boolean;
 }
 
-export function WaxSealEnvelope({ config, lang, onOpenComplete }: WaxSealEnvelopeProps) {
+export function WaxSealEnvelope({
+  config,
+  lang,
+  guestName,
+  onOpenComplete,
+  triggerConfetti = true,
+}: WaxSealEnvelopeProps) {
   const [stage, setStage] = useState<'idle' | 'cracking' | 'opening' | 'revealed'>('idle');
 
   const handleOpen = () => {
@@ -23,96 +32,119 @@ export function WaxSealEnvelope({ config, lang, onOpenComplete }: WaxSealEnvelop
     weddingAudio.playWaxSealCrack();
     weddingAudio.startTraditionalMusic();
 
-    // Phase 2: Mail flap opens & envelope expands
+    // Trigger celebratory confetti with a slight delay
+    if (triggerConfetti) {
+      setTimeout(() => {
+        fireWeddingConfetti();
+      }, 450);
+    }
+
+    // Phase 2: Flap unseals & envelope blooms
     setTimeout(() => {
       setStage('opening');
-    }, 350);
+    }, 400);
 
-    // Phase 3: Transition to full wedding card
+    // Phase 3: Transition smoothly to the wedding invitation card
     setTimeout(() => {
       setStage('revealed');
       onOpenComplete();
-    }, 1000);
+    }, 1100);
   };
 
   const handleSkip = (e: React.MouseEvent) => {
     e.stopPropagation();
     setStage('revealed');
     weddingAudio.startTraditionalMusic();
+    if (triggerConfetti) {
+      fireWeddingConfetti();
+    }
     onOpenComplete();
   };
 
   return (
     <div
       onClick={handleOpen}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden select-none cursor-pointer bg-[#200408]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden select-none cursor-pointer bg-[#050B14]/95 transition-opacity duration-700"
     >
-      {/* Background Ambience Texture */}
+      {/* Background Ambience Texture: Moroccan Pattern Backdrop */}
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none animate-slow-drift"
+        className="absolute inset-0 opacity-25 pointer-events-none animate-slow-drift mix-blend-luminosity"
         style={{
-          backgroundImage: 'url(/assets/backgrounds/alyoha-arabic-bg.webp)',
+          backgroundImage: 'url(/assets/backgrounds/moroccan-pattern-bg.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       />
 
-      {/* Radial Focus Vignette */}
-      <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_0%,rgba(16,2,5,0.85)_100%] pointer-events-none" />
+      {/* Radial Deep Vignette & Golden Ambient Aura */}
+      <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_20%,rgba(5,11,20,0.92)_100%] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-radial-[circle,rgba(223,191,115,0.18)_0%,transparent_70%] pointer-events-none blur-2xl animate-pulse" />
 
-      {/* The Postcard / Envelope Composition */}
-      <div className="relative w-full max-w-[360px] sm:max-w-[440px] aspect-[4/3] flex flex-col items-center justify-center">
-        {/* Physical Postcard Envelope */}
+      {/* The Postcard / Envelope Composition (No boxed container, natural shadows) */}
+      <div className="relative w-full max-w-[360px] sm:max-w-[460px] md:max-w-[500px] flex flex-col items-center justify-center">
+        {/* Personalized Invitee Callout Badge on Envelope */}
+        {guestName && (
+          <div
+            className={`mb-4 px-5 py-1.5 rounded-full border border-[#DFBF73]/60 bg-[#081226]/85 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.6)] text-center transition-all duration-500 ${
+              stage !== 'idle' ? 'opacity-0 -translate-y-2' : 'opacity-100'
+            }`}
+          >
+            <span
+              className={`text-xs sm:text-sm text-[#FFDF73] font-medium tracking-wide flex items-center justify-center gap-1.5 ${
+                lang === 'ur' ? 'font-nastaliq-display' : 'font-cinzel'
+              }`}
+            >
+              <Sparkles className="w-3 h-3 text-[#DFBF73]" />
+              {lang === 'ur'
+                ? `بخدمتِ گرامی قدر: ${guestName} و اہلِ خانہ`
+                : `Invited with Honor: ${guestName} & Family`}
+              <Sparkles className="w-3 h-3 text-[#DFBF73]" />
+            </span>
+          </div>
+        )}
+
+        {/* Physical Luxurious Navy & Gold Envelope Display Card */}
         <div
-          className={`relative w-full h-full rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col items-center justify-center transition-all duration-700 ease-out ${
-            stage === 'opening'
-              ? 'scale-105 opacity-90'
+          className={`relative w-full aspect-[1157/1112] filter transition-all duration-700 ease-out ${
+            stage === 'cracking'
+              ? 'scale-103 drop-shadow-[0_30px_70px_rgba(223,191,115,0.45)]'
+              : stage === 'opening'
+              ? 'scale-110 opacity-80 blur-[1px] drop-shadow-[0_40px_90px_rgba(255,223,115,0.6)]'
               : stage === 'revealed'
-              ? 'scale-110 opacity-0'
-              : 'scale-100 opacity-100'
+              ? 'scale-125 opacity-0'
+              : 'scale-100 hover:scale-[1.02] drop-shadow-[0_25px_60px_rgba(0,0,0,0.85)] hover:drop-shadow-[0_30px_70px_rgba(223,191,115,0.3)]'
           }`}
         >
-          {/* Postcard Envelope Texture Fills Frame */}
-          <div className="absolute inset-0 z-0">
+          {/* Main Envelope Image Asset */}
+          <div className="relative w-full h-full">
             <Image
-              src="/assets/envelope/brown-envelope.webp"
-              alt="Wedding Postcard Envelope"
+              src="/assets/envelope/luxurious-navy-envelope.webp"
+              alt="Luxurious Navy Gold Wedding Envelope"
               fill
-              sizes="(max-width: 640px) 360px, 440px"
-              className="object-cover object-center"
+              sizes="(max-width: 640px) 360px, (max-width: 768px) 460px, 500px"
+              className="object-contain"
               priority
             />
           </div>
 
-          {/* Luxury Card Perimeter Filigree & Inset Bevel */}
-          <div className="absolute inset-2.5 sm:inset-3 border-2 border-[#DFBF73]/60 rounded-xl pointer-events-none z-10 shadow-inner" />
-          <div className="absolute inset-4 sm:inset-4.5 border border-[#DFBF73]/30 rounded-lg pointer-events-none z-10" />
-
-          {/* Centered Royal Wedding Shield Seal */}
+          {/* Interactive Center Seal Hotspot */}
           <div
-            className={`relative z-30 transition-all duration-500 ease-out ${
-              stage === 'cracking'
-                ? 'scale-115 rotate-6'
-                : stage === 'opening'
-                ? 'scale-75 opacity-0'
-                : 'scale-100 hover:scale-105 active:scale-95'
-            }`}
+            className="absolute top-[49%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center group"
+            title="Click to open invitation"
           >
-            <div className="relative w-30 h-30 sm:w-34 sm:h-34 drop-shadow-[0_14px_30px_rgba(0,0,0,0.85)]">
-              <Image
-                src="/assets/seal/wedding-seal-opt.webp"
-                alt="Royal Wedding Shield Seal"
-                fill
-                sizes="(max-width: 640px) 120px, 136px"
-                className="object-contain"
-                priority
-              />
-            </div>
+            {/* Luminous Pulsing Seal Halo */}
+            <div
+              className={`absolute inset-0 rounded-full border border-[#DFBF73]/50 transition-all duration-500 ${
+                stage === 'cracking'
+                  ? 'scale-125 border-[#FFDF73] bg-[#FFDF73]/20 shadow-[0_0_30px_#FFDF73]'
+                  : 'group-hover:scale-110 group-hover:border-[#FFDF73]/80 animate-ping opacity-25'
+              }`}
+            />
           </div>
         </div>
 
-        {/* Tactile Tap Prompt */}
-        <div className="mt-7 text-center z-20 space-y-3">
+        {/* Tactile Tap Prompt & Actions */}
+        <div className="mt-6 text-center z-20 space-y-3">
           <p className="text-xs uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] animate-pulse">
             <span className="text-[#FFDF73]">✦</span>
             <span>{config.seal.openPrompt[lang]}</span>
@@ -124,7 +156,7 @@ export function WaxSealEnvelope({ config, lang, onOpenComplete }: WaxSealEnvelop
             <button
               type="button"
               onClick={handleSkip}
-              className="text-[11px] text-[#EFE8DA]/70 hover:text-[#FFDF73] font-cinzel tracking-wider px-3 py-1 rounded-full border border-[#DFBF73]/30 bg-[#160205]/60 hover:border-[#DFBF73]/60 transition-colors cursor-pointer"
+              className="text-[11px] text-[#EFE8DA]/80 hover:text-[#FFDF73] font-cinzel tracking-wider px-4 py-1.5 rounded-full border border-[#DFBF73]/40 bg-[#081226]/80 hover:border-[#DFBF73]/80 hover:bg-[#0D1B36] transition-all cursor-pointer shadow-md"
             >
               {lang === 'ur' ? 'براہِ راست دعوت نامہ کھولیں ➔' : 'Skip to Invitation ➔'}
             </button>

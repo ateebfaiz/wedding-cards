@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { WeddingConfig, WeddingEvent, SupportedLanguage } from '@/types/wedding';
@@ -15,7 +15,17 @@ import { BaraatStatusCard } from '@/components/events/BaraatStatusCard';
 import { ActionRow } from '@/components/events/ActionRow';
 import { filterEventsForTier } from '@/lib/audience';
 import { HeirloomAmbientBackground } from '@/components/backgrounds/HeirloomAmbientBackground';
-import { ShieldAlert, ArrowLeft, ArrowRight } from 'lucide-react';
+import { AudioController } from '@/components/layout/AudioController';
+import { fireWeddingConfetti } from '@/lib/confetti';
+import {
+  ShieldAlert,
+  ArrowLeft,
+  ArrowRight,
+  Phone,
+  MessageCircle,
+  Clock,
+  Sparkles,
+} from 'lucide-react';
 
 interface EventClientViewProps {
   config: WeddingConfig;
@@ -28,6 +38,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   const tier = (searchParams.get('invite') as any) || 'all';
   const navParam = searchParams.get('nav');
+  const guestName = searchParams.get('to') || '';
 
   // Single-event tiers are strictly locked: no navigation bar and no browsing other events
   const isSingleEventTier = tier === 'walima' || tier === 'nikkah' || tier === 'baraat';
@@ -45,13 +56,23 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   const otherEvents = Object.values(config.events).filter((e) => e.slug !== event.slug);
 
+  // Trigger confetti for Nikkah and Baraat
+  useEffect(() => {
+    if (event.slug === 'nikkah' || event.slug === 'baraat') {
+      const timer = setTimeout(() => {
+        fireWeddingConfetti();
+      }, 700);
+      return () => clearTimeout(timer);
+    }
+  }, [event.slug]);
+
   return (
     <div
       className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
-      {/* Dynamic Heirloom Ambient Background with Dual Rotating Mandalas & Frosted Light Flares */}
-      <HeirloomAmbientBackground />
+      {/* Dynamic Heirloom Ambient Background with Dual Rotating Mandalas & Islamic Arch Backdrop */}
+      <HeirloomAmbientBackground variant="invitation" />
 
       {/* 1. Navigation Header: Rendered ONLY when navigation is permitted */}
       {allowNavigation ? (
@@ -62,7 +83,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
           showEventTabs={true}
         />
       ) : (
-        /* Floating Unobtrusive Corner Language Switcher (Zero Navigation Bar) */
+        /* Floating Unobtrusive Corner Language Switcher (When Navigation is Disabled) */
         <div className="fixed top-4 right-4 z-40 select-none">
           <button
             type="button"
@@ -104,7 +125,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
             {isSingleEventTier ? (
               <Link
-                href={`/${tier}?invite=${tier}${searchParams.get('to') ? `&to=${encodeURIComponent(searchParams.get('to')!)}` : ''}&nav=0`}
+                href={`/${tier}?invite=${tier}${guestName ? `&to=${encodeURIComponent(guestName)}` : ''}&nav=0`}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
               >
                 <span>{lang === 'ur' ? 'اپنے مخصوص دعوت نامے پر جائیں' : 'Go to Your Designated Ceremony'}</span>
@@ -122,6 +143,25 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
         ) : (
           /* Full Independent Stationery Canvas */
           <div className="w-full flex flex-col items-center space-y-6">
+            {/* Dedicated Personalized Invitee Heading Section */}
+            {guestName && (
+              <div className="w-full my-2 p-5 rounded-3xl bg-[#FCFAF6]/95 border border-[#B5965A]/45 shadow-[0_8px_30px_rgba(52,44,38,0.06)] backdrop-blur-md text-center transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold flex items-center justify-center gap-1.5 mb-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
+                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Specially Invited with Honor'}</span>
+                  <Sparkles className="w-3.5 h-3.5 text-[#B5965A]" />
+                </span>
+                <h2
+                  className={`text-2xl sm:text-3xl lg:text-4xl text-[#342C26] font-bold ${
+                    lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                  }`}
+                >
+                  {lang === 'ur' ? `${guestName} و اہلِ خانہ` : `${guestName} & Family`}
+                </h2>
+                <div className="w-16 h-[1.5px] bg-gradient-to-r from-transparent via-[#B5965A] to-transparent mx-auto mt-3" />
+              </div>
+            )}
+
             {/* Event Hero */}
             <EventHero event={event} lang={lang} />
 
@@ -159,6 +199,93 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
             {event.travelGuidance && (
               <div className="w-full">
                 <TravelGuide guidance={event.travelGuidance} lang={lang} />
+              </div>
+            )}
+
+            {/* Event Instructions Card */}
+            {config.eventInstructions && (
+              <div className="w-full p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+                <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
+                  <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
+                  <span className="text-xs uppercase tracking-wider font-sans font-bold">
+                    {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
+                  </span>
+                </div>
+                <p
+                  className={`text-xs sm:text-sm text-[#5A4D41] leading-relaxed ${
+                    lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-sans'
+                  }`}
+                >
+                  {config.eventInstructions[lang]}
+                </p>
+              </div>
+            )}
+
+            {/* Contact & Info RSVP Card */}
+            {config.contacts && config.contacts.length > 0 && (
+              <div className="w-full p-5 sm:p-6 rounded-2xl bg-[#FCFAF6]/90 border border-[#B5965A]/35 shadow-xs backdrop-blur-xs text-left">
+                <div className="mb-3">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#702F3D] font-sans font-bold block">
+                    {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
+                  </span>
+                  <h3
+                    className={`text-lg font-bold text-[#342C26] ${
+                      lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                    }`}
+                  >
+                    {lang === 'ur' ? 'کسی بھی سوال یا رہنمائی کے لیے رابطہ فرمائیں' : 'For Inquiries & Guidance'}
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#B5965A]/20">
+                  {config.contacts.map((contact, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl border border-[#B5965A]/25 bg-white/70 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-1 mb-1">
+                          <span
+                            className={`text-sm font-bold text-[#342C26] ${
+                              lang === 'ur' ? 'font-nastaliq-body text-base' : 'font-sans'
+                            }`}
+                          >
+                            {contact.name[lang]}
+                          </span>
+                          {contact.relation && (
+                            <span className="text-[10px] text-[#81776B] font-sans font-medium px-2 py-0.5 rounded-full bg-[#FAF7F2]">
+                              {contact.relation[lang]}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-xs text-[#5A4D41] font-mono tracking-wide block mb-3">
+                          {contact.phone}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-2 border-t border-[#B5965A]/15">
+                        <a
+                          href={`tel:${contact.phone}`}
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#342C26] text-[#F8F5EE] text-[11px] font-sans font-semibold hover:bg-[#545B43] transition-colors"
+                        >
+                          <Phone className="w-3 h-3" />
+                          <span>{lang === 'ur' ? 'کال کریں' : 'Call'}</span>
+                        </a>
+                        {contact.whatsappUrl && (
+                          <a
+                            href={contact.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#25D366] text-white text-[11px] font-sans font-semibold hover:bg-[#1EBE5D] transition-colors shadow-2xs"
+                          >
+                            <MessageCircle className="w-3 h-3" />
+                            <span>WhatsApp</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -210,6 +337,9 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
           </div>
         )}
       </main>
+
+      {/* Persistent Audio Controller on ALL invitation pages */}
+      <AudioController />
     </div>
   );
 }

@@ -36,8 +36,8 @@ export function EventNavigationHeader({
 
   const events = [
     { slug: 'nikkah', labelEn: 'Nikkah', labelUr: 'نکاح' },
-    { slug: 'baraat', labelEn: 'Baraat', labelUr: 'بارات' },
     { slug: 'walima', labelEn: 'Walima', labelUr: 'ولیمہ' },
+    { slug: 'baraat', labelEn: 'Baraat', labelUr: 'بارات' },
   ];
 
   return (
