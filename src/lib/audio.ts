@@ -106,6 +106,77 @@ class WeddingAudioManager {
   }
 
   /**
+   * Sacred Celestial Resonant Tone (for Bismillah and Verse interactions)
+   */
+  public playSacredChime(freq: number = 528): void {
+    if (this.isMuted) return;
+    this.unlockAudio();
+    if (!this.ctx || !this.sfxGain) return;
+
+    const t = this.ctx.currentTime;
+
+    // Warm pure sinusoidal fundamental (528 Hz Love/Blessing Solfeggio or harmonic)
+    const osc = this.ctx.createOscillator();
+    const subOsc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, t);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.002, t + 1.2);
+
+    subOsc.type = 'triangle';
+    subOsc.frequency.setValueAtTime(freq * 1.5, t); // Perfect fifth harmonic shimmer
+
+    gain.gain.setValueAtTime(0.001, t);
+    gain.gain.linearRampToValueAtTime(0.25, t + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+
+    osc.connect(gain);
+    subOsc.connect(gain);
+    gain.connect(this.sfxGain);
+
+    osc.start(t);
+    subOsc.start(t);
+    osc.stop(t + 1.9);
+    subOsc.stop(t + 1.9);
+  }
+
+  /**
+   * Delicate Soft Harp / Tactile Pluck (for Timeline interactions)
+   */
+  public playTactilePluck(noteIndex: number = 0): void {
+    if (this.isMuted) return;
+    this.unlockAudio();
+    if (!this.ctx || !this.sfxGain) return;
+
+    // Pentatonic scale degrees: D4, F#4, A4, B4, D5, E5, F#5
+    const pentatonic = [293.66, 369.99, 440.0, 493.88, 587.33, 659.25, 739.99];
+    const freq = pentatonic[noteIndex % pentatonic.length];
+
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    const filter = this.ctx.createBiquadFilter();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, t);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1600, t);
+    filter.frequency.exponentialRampToValueAtTime(300, t + 0.4);
+
+    gain.gain.setValueAtTime(0.2, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.sfxGain);
+
+    osc.start(t);
+    osc.stop(t + 0.5);
+  }
+
+  /**
    * Plays a single traditional Shehnai/Flute note with vibrato and wooden warmth
    */
   private playShehnaiNote(freq: number, startTime: number, duration: number) {

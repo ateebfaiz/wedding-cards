@@ -16,6 +16,7 @@ import { ActionRow } from '@/components/events/ActionRow';
 import { filterEventsForTier } from '@/lib/audience';
 import { HeirloomAmbientBackground } from '@/components/backgrounds/HeirloomAmbientBackground';
 import { AudioController } from '@/components/layout/AudioController';
+import { WaxSealEnvelope } from '@/components/envelope/WaxSealEnvelope';
 import { fireWeddingConfetti } from '@/lib/confetti';
 import {
   ShieldAlert,
@@ -55,15 +56,46 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   const otherEvents = Object.values(config.events).filter((e) => e.slug !== event.slug);
 
-  // Trigger confetti for Nikkah and Baraat
+  // If a personalized guest link is used, always begin with the glowing envelope seal experience
+  const isDirectGuestLink = Boolean(guestName || (tier && tier !== 'all'));
+  const [isOpened, setIsOpened] = useState(false);
+  const [hasCheckedStorage, setHasCheckedStorage] = useState(false);
+
   useEffect(() => {
-    if (event.slug === 'nikkah' || event.slug === 'baraat') {
+    const autoOpen = searchParams.get('opened') === 'true';
+    if (!isDirectGuestLink) {
+      const stored = sessionStorage.getItem(`envelope_opened_${config.meta.id}_${event.slug}`);
+      if (stored === 'true' || autoOpen) {
+        setIsOpened(true);
+      }
+    } else if (autoOpen) {
+      setIsOpened(true);
+    }
+    setHasCheckedStorage(true);
+  }, [config.meta.id, event.slug, isDirectGuestLink, searchParams]);
+
+  const handleOpenComplete = () => {
+    setIsOpened(true);
+    try {
+      sessionStorage.setItem(`envelope_opened_${config.meta.id}_${event.slug}`, 'true');
+    } catch {
+      // ignore
+    }
+  };
+
+  // Trigger confetti for Nikkah and Baraat after envelope is opened
+  useEffect(() => {
+    if (isOpened && (event.slug === 'nikkah' || event.slug === 'baraat')) {
       const timer = setTimeout(() => {
         fireWeddingConfetti();
       }, 700);
       return () => clearTimeout(timer);
     }
-  }, [event.slug]);
+  }, [event.slug, isOpened]);
+
+  if (!hasCheckedStorage) {
+    return <div className="min-h-screen bg-[#F8F5EE]" />;
+  }
 
   return (
     <div
@@ -72,6 +104,17 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
     >
       {/* Full-Bleed Islamic Arch Backdrop Fill-In for Mobile & Desktop */}
       <HeirloomAmbientBackground variant="invitation" />
+
+      {/* Interactive Glowing Envelope Opening Experience for Guest Invitations */}
+      {!isOpened && (
+        <WaxSealEnvelope
+          config={config}
+          lang={lang}
+          guestName={guestName}
+          onOpenComplete={handleOpenComplete}
+          triggerConfetti={event.slug === 'nikkah' || event.slug === 'baraat'}
+        />
+      )}
 
       {/* 1. Navigation Header: Rendered ONLY when navigation is permitted */}
       {allowNavigation ? (
