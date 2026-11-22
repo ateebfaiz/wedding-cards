@@ -18,130 +18,137 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
   const handleOpen = () => {
     if (stage !== 'idle') return;
 
-    // Phase 1: Wax crack & music unlock
+    // Phase 1: Wax crack & music playback
     setStage('cracking');
     weddingAudio.playWaxSealCrack();
     weddingAudio.startTraditionalMusic();
 
-    // Phase 2: Flap rotates open
+    // Phase 2: Mail flap opens & envelope expands
     setTimeout(() => {
       setStage('opening');
-    }, 320);
+    }, 350);
 
-    // Phase 3: Reveal full invitation card
+    // Phase 3: Transition to full wedding card
     setTimeout(() => {
       setStage('revealed');
       onOpenComplete();
     }, 1100);
   };
 
+  const coupleDisplay =
+    lang === 'ur'
+      ? `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`
+      : `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
+
   return (
     <div
       onClick={handleOpen}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden select-none cursor-pointer"
       style={{
-        backgroundImage: 'radial-gradient(circle at center, #2C050B 0%, #150205 100%)',
+        backgroundImage: 'radial-gradient(circle at center, #240307 0%, #0E0103 100%)',
       }}
     >
-      {/* Animated Background Arabesque Pattern with gentle drift */}
+      {/* Background Deep Maroon-Gold Pattern with Slow Drift */}
       <div
-        className="absolute inset-0 opacity-25 mix-blend-overlay pointer-events-none animate-pulse duration-[8000ms]"
+        className="absolute inset-0 opacity-30 mix-blend-screen pointer-events-none animate-slow-drift"
         style={{
-          backgroundImage: 'url(/assets/backgrounds/golden-arabesque-opt.webp)',
+          backgroundImage: 'url(/assets/backgrounds/maroon-golden-opt.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       />
 
-      {/* Rotating Subtle Mandala Glow in Background */}
-      <div className="absolute w-[500px] h-[500px] md:w-[700px] md:h-[700px] opacity-15 pointer-events-none animate-[spin_60s_linear_infinite]">
+      {/* Decorative Golden Mandala Rotating Animation Asset */}
+      <div className="absolute w-[440px] h-[440px] sm:w-[680px] sm:h-[680px] opacity-25 pointer-events-none animate-spin-slow">
         <Image
-          src="/assets/mandalas/white-ornament-mandala.png"
-          alt=""
+          src="/assets/mandalas/decorative-golden-mandala.webp"
+          alt="Decorative Golden Mandala"
           fill
           className="object-contain"
           priority
         />
       </div>
 
-      {/* Main Envelope Card */}
-      <div className="relative w-full max-w-[360px] sm:max-w-md aspect-[4/3] flex flex-col items-center justify-center">
-        {/* Envelope Body */}
-        <div className="relative w-full h-full rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.8)] border border-[#DFBF73]/40 overflow-hidden flex flex-col items-center justify-center bg-gradient-to-b from-[#4A0A12] via-[#35050C] to-[#200206]">
-          {/* Diagonal fold accents */}
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_49.5%,#DFBF73_50%,transparent_50.5%)] opacity-20 pointer-events-none" />
-          <div className="absolute inset-0 bg-[linear-gradient(-45deg,transparent_49.5%,#DFBF73_50%,transparent_50.5%)] opacity-20 pointer-events-none" />
-
-          {/* Vertical Ceremonial Silk Ribbon in Deep Crimson & Gold */}
-          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-14 bg-gradient-to-r from-[#2A0408] via-[#8B0000] to-[#2A0408] shadow-2xl z-15 pointer-events-none flex items-center justify-between px-1 border-x border-[#DFBF73]/40">
-            <span className="w-[1px] h-full bg-[#DFBF73]/60" />
-            <span className="w-[1px] h-full bg-[#DFBF73]/60" />
+      {/* The Mail Envelope Composition */}
+      <div className="relative w-full max-w-[360px] sm:max-w-[420px] aspect-[4/3] flex flex-col items-center justify-center">
+        {/* Physical Brown Mail Envelope Container */}
+        <div
+          className={`relative w-full h-full rounded-2xl shadow-[0_30px_70px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col items-center justify-center transition-all duration-700 ease-out ${
+            stage === 'opening'
+              ? 'scale-105 opacity-90'
+              : stage === 'revealed'
+              ? 'scale-110 opacity-0'
+              : 'scale-100 opacity-100'
+          }`}
+        >
+          {/* Authentic Brown Envelope Texture Background */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/assets/envelope/brown-envelope.webp"
+              alt="Mail Envelope"
+              fill
+              className="object-cover object-center"
+              priority
+            />
           </div>
 
-          {/* Envelope Card Peeking / Emerging on Tap */}
-          <div
-            className={`absolute w-[90%] h-[85%] bg-[#F8F5EE] border-2 border-[#DFBF73]/60 rounded-xl shadow-2xl transition-all duration-700 ease-out flex flex-col items-center justify-center p-6 text-center z-10 ${
-              stage === 'opening'
-                ? '-translate-y-28 opacity-95 scale-102'
-                : stage === 'revealed'
-                ? '-translate-y-48 opacity-0 scale-105'
-                : 'translate-y-0 opacity-100'
-            }`}
-          >
-            {/* Elegant Bismillah Calligraphy */}
-            <div className="relative w-44 h-12 mb-2">
-              <Image
-                src="/assets/calligraphy/bismillah-gold-banner.webp"
-                alt="Bismillah"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+          {/* Luxury Card Vignette & Gold Filigree Edging */}
+          <div className="absolute inset-2 sm:inset-3 border-2 border-[#DFBF73]/60 rounded-xl pointer-events-none z-10 shadow-inner" />
+          <div className="absolute inset-3.5 sm:inset-4.5 border border-[#DFBF73]/30 rounded-lg pointer-events-none z-10" />
 
+          {/* Top Calligraphy Badge on Envelope */}
+          <div className="relative z-20 -mt-6 sm:-mt-8 mb-1 w-44 sm:w-52 h-12">
+            <Image
+              src="/assets/calligraphy/bismillah-gold-banner.webp"
+              alt="Bismillah"
+              fill
+              className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+              priority
+            />
+          </div>
+
+          {/* Names Written on Mail */}
+          <div className="relative z-20 text-center px-4 space-y-1 mb-2">
             <h1
-              className={`text-2xl md:text-3xl text-[#342C26] my-1 font-normal ${
-                lang === 'ur' ? 'font-nastaliq-display leading-relaxed' : 'font-cinzel text-xl tracking-wider'
+              className={`text-2xl sm:text-3xl text-[#2C1810] font-bold drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)] ${
+                lang === 'ur' ? 'font-nastaliq-display text-3xl sm:text-4xl text-[#3A050A]' : 'font-cinzel'
               }`}
             >
-              {config.meta.title[lang]}
+              {coupleDisplay}
             </h1>
 
-            {/* Personalized Guest Badge if provided */}
-            {guestName && (
-              <div className="my-1.5 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/30 text-xs font-medium text-[#8B0000]">
-                {lang === 'ur' ? `بخدمتِ گرامی قدر: ${guestName}` : `Specially Invited: ${guestName}`}
+            {/* Personalized Guest Address Line */}
+            {guestName ? (
+              <div className="inline-block px-3 py-1 rounded-full bg-[#8B0000]/15 border border-[#8B0000]/30 shadow-xs">
+                <span
+                  className={`text-xs sm:text-sm text-[#5C0A10] font-semibold ${
+                    lang === 'ur' ? 'font-nastaliq-display' : 'font-cinzel'
+                  }`}
+                >
+                  {lang === 'ur' ? `بخدمتِ گرامی قدر: ${guestName}` : `For: ${guestName}`}
+                </span>
               </div>
+            ) : (
+              <p className="text-[11px] sm:text-xs uppercase tracking-widest text-[#5C451C] font-cinzel font-semibold">
+                {config.meta.title[lang]}
+              </p>
             )}
-
-            <p className="text-xs text-[#8A8074] font-serif italic mt-1">
-              {config.seal.sealSubtitle[lang]}
-            </p>
           </div>
 
-          {/* Envelope Flap (Top Triangular Flap) */}
+          {/* Royal Shield Seal (Ateeb & Nimra Wedding Seal) in Center of Envelope */}
           <div
-            className={`absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-[#5C0D17] to-[#3B070E] border-b border-[#DFBF73]/50 origin-top transition-transform duration-500 ease-in-out [clip-path:polygon(0_0,100%_0,50%_100%)] shadow-md z-20 ${
-              stage !== 'idle' ? '[transform:rotateX(-180deg)] opacity-30' : ''
-            }`}
-          />
-
-          {/* Royal Shield Seal (Ateeb & Nimra Wedding Seal) positioned in the center */}
-          <div
-            className={`absolute z-30 transition-all duration-500 ease-out ${
+            className={`relative z-30 my-1 transition-all duration-500 ease-out ${
               stage === 'cracking'
                 ? 'scale-115 rotate-6'
                 : stage === 'opening'
-                ? 'scale-75 opacity-0 -translate-y-12'
-                : stage === 'revealed'
-                ? 'opacity-0 scale-50'
-                : 'scale-100'
+                ? 'scale-75 opacity-0'
+                : 'scale-100 hover:scale-105 active:scale-95'
             }`}
           >
-            <div className="relative w-28 h-28 md:w-32 md:h-32 drop-shadow-[0_12px_28px_rgba(0,0,0,0.8)] hover:scale-105 active:scale-95 transition-transform">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 drop-shadow-[0_12px_30px_rgba(0,0,0,0.85)]">
               <Image
                 src="/assets/seal/wedding-seal-opt.webp"
-                alt="Wedding Shield Seal"
+                alt="Royal Wedding Shield Seal"
                 fill
                 className="object-contain"
                 priority
@@ -150,12 +157,12 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
           </div>
         </div>
 
-        {/* Tap Prompt Below Envelope (NO SKIP OPTION) */}
+        {/* Tactile Tap Prompt (NO SKIP OPTION) */}
         <div className="mt-8 text-center z-20">
-          <p className="text-xs uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-semibold flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-            <span className="text-[#FFDF73] animate-pulse">✦</span>
+          <p className="text-xs uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] animate-pulse">
+            <span className="text-[#FFDF73]">✦</span>
             <span>{config.seal.openPrompt[lang]}</span>
-            <span className="text-[#FFDF73] animate-pulse">✦</span>
+            <span className="text-[#FFDF73]">✦</span>
           </p>
         </div>
       </div>

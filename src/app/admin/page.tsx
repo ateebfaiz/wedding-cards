@@ -7,16 +7,12 @@ import { getWeddingConfig } from '@/config/default';
 import { GuestAccessTier } from '@/lib/audience';
 import { copyToClipboard } from '@/lib/utils';
 import {
-  Users,
   Copy,
   Check,
   Share2,
-  ExternalLink,
-  Shield,
   QrCode,
-  Sparkles,
-  Calendar,
   Eye,
+  ArrowLeft,
 } from 'lucide-react';
 import { QRCodeModal } from '@/components/modals/QRCodeModal';
 
@@ -36,20 +32,15 @@ export default function AdminInvitePage() {
   const coupleNamesUr = `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`;
 
   const tierDescriptions: Record<GuestAccessTier, { titleEn: string; titleUr: string; events: string[] }> = {
-    all: {
-      titleEn: 'All Festivities (Family & Close Friends)',
-      titleUr: 'تمام تقریبات (نکاح، بارات اور ولیمہ)',
-      events: ['Nikkah & Rasm-e-Hina (Faisalabad)', 'The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
-    },
     walima: {
-      titleEn: 'Walima Reception Only (Colleagues & Network)',
-      titleUr: 'صرف دعوتِ ولیمہ (احباب و رفقائے کار)',
+      titleEn: 'Walima Only (Colleagues & Network)',
+      titleUr: 'صرف دعوتِ ولیمہ (احباب و رفقاء)',
       events: ['Walima Reception (Hall 20, Garrison Club Lahore)'],
     },
-    baraat: {
-      titleEn: 'Baraat Only',
-      titleUr: 'صرف تقریبِ بارات',
-      events: ['The Wedding Baraat (Lahore)'],
+    all: {
+      titleEn: 'All Events (Family & Close Friends)',
+      titleUr: 'تمام تقریبات (نکاح، بارات اور ولیمہ)',
+      events: ['Nikkah & Rasm-e-Hina (Faisalabad)', 'The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
     },
     reception: {
       titleEn: 'Baraat & Walima',
@@ -60,6 +51,11 @@ export default function AdminInvitePage() {
       titleEn: 'Nikkah & Rasm-e-Hina Only',
       titleUr: 'صرف نکاح و رسمِ حنا',
       events: ['Nikkah & Rasm-e-Hina (Farmhouse, Faisalabad)'],
+    },
+    baraat: {
+      titleEn: 'Baraat Only',
+      titleUr: 'صرف تقریبِ بارات',
+      events: ['The Wedding Baraat (Lahore)'],
     },
   };
 
@@ -88,7 +84,7 @@ export default function AdminInvitePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#140205] text-[#F8F5EE] py-8 px-4 flex flex-col items-center select-none">
+    <div className="min-h-screen bg-[#140205] text-[#F8F5EE] py-6 sm:py-10 px-3 sm:px-4 flex flex-col items-center select-none overflow-x-hidden">
       {/* Background Ambience */}
       <div
         className="fixed inset-0 opacity-20 pointer-events-none"
@@ -98,11 +94,11 @@ export default function AdminInvitePage() {
         }}
       />
 
-      <div className="relative w-full max-w-xl bg-[#200408]/95 border-2 border-[#DFBF73]/50 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-md">
+      <div className="relative w-full max-w-lg bg-[#200408]/95 border-2 border-[#DFBF73]/50 rounded-3xl p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-md">
         {/* Header with Royal Shield Seal Logo */}
-        <div className="flex items-center justify-between border-b border-[#DFBF73]/30 pb-4 mb-6">
+        <div className="flex items-center justify-between border-b border-[#DFBF73]/30 pb-4 mb-5">
           <div className="flex items-center gap-3">
-            <div className="relative w-12 h-12">
+            <div className="relative w-12 h-12 shrink-0">
               <Image
                 src="/assets/seal/wedding-seal-opt.webp"
                 alt="Wedding Seal Logo"
@@ -114,7 +110,7 @@ export default function AdminInvitePage() {
               <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-cinzel font-bold block">
                 Host Private Portal
               </span>
-              <h1 className="text-xl sm:text-2xl font-cinzel font-bold text-[#FFDF73]">
+              <h1 className="text-lg sm:text-xl font-cinzel font-bold text-[#FFDF73] whitespace-nowrap">
                 Guest Invitation AppClip
               </h1>
             </div>
@@ -122,22 +118,17 @@ export default function AdminInvitePage() {
 
           <Link
             href="/"
-            className="text-xs font-cinzel text-[#DFBF73] hover:text-[#FFDF73] border border-[#DFBF73]/40 rounded-full px-3 py-1 bg-[#8B0000]/30 transition-colors"
+            className="text-xs font-cinzel text-[#DFBF73] hover:text-[#FFDF73] border border-[#DFBF73]/40 rounded-full px-3 py-1.5 bg-[#8B0000]/30 transition-colors whitespace-nowrap shrink-0"
           >
             Open Card ↗
           </Link>
         </div>
 
-        {/* Instructions */}
-        <p className="text-xs text-[#EFE8DA]/80 leading-relaxed mb-6 font-light">
-          Generate confidential, targeted invitation links for individual guests or family circles. Guests will only see the exact ceremonies they are invited to attend.
-        </p>
-
         {/* Input Form */}
-        <div className="space-y-5">
+        <div className="space-y-4">
           {/* Guest / Family Name */}
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-medium mb-1.5">
+            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-cinzel font-bold mb-1.5 whitespace-nowrap">
               1. Guest / Family Name
             </label>
             <input
@@ -145,16 +136,16 @@ export default function AdminInvitePage() {
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
               placeholder="e.g. Dr. & Mrs. Farooq Khan"
-              className="w-full px-4 py-3 rounded-xl border border-[#DFBF73]/50 bg-[#35050C] text-[#FFF] placeholder-[#A68850] text-sm focus:outline-hidden focus:border-[#FFDF73] focus:ring-1 focus:ring-[#FFDF73]"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[#DFBF73]/50 bg-[#35050C] text-[#FFF] placeholder-[#A68850] text-sm focus:outline-hidden focus:border-[#FFDF73] focus:ring-1 focus:ring-[#FFDF73]"
             />
           </div>
 
-          {/* Invitation Tier Selection */}
+          {/* Invitation Tier Selection (No awkward wraps) */}
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-medium mb-1.5">
+            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-cinzel font-bold mb-1.5 whitespace-nowrap">
               2. Invited Ceremony Access
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {(['walima', 'all', 'reception', 'nikkah', 'baraat'] as GuestAccessTier[]).map((tKey) => {
                 const info = tierDescriptions[tKey];
                 const isSelected = tier === tKey;
@@ -164,16 +155,16 @@ export default function AdminInvitePage() {
                     key={tKey}
                     type="button"
                     onClick={() => setTier(tKey)}
-                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                    className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
                         ? 'border-[#FFDF73] bg-[#8B0000]/60 ring-1 ring-[#FFDF73]'
                         : 'border-[#DFBF73]/30 bg-[#2C050B]/60 hover:border-[#DFBF73]/60'
                     }`}
                   >
-                    <span className="text-xs font-bold text-[#FFDF73] block mb-0.5">
+                    <span className="text-xs font-bold text-[#FFDF73] block mb-0.5 whitespace-nowrap truncate">
                       {info.titleEn}
                     </span>
-                    <span className="text-[11px] font-nastaliq text-[#EFE8DA]/80 block">
+                    <span className="text-[11px] font-nastaliq text-[#EFE8DA]/85 block whitespace-nowrap truncate">
                       {info.titleUr}
                     </span>
                   </button>
@@ -182,17 +173,17 @@ export default function AdminInvitePage() {
             </div>
           </div>
 
-          {/* WhatsApp Language Preference */}
+          {/* WhatsApp Language Preference (No wrap) */}
           <div>
-            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-medium mb-1.5">
+            <label className="block text-xs uppercase tracking-wider text-[#DFBF73] font-cinzel font-bold mb-1.5 whitespace-nowrap">
               3. WhatsApp Message Language
             </label>
-            <div className="inline-flex rounded-lg border border-[#DFBF73]/40 p-1 bg-[#2C050B]">
+            <div className="inline-flex rounded-xl border border-[#DFBF73]/40 p-1 bg-[#2C050B]">
               <button
                 type="button"
                 onClick={() => setLangPref('ur')}
-                className={`px-4 py-1.5 rounded-md text-xs font-nastaliq transition-colors cursor-pointer ${
-                  langPref === 'ur' ? 'bg-[#8B0000] text-[#FFDF73]' : 'text-[#EFE8DA]/70'
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-nastaliq transition-colors cursor-pointer whitespace-nowrap ${
+                  langPref === 'ur' ? 'bg-[#8B0000] text-[#FFDF73] font-bold shadow-xs' : 'text-[#EFE8DA]/70'
                 }`}
               >
                 اردو دعوت نامہ
@@ -200,8 +191,8 @@ export default function AdminInvitePage() {
               <button
                 type="button"
                 onClick={() => setLangPref('en')}
-                className={`px-4 py-1.5 rounded-md text-xs font-cinzel transition-colors cursor-pointer ${
-                  langPref === 'en' ? 'bg-[#8B0000] text-[#FFDF73]' : 'text-[#EFE8DA]/70'
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-cinzel transition-colors cursor-pointer whitespace-nowrap ${
+                  langPref === 'en' ? 'bg-[#8B0000] text-[#FFDF73] font-bold shadow-xs' : 'text-[#EFE8DA]/70'
                 }`}
               >
                 English Text
@@ -210,71 +201,71 @@ export default function AdminInvitePage() {
           </div>
 
           {/* Generated URL Box */}
-          <div className="p-4 rounded-xl bg-[#180205] border border-[#DFBF73]/40 space-y-2">
-            <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-bold block">
+          <div className="p-3.5 rounded-xl bg-[#180205] border border-[#DFBF73]/40 space-y-1.5">
+            <span className="text-[10px] uppercase tracking-widest text-[#DFBF73] font-bold block whitespace-nowrap">
               Personalized Guest Link:
             </span>
-            <p className="text-xs font-mono text-[#FFDF73] break-all select-all">
+            <p className="text-xs font-mono text-[#FFDF73] break-all select-all leading-relaxed">
               {guestUrl}
             </p>
-
-            <div className="pt-1 text-[11px] text-[#A68850] flex items-center gap-1.5">
-              <span>Included events:</span>
+            <div className="text-[10px] text-[#A68850] flex flex-wrap items-center gap-1 pt-1">
+              <span className="whitespace-nowrap">Included:</span>
               <span className="text-[#EFE8DA] font-medium">{currentTierInfo.events.join(' · ')}</span>
             </div>
           </div>
 
-          {/* Action Row */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-            {/* Copy Link */}
+          {/* Action Buttons: 100% Mobile Optimized with ZERO Awkward Wraps */}
+          <div className="flex flex-col sm:flex-row items-stretch gap-2.5 pt-1">
+            {/* Copy Link Button */}
             <button
               type="button"
               onClick={handleCopyLink}
-              className="w-full sm:flex-1 py-3 rounded-full border border-[#DFBF73] text-[#FFDF73] font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:bg-[#8B0000]/40 transition-colors cursor-pointer shadow-md"
+              className="w-full sm:flex-1 py-3 px-4 rounded-xl border border-[#DFBF73] text-[#FFDF73] font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:bg-[#8B0000]/40 transition-colors cursor-pointer shadow-md whitespace-nowrap shrink-0"
             >
               {copied ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span>Link Copied!</span>
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span className="whitespace-nowrap">Link Copied!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-[#DFBF73]" />
-                  <span>Copy Private Link</span>
+                  <Copy className="w-4 h-4 text-[#DFBF73] shrink-0" />
+                  <span className="whitespace-nowrap">Copy Private Link</span>
                 </>
               )}
             </button>
 
-            {/* Share WhatsApp */}
+            {/* Send WhatsApp Button */}
             <button
               type="button"
               onClick={handleShareWhatsApp}
-              className="w-full sm:flex-1 py-3 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg cursor-pointer"
+              className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-cinzel text-xs font-bold flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-lg cursor-pointer whitespace-nowrap shrink-0"
             >
-              <Share2 className="w-4 h-4" />
-              <span>Send WhatsApp</span>
+              <Share2 className="w-4 h-4 shrink-0" />
+              <span className="whitespace-nowrap">Send WhatsApp</span>
             </button>
 
-            {/* Show QR */}
+            {/* QR Button */}
             <button
               type="button"
               onClick={() => setShowQR(true)}
-              className="p-3 rounded-full border border-[#DFBF73]/50 text-[#DFBF73] hover:text-[#FFDF73] hover:border-[#FFDF73] transition-colors cursor-pointer"
-              title="Generate QR code for card printing"
+              className="w-full sm:w-auto py-3 px-4 rounded-xl border border-[#DFBF73]/60 bg-[#2C050B] text-[#DFBF73] hover:text-[#FFDF73] hover:border-[#FFDF73] flex items-center justify-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0"
+              title="Generate QR code"
             >
-              <QrCode className="w-5 h-5" />
+              <QrCode className="w-4 h-4 shrink-0" />
+              <span className="text-xs font-cinzel font-bold sm:hidden whitespace-nowrap">View QR</span>
             </button>
           </div>
 
-          {/* Live Preview Button */}
+          {/* Test Live Preview Link */}
           <div className="text-center pt-2">
             <a
               href={guestUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-[#DFBF73] hover:text-[#FFDF73] hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs text-[#DFBF73] hover:text-[#FFDF73] hover:underline whitespace-nowrap"
             >
-              <Eye className="w-3.5 h-3.5" />
+              <Eye className="w-3.5 h-3.5 shrink-0" />
               <span>Test Live Card exactly as this guest will see it ↗</span>
             </a>
           </div>
