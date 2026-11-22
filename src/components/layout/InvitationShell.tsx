@@ -22,13 +22,14 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
   const [hasCheckedStorage, setHasCheckedStorage] = useState(false);
 
   useEffect(() => {
-    // Check if opened during current session
+    // Check if opened during current session or requested via query parameter
+    const autoOpen = searchParams.get('opened') === 'true';
     const stored = sessionStorage.getItem(`envelope_opened_${config.meta.id}`);
-    if (stored === 'true') {
+    if (stored === 'true' || autoOpen) {
       setIsOpened(true);
     }
     setHasCheckedStorage(true);
-  }, [config.meta.id]);
+  }, [config.meta.id, searchParams]);
 
   const handleOpenComplete = () => {
     setIsOpened(true);
@@ -91,7 +92,7 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
         </button>
       </div>
 
-      {/* Main Wedding Card Viewport (Mobile-AppClip Optimized) */}
+      {/* Main Wedding Card Viewport (Mobile-Optimized Heirloom Folio) */}
       <main className="w-full max-w-xl px-3 py-6 sm:py-10 z-10 flex flex-col items-center justify-center">
         {children(lang, guestContext)}
       </main>

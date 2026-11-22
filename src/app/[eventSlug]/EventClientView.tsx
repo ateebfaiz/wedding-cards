@@ -2,11 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { WeddingConfig, WeddingEvent } from '@/types/wedding';
 import { InvitationShell } from '@/components/layout/InvitationShell';
 import { IslamicIlluminatedFrame } from '@/components/svg/IslamicIlluminatedBorder';
-import { BismillahCalligraphySvg } from '@/components/svg/BismillahCalligraphySvg';
+import { IslamicGeometricStar } from '@/components/ornaments/IslamicGeometricStar';
 import { EventHero } from '@/components/events/EventHero';
 import { CountdownTimer } from '@/components/common/CountdownTimer';
 import { ScheduleTimeline } from '@/components/events/ScheduleTimeline';
@@ -87,10 +88,36 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
         }
 
         return (
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center relative">
+            {/* Background Animated Islamic Geometric Star */}
+            <div className="fixed inset-0 flex items-center justify-center pointer-events-none opacity-20 -z-10 overflow-hidden">
+              <IslamicGeometricStar size={750} className="scale-75 sm:scale-100" />
+            </div>
+
             <IslamicIlluminatedFrame className="w-full max-w-2xl my-2">
-              {/* Classical Bismillah Calligraphy Vector */}
-              <BismillahCalligraphySvg width="260" height="50" className="mb-2" />
+              {/* Islamic Geometric Euclidean Ornament Header Crown */}
+              <div className="relative w-44 sm:w-56 h-10 mx-auto -mt-2 mb-1 opacity-70">
+                <Image
+                  src="/assets/ornaments/islamic-geometric-ornament.webp"
+                  alt="Islamic Ornament Header"
+                  fill
+                  sizes="(max-width: 640px) 176px, 224px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {/* Default Bismillah Banner Asset Across All Pages */}
+              <div className="relative w-64 sm:w-76 aspect-[934/225] mx-auto my-1.5 drop-shadow-[0_1px_3px_rgba(181,150,90,0.35)]">
+                <Image
+                  src="/assets/calligraphy/bismillah-islamic-vector.webp"
+                  alt="Bismillah Al-Rahman Al-Raheem"
+                  fill
+                  sizes="(max-width: 640px) 256px, 304px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
 
               {/* Event Hero */}
               <EventHero event={event} lang={lang} />

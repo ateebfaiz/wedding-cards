@@ -28,29 +28,31 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
   return (
     <div className="w-full my-8">
       <div className="flex items-center justify-center gap-3 mb-6">
-        <span className="w-8 h-[1px] bg-[#B5965A]/40" />
-        <h2 className="text-xs uppercase tracking-[0.2em] text-[#8A8074] font-medium">
+        <span className="w-8 h-[1px] bg-[#DFBF73]" />
+        <h2 className="text-xs uppercase tracking-[0.25em] text-[#8B0000] font-cinzel font-black">
           {lang === 'ur' ? 'تقریب کے اوقات کار' : 'Ceremony Schedule'}
         </h2>
-        <span className="w-8 h-[1px] bg-[#B5965A]/40" />
+        <span className="w-8 h-[1px] bg-[#DFBF73]" />
       </div>
 
-      <div className="relative border-l border-[#B5965A]/30 ml-4 md:ml-32 pl-6 space-y-8">
+      <div className="relative border-l border-[#DFBF73]/50 ml-4 md:ml-32 pl-6 space-y-8">
         {schedule.map((item, index) => {
           const displayTime = lang === 'ur' && item.timeUrdu ? item.timeUrdu : item.time;
 
           return (
             <div key={index} className="relative group">
               {/* Timeline Node Icon */}
-              <div className="absolute -left-[35px] top-0.5 w-7 h-7 rounded-full bg-[#F8F5EE] border border-[#B5965A] flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform">
+              <div className="absolute -left-[35px] top-0.5 w-7 h-7 rounded-full bg-[#FAF7F2] border-2 border-[#DFBF73] flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform">
                 {getIcon(item.iconName)}
               </div>
 
               {/* Time Label */}
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
                 <h3
-                  className={`text-base md:text-lg text-[#342C26] font-medium ${
-                    lang === 'ur' ? 'font-nastaliq-display text-lg md:text-xl text-[#5E0C12]' : 'font-serif'
+                  className={`text-base md:text-lg font-bold ${
+                    lang === 'ur'
+                      ? 'font-nastaliq-display text-xl text-[#4A0810]'
+                      : 'font-playfair text-lg text-[#2A0E12]'
                   }`}
                 >
                   {item.title[lang]}
@@ -58,9 +60,9 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
 
                 <span
                   dir="ltr"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#545B43] bg-[#545B43]/10 px-2.5 py-0.5 rounded-full w-fit"
+                  className="inline-flex items-center gap-1.5 text-xs font-cinzel font-bold text-[#FFDF73] bg-[#2E050B] px-3 py-1 rounded-full w-fit shadow-2xs"
                 >
-                  <Clock className="w-3 h-3" />
+                  <Clock className="w-3 h-3 text-[#DFBF73]" />
                   <span>{displayTime}</span>
                 </span>
               </div>

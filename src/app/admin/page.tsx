@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
 import { GuestAccessTier } from '@/lib/audience';
@@ -118,17 +117,10 @@ export default function AdminInvitePage() {
                 Host Private Portal
               </span>
               <h1 className="text-lg sm:text-xl font-cinzel font-bold text-[#FFDF73] whitespace-nowrap">
-                Guest Invitation AppClip
+                Guest Invitation Manager
               </h1>
             </div>
           </div>
-
-          <Link
-            href="/"
-            className="text-xs font-cinzel text-[#DFBF73] hover:text-[#FFDF73] border border-[#DFBF73]/40 rounded-full px-3 py-1.5 bg-[#8B0000]/30 transition-colors whitespace-nowrap shrink-0"
-          >
-            Open Card ↗
-          </Link>
         </div>
 
         {/* Input Form */}

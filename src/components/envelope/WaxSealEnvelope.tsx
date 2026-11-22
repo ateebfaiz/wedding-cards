@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { WeddingConfig, SupportedLanguage } from '@/types/wedding';
 import { weddingAudio } from '@/lib/audio';
+import { IslamicGeometricStar } from '@/components/ornaments/IslamicGeometricStar';
 
 interface WaxSealEnvelopeProps {
   config: WeddingConfig;
@@ -12,7 +13,7 @@ interface WaxSealEnvelopeProps {
   onOpenComplete: () => void;
 }
 
-export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: WaxSealEnvelopeProps) {
+export function WaxSealEnvelope({ config, lang, onOpenComplete }: WaxSealEnvelopeProps) {
   const [stage, setStage] = useState<'idle' | 'cracking' | 'opening' | 'revealed'>('idle');
 
   const handleOpen = () => {
@@ -35,22 +36,17 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
     }, 1100);
   };
 
-  const coupleDisplay =
-    lang === 'ur'
-      ? `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`
-      : `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
-
   return (
     <div
       onClick={handleOpen}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden select-none cursor-pointer"
       style={{
-        backgroundImage: 'radial-gradient(circle at center, #240307 0%, #0E0103 100%)',
+        backgroundImage: 'radial-gradient(circle at center, #28040A 0%, #0D0103 100%)',
       }}
     >
       {/* Background Deep Maroon-Gold Pattern with Slow Drift */}
       <div
-        className="absolute inset-0 opacity-30 mix-blend-screen pointer-events-none animate-slow-drift"
+        className="absolute inset-0 opacity-25 mix-blend-screen pointer-events-none animate-slow-drift"
         style={{
           backgroundImage: 'url(/assets/backgrounds/maroon-golden-opt.webp)',
           backgroundSize: 'cover',
@@ -58,23 +54,16 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
         }}
       />
 
-      {/* Decorative Golden Mandala Rotating Animation Asset */}
-      <div className="absolute w-[440px] h-[440px] sm:w-[680px] sm:h-[680px] opacity-25 pointer-events-none animate-spin-slow">
-        <Image
-          src="/assets/mandalas/decorative-golden-mandala.webp"
-          alt="Decorative Golden Mandala"
-          fill
-          sizes="(max-width: 640px) 440px, 680px"
-          className="object-contain"
-          priority
-        />
+      {/* Mesmerizing Islamic Geometric Star SVG Animation (Replacing Golden Mandala) */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <IslamicGeometricStar size={680} className="scale-75 sm:scale-100" />
       </div>
 
-      {/* The Mail Envelope Composition */}
-      <div className="relative w-full max-w-[360px] sm:max-w-[420px] aspect-[4/3] flex flex-col items-center justify-center">
-        {/* Physical Brown Mail Envelope Container */}
+      {/* The Postcard / Envelope Composition (Only Postcard + Seal, No Writing Over It) */}
+      <div className="relative w-full max-w-[380px] sm:max-w-[460px] aspect-[4/3] flex flex-col items-center justify-center">
+        {/* Physical Postcard Envelope: Filled Seamlessly with No Writing Over It */}
         <div
-          className={`relative w-full h-full rounded-2xl shadow-[0_30px_70px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col items-center justify-center transition-all duration-700 ease-out ${
+          className={`relative w-full h-full rounded-2xl shadow-[0_35px_90px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col items-center justify-center transition-all duration-700 ease-out ${
             stage === 'opening'
               ? 'scale-105 opacity-90'
               : stage === 'revealed'
@@ -82,78 +71,38 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
               : 'scale-100 opacity-100'
           }`}
         >
-          {/* Authentic Brown Envelope Texture Background */}
+          {/* Authentic Postcard Envelope Texture Fills the Whole Container */}
           <div className="absolute inset-0 z-0">
             <Image
               src="/assets/envelope/brown-envelope.webp"
-              alt="Mail Envelope"
+              alt="Wedding Postcard Envelope"
               fill
-              sizes="(max-width: 640px) 360px, 420px"
+              sizes="(max-width: 640px) 380px, 460px"
               className="object-cover object-center"
               priority
             />
           </div>
 
-          {/* Luxury Card Vignette & Gold Filigree Edging */}
-          <div className="absolute inset-2 sm:inset-3 border-2 border-[#DFBF73]/60 rounded-xl pointer-events-none z-10 shadow-inner" />
-          <div className="absolute inset-3.5 sm:inset-4.5 border border-[#DFBF73]/30 rounded-lg pointer-events-none z-10" />
+          {/* Luxury Card Perimeter Filigree & Inset Bevel (No text, pure stationery aesthetic) */}
+          <div className="absolute inset-2.5 sm:inset-3 border-2 border-[#DFBF73]/60 rounded-xl pointer-events-none z-10 shadow-inner" />
+          <div className="absolute inset-4 sm:inset-5 border border-[#DFBF73]/30 rounded-lg pointer-events-none z-10" />
 
-          {/* Top Calligraphy Badge on Envelope */}
-          <div className="relative z-20 -mt-6 sm:-mt-8 mb-1 w-44 sm:w-52 h-12">
-            <Image
-              src="/assets/calligraphy/bismillah-gold-banner.webp"
-              alt="Bismillah"
-              fill
-              sizes="(max-width: 640px) 176px, 208px"
-              className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
-              priority
-            />
-          </div>
-
-          {/* Names Written on Mail */}
-          <div className="relative z-20 text-center px-4 space-y-1 mb-2">
-            <h1
-              className={`text-2xl sm:text-3xl text-[#2C1810] font-bold drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)] ${
-                lang === 'ur' ? 'font-nastaliq-display text-3xl sm:text-4xl text-[#3A050A]' : 'font-cinzel'
-              }`}
-            >
-              {coupleDisplay}
-            </h1>
-
-            {/* Personalized Guest Address Line */}
-            {guestName ? (
-              <div className="inline-block px-3 py-1 rounded-full bg-[#8B0000]/15 border border-[#8B0000]/30 shadow-xs">
-                <span
-                  className={`text-xs sm:text-sm text-[#5C0A10] font-semibold ${
-                    lang === 'ur' ? 'font-nastaliq-display' : 'font-cinzel'
-                  }`}
-                >
-                  {lang === 'ur' ? `بخدمتِ گرامی قدر: ${guestName}` : `For: ${guestName}`}
-                </span>
-              </div>
-            ) : (
-              <p className="text-[11px] sm:text-xs uppercase tracking-widest text-[#5C451C] font-cinzel font-semibold">
-                {config.meta.title[lang]}
-              </p>
-            )}
-          </div>
-
-          {/* Royal Shield Seal (Ateeb & Nimra Wedding Seal) in Center of Envelope */}
+          {/* Centered Royal Wedding Shield Seal (Only Element on Envelope) */}
           <div
-            className={`relative z-30 my-1 transition-all duration-500 ease-out ${
+            className={`relative z-30 transition-all duration-500 ease-out ${
               stage === 'cracking'
-                ? 'scale-115 rotate-6'
+                ? 'scale-120 rotate-6'
                 : stage === 'opening'
                 ? 'scale-75 opacity-0'
                 : 'scale-100 hover:scale-105 active:scale-95'
             }`}
           >
-            <div className="relative w-28 h-28 sm:w-32 sm:h-32 drop-shadow-[0_12px_30px_rgba(0,0,0,0.85)]">
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 drop-shadow-[0_16px_40px_rgba(0,0,0,0.9)]">
               <Image
                 src="/assets/seal/wedding-seal-opt.webp"
                 alt="Royal Wedding Shield Seal"
                 fill
-                sizes="(max-width: 640px) 112px, 128px"
+                sizes="(max-width: 640px) 128px, 144px"
                 className="object-contain"
                 priority
               />

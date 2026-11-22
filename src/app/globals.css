@@ -17,12 +17,16 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* English Regal Serif Typography */
+/* English Regal Serif Typography Hierarchy */
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
 .font-cinzel {
   font-family: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
 }
@@ -31,29 +35,60 @@ body {
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
+.font-sans {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
 /* Urdu Typography Hierarchy */
 /* Grand Display Nastaliq for Names & Headings */
 .font-nastaliq-display {
   font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
-  line-height: 2.3 !important;
+  line-height: 2.2 !important;
   letter-spacing: 0.01em;
 }
 
 /* High-Legibility Body Nastaliq for Venues & Schedules */
 .font-nastaliq-body {
   font-family: 'Noto Nastaliq Urdu', 'Gulzar', serif;
-  line-height: 2.1 !important;
+  line-height: 2.0 !important;
 }
 
 .font-nastaliq {
   font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
-  line-height: 2.3 !important;
+  line-height: 2.2 !important;
 }
 
 /* Sacred Arabic / Classical Naskh */
 .font-arabic {
-  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-family: 'Amiri', serif;
   line-height: 2.0 !important;
+}
+
+/* Counter-rotating SVG animation classes */
+@keyframes spinClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCounterClockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow-cw {
+  animation: spinClockwise 60s linear infinite;
+}
+
+.animate-spin-slow-ccw {
+  animation: spinCounterClockwise 45s linear infinite;
 }
 
 /* Animated Background Slow Pan */
