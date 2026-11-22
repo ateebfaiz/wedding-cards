@@ -31,6 +31,7 @@ function HomeCardContent() {
                   src="/assets/mandalas/decorative-golden-mandala.webp"
                   alt=""
                   fill
+                  sizes="320px"
                   className="object-contain"
                 />
               </div>
@@ -45,6 +46,7 @@ function HomeCardContent() {
                   src="/assets/seal/wedding-seal-opt.webp"
                   alt="Wedding Shield Crest"
                   fill
+                  sizes="(max-width: 640px) 96px, 112px"
                   className="object-contain"
                   priority
                 />
@@ -56,6 +58,7 @@ function HomeCardContent() {
                   src="/assets/calligraphy/bismillah-gold-banner.webp"
                   alt="Bismillah Al-Rahman Al-Raheem"
                   fill
+                  sizes="(max-width: 640px) 240px, 288px"
                   className="object-contain drop-shadow-[0_1px_2px_rgba(181,150,90,0.3)]"
                   priority
                 />
@@ -67,6 +70,7 @@ function HomeCardContent() {
                   src="/assets/calligraphy/quranic-marriage-verse.webp"
                   alt="Surah Ar-Rum: 21 Marriage Verse"
                   fill
+                  sizes="(max-width: 640px) 340px, 380px"
                   className="object-contain p-1"
                   priority
                 />

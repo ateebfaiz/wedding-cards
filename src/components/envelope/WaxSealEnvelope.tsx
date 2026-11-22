@@ -64,6 +64,7 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
           src="/assets/mandalas/decorative-golden-mandala.webp"
           alt="Decorative Golden Mandala"
           fill
+          sizes="(max-width: 640px) 440px, 680px"
           className="object-contain"
           priority
         />
@@ -87,6 +88,7 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
               src="/assets/envelope/brown-envelope.webp"
               alt="Mail Envelope"
               fill
+              sizes="(max-width: 640px) 360px, 420px"
               className="object-cover object-center"
               priority
             />
@@ -102,6 +104,7 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
               src="/assets/calligraphy/bismillah-gold-banner.webp"
               alt="Bismillah"
               fill
+              sizes="(max-width: 640px) 176px, 208px"
               className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
               priority
             />
@@ -150,6 +153,7 @@ export function WaxSealEnvelope({ config, lang, guestName, onOpenComplete }: Wax
                 src="/assets/seal/wedding-seal-opt.webp"
                 alt="Royal Wedding Shield Seal"
                 fill
+                sizes="(max-width: 640px) 112px, 128px"
                 className="object-contain"
                 priority
               />

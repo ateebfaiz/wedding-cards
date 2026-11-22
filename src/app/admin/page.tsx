@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getWeddingConfig } from '@/config/default';
@@ -23,10 +23,16 @@ export default function AdminInvitePage() {
   const [langPref, setLangPref] = useState<'ur' | 'en'>('ur');
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [origin, setOrigin] = useState('https://ahmedarfa.com');
 
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://ahmedarfa.com';
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setOrigin(window.location.origin);
+    }
+  }, []);
+
   const nameQuery = guestName.trim() ? `&to=${encodeURIComponent(guestName.trim())}` : '';
-  const guestUrl = `${baseUrl}/?invite=${tier}${nameQuery}`;
+  const guestUrl = `${origin}/?invite=${tier}${nameQuery}`;
 
   const coupleNamesEn = `${config.couple.groom.shortName?.en || config.couple.groom.fullName.en} & ${config.couple.bride.shortName?.en || config.couple.bride.fullName.en}`;
   const coupleNamesUr = `${config.couple.groom.shortName?.ur || config.couple.groom.fullName.ur} اور ${config.couple.bride.shortName?.ur || config.couple.bride.fullName.ur}`;
@@ -103,6 +109,7 @@ export default function AdminInvitePage() {
                 src="/assets/seal/wedding-seal-opt.webp"
                 alt="Wedding Seal Logo"
                 fill
+                sizes="48px"
                 className="object-contain"
               />
             </div>
