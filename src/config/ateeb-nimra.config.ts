@@ -4,7 +4,7 @@ import { WeddingConfig } from '@/types/wedding';
  * Ateeb & Nimra — The Heirloom Digital Wedding Invitation Configuration
  * Configured with authentic family names, parentage, and ceremony details.
  */
-export const ahmedArfaWeddingConfig: WeddingConfig = {
+export const ateebNimraWeddingConfig: WeddingConfig = {
   meta: {
     id: 'ateeb-nimra-wedding',
     title: {
@@ -15,7 +15,7 @@ export const ahmedArfaWeddingConfig: WeddingConfig = {
       en: 'The digital wedding invitation festivities of Ateeb Faiz & Nimra Javed.',
       ur: 'عاطب فیض اور نمرہ جاوید کی شادی خانہ آبادی کا باوقار ڈیجیٹل دعوت نامہ۔',
     },
-    url: 'https://ahmedarfa.com',
+    url: 'https://weddingcards.app',
     defaultLanguage: 'en',
     theme: {
       palette: {

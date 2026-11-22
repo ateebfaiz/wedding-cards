@@ -20,7 +20,7 @@ export function GuestLinkGeneratorModal({ config, lang, isOpen, onClose }: Guest
 
   if (!isOpen) return null;
 
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://ahmedarfa.com';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://weddingcards.app';
   const nameQuery = guestName.trim() ? `&to=${encodeURIComponent(guestName.trim())}` : '';
   const generatedLink = `${baseUrl}/?invite=${tier}${nameQuery}`;
 

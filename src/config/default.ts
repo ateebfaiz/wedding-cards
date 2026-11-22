@@ -1,11 +1,10 @@
 import { WeddingConfig } from '@/types/wedding';
-import { ahmedArfaWeddingConfig } from './ahmed-arfa.config';
+import { ateebNimraWeddingConfig } from './ateeb-nimra.config';
 
 /**
- * Active Configuration on branch 'ahmad-arfa-invitation'
- * Configured specifically for Ahmed & Arfa's Wedding Invitation festivities.
+ * Active Configuration for Ateeb & Nimra Wedding Invitation festivities.
  */
-export const activeWeddingConfig: WeddingConfig = ahmedArfaWeddingConfig;
+export const activeWeddingConfig: WeddingConfig = ateebNimraWeddingConfig;
 
 export function getWeddingConfig(): WeddingConfig {
   return activeWeddingConfig;

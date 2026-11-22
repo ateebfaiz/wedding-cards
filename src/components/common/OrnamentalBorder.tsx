@@ -21,15 +21,15 @@ export function OrnamentalBorder({ children, className = '' }: { children: React
 
 export function MughalArchHeader() {
   return (
-    <div className="w-full flex items-center justify-center my-4 opacity-75">
-      <svg width="120" height="24" viewBox="0 0 120 24" fill="none" className="text-[#B5965A]">
+    <div className="w-full flex items-center justify-center my-4 opacity-85">
+      <svg width="140" height="26" viewBox="0 0 120 24" fill="none" className="text-[#DFBF73]">
         <path
           d="M0 12H40C50 12 55 4 60 2C65 4 70 12 80 12H120"
           stroke="currentColor"
-          strokeWidth="1"
+          strokeWidth="1.2"
           strokeLinecap="round"
         />
-        <circle cx="60" cy="2" r="2" fill="currentColor" />
+        <circle cx="60" cy="2" r="2.5" fill="currentColor" />
         <circle cx="50" cy="8" r="1.5" fill="currentColor" />
         <circle cx="70" cy="8" r="1.5" fill="currentColor" />
       </svg>

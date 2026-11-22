@@ -13,18 +13,18 @@ export function MeetingPointCard({ meetingPoint, lang }: MeetingPointCardProps) 
   const displayTime = lang === 'ur' && meetingPoint.assemblyTimeUrdu ? meetingPoint.assemblyTimeUrdu : meetingPoint.assemblyTime;
 
   return (
-    <div className="w-full my-4 p-5 rounded-lg border border-[#B5965A]/30 bg-[#EFE8DA]/50 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-      <div className="flex items-center gap-3.5 text-center md:text-left">
-        <div className="w-9 h-9 rounded-full bg-[#B5965A]/20 text-[#B5965A] flex items-center justify-center shrink-0">
+    <div className="w-full my-5 p-5 sm:p-6 rounded-2xl border-2 border-[#DFBF73]/60 bg-[#FAF7F2] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div className="flex items-center gap-3.5">
+        <div className="w-10 h-10 rounded-full bg-[#8B0000]/10 text-[#8B0000] border border-[#8B0000]/30 flex items-center justify-center shrink-0">
           <Compass className="w-5 h-5" />
         </div>
         <div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-[#8A8074] font-medium block">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[#8B0000] font-cinzel font-bold block">
             {meetingPoint.title[lang]}
           </span>
           <h4
-            className={`text-base md:text-lg text-[#342C26] font-medium ${
-              lang === 'ur' ? 'font-nastaliq leading-loose' : 'font-serif'
+            className={`text-base sm:text-lg font-bold text-[#35050C] ${
+              lang === 'ur' ? 'font-nastaliq-display text-xl' : 'font-playfair'
             }`}
           >
             {meetingPoint.location[lang]}
@@ -32,12 +32,12 @@ export function MeetingPointCard({ meetingPoint, lang }: MeetingPointCardProps) 
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 shrink-0">
         <span
           dir="ltr"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#545B43] bg-[#545B43]/15 px-3 py-1.5 rounded-full"
+          className="inline-flex items-center gap-1.5 text-xs font-cinzel font-bold text-[#FFDF73] bg-[#2E050B] px-3.5 py-1.5 rounded-full shadow-2xs"
         >
-          <Clock className="w-3.5 h-3.5" />
+          <Clock className="w-3.5 h-3.5 text-[#DFBF73]" />
           <span>{displayTime}</span>
         </span>
 
@@ -45,10 +45,10 @@ export function MeetingPointCard({ meetingPoint, lang }: MeetingPointCardProps) 
           href={meetingPoint.directionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#545B43] text-[#F8F5EE] text-xs font-medium hover:bg-[#434935] transition-colors shadow-xs"
+          className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl border-2 border-[#DFBF73] bg-[#FDFBF7] text-[#35050C] text-xs font-cinzel font-bold hover:bg-[#F5EFEB] transition-colors shadow-2xs"
         >
-          <Navigation className="w-3 h-3" />
-          <span>{lang === 'ur' ? 'مقام' : 'Location'}</span>
+          <Navigation className="w-3.5 h-3.5 text-[#B5965A]" />
+          <span>{lang === 'ur' ? 'مقام دیکھیں' : 'View Location'}</span>
         </a>
       </div>
     </div>

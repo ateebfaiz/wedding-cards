@@ -23,7 +23,7 @@ export default function AdminInvitePage() {
   const [langPref, setLangPref] = useState<'ur' | 'en'>('ur');
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
-  const [origin, setOrigin] = useState('https://ahmedarfa.com');
+  const [origin, setOrigin] = useState('https://weddingcards.app');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
