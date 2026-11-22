@@ -119,6 +119,7 @@ function HomeCardContent() {
                       src="/assets/mandalas/gdj-mandala-ornament.webp"
                       alt=""
                       fill
+                      priority
                       sizes="288px"
                       className="object-contain"
                     />

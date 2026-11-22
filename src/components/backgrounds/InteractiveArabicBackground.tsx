@@ -62,6 +62,7 @@ export function InteractiveArabicBackground({ showDiscAnimation = true }: Intera
               src="/assets/mandalas/gdj-arabesque-disc.webp"
               alt="Geometric Arabesque Disc"
               fill
+              priority
               sizes="(max-width: 640px) 540px, 780px"
               className="object-contain"
             />

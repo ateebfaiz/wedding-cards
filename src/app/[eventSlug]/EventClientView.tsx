@@ -93,6 +93,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                   src="/assets/mandalas/gdj-mandala-ornament.webp"
                   alt=""
                   fill
+                  priority
                   sizes="384px"
                   className="object-contain"
                 />
