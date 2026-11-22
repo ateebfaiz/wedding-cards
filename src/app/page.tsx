@@ -199,13 +199,19 @@ function HomeCardContent() {
                     </div>
 
                     <div className="pt-3.5 mt-3.5 border-t border-[#B5965A]/25 flex items-center justify-end">
-                      <Link
-                        href={`/${event.slug}`}
-                        className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-semibold hover:bg-[#545B43] transition-colors shadow-2xs"
-                      >
-                        <span>{lang === 'ur' ? 'دعوت نامہ دیکھیں' : 'View Invitation'}</span>
-                        <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                      </Link>
+                      {(() => {
+                        const isSingle = guest.tier === 'walima' || guest.tier === 'nikkah' || guest.tier === 'baraat';
+                        const targetParams = `?invite=${guest.tier}${guest.guestName ? `&to=${encodeURIComponent(guest.guestName)}` : ''}${isSingle ? '&nav=0' : ''}`;
+                        return (
+                          <Link
+                            href={`/${event.slug}${targetParams}`}
+                            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-semibold hover:bg-[#545B43] transition-colors shadow-2xs"
+                          >
+                            <span>{lang === 'ur' ? 'دعوت نامہ دیکھیں' : 'View Invitation'}</span>
+                            <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                          </Link>
+                        );
+                      })()}
                     </div>
                   </div>
                 );

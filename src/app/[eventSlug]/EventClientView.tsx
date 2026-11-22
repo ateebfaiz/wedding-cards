@@ -27,7 +27,14 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
   const [lang, setLang] = useState<SupportedLanguage>(config.meta.defaultLanguage || 'en');
 
   const tier = (searchParams.get('invite') as any) || 'all';
-  const isAllEvents = tier === 'all';
+  const navParam = searchParams.get('nav');
+
+  // Single-event tiers are strictly locked: no navigation bar and no browsing other events
+  const isSingleEventTier = tier === 'walima' || tier === 'nikkah' || tier === 'baraat';
+
+  // Navigation is allowed ONLY for multi-event guests and when admin did not disable it (&nav=0)
+  const allowNavigation = !isSingleEventTier && navParam !== '0' && navParam !== 'false';
+
   const { allowedOrder } = filterEventsForTier(config, tier);
   const isAllowed = allowedOrder.includes(event.id) || allowedOrder.includes(event.slug);
 
@@ -46,13 +53,27 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
       {/* Dynamic Heirloom Ambient Background with Dual Rotating Mandalas & Frosted Light Flares */}
       <HeirloomAmbientBackground />
 
-      {/* 1. Top Navigation Header (Tabs only visible if invited to all events) */}
-      <EventNavigationHeader
-        currentSlug={event.slug}
-        lang={lang}
-        onToggleLang={() => setLang(lang === 'en' ? 'ur' : 'en')}
-        showEventTabs={isAllEvents}
-      />
+      {/* 1. Navigation Header: Rendered ONLY when navigation is permitted */}
+      {allowNavigation ? (
+        <EventNavigationHeader
+          currentSlug={event.slug}
+          lang={lang}
+          onToggleLang={() => setLang(lang === 'en' ? 'ur' : 'en')}
+          showEventTabs={true}
+        />
+      ) : (
+        /* Floating Unobtrusive Corner Language Switcher (Zero Navigation Bar) */
+        <div className="fixed top-4 right-4 z-40 select-none">
+          <button
+            type="button"
+            onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
+            aria-label="Toggle Language"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6]/90 text-[#342C26] text-xs font-sans font-medium tracking-wide shadow-xs backdrop-blur-md hover:border-[#B5965A] hover:bg-[#EFE8DA] transition-all cursor-pointer"
+          >
+            <span>{lang === 'en' ? 'اردو' : 'English'}</span>
+          </button>
+        </div>
+      )}
 
       {/* 2. Main Full-Fledged Content Area (Unwrapped & Breathing) */}
       <main className="w-full max-w-3xl px-4 sm:px-8 py-8 sm:py-14 flex flex-col items-center relative z-10">
@@ -77,17 +98,26 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
               }`}
             >
               {lang === 'ur'
-                ? 'یہ پرمسرت تقریب مخصوص احباب و اہلِ خانہ کے لیے ہے۔ آپ کو اپنے مخصوص دعوت نامے میں خوش آمدید کہتے ہیں۔'
-                : 'This intimate ceremony is reserved for invited guests. You are warmly invited to your designated celebration.'}
+                ? 'یہ پرمسرت تقریب مخصوص احباب کے لیے ہے۔ آپ کو اپنے مخصوص دعوت نامے میں خوش آمدید کہتے ہیں۔'
+                : 'This intimate ceremony is reserved for invited guests. Please view your designated celebration.'}
             </p>
 
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
-            >
-              <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
-              <span>{lang === 'ur' ? 'مرکزی دعوت نامہ دیکھیں' : 'View Main Wedding Invitation'}</span>
-            </Link>
+            {isSingleEventTier ? (
+              <Link
+                href={`/${tier}?invite=${tier}${searchParams.get('to') ? `&to=${encodeURIComponent(searchParams.get('to')!)}` : ''}&nav=0`}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
+              >
+                <span>{lang === 'ur' ? 'اپنے مخصوص دعوت نامے پر جائیں' : 'Go to Your Designated Ceremony'}</span>
+              </Link>
+            ) : (
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
+                <span>{lang === 'ur' ? 'مرکزی دعوت نامہ دیکھیں' : 'View Main Wedding Invitation'}</span>
+              </Link>
+            )}
           </div>
         ) : (
           /* Full Independent Stationery Canvas */
@@ -132,8 +162,8 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
               </div>
             )}
 
-            {/* 3. Bottom Event Switcher: ONLY shown when invited to all events */}
-            {isAllEvents && (
+            {/* 3. Bottom Event Switcher: ONLY shown when allowNavigation is true */}
+            {allowNavigation && (
               <div className="w-full mt-10 pt-8 border-t border-[#B5965A]/25 text-center">
                 <span className="text-[11px] uppercase tracking-[0.25em] text-[#81776B] font-sans font-bold block mb-4">
                   {lang === 'ur' ? 'دیگر تقریباتِ شادی' : 'Explore Other Ceremonies'}
@@ -165,19 +195,18 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                     </Link>
                   ))}
                 </div>
+
+                <div className="pt-4 text-center">
+                  <Link
+                    href="/"
+                    className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#342C26] hover:text-[#702F3D] transition-colors"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
+                    <span>{lang === 'ur' ? 'مرکزی کارڈ پر واپس جائیں' : 'Back to Main Wedding Card'}</span>
+                  </Link>
+                </div>
               </div>
             )}
-
-            {/* Link back to Main Invitation Card */}
-            <div className="pt-6 text-center">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#342C26] hover:text-[#702F3D] transition-colors"
-              >
-                <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
-                <span>{lang === 'ur' ? 'مرکزی کارڈ پر واپس جائیں' : 'Back to Main Wedding Card'}</span>
-              </Link>
-            </div>
           </div>
         )}
       </main>

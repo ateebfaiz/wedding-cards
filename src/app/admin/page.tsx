@@ -12,6 +12,7 @@ import {
   Share2,
   QrCode,
   Eye,
+  Lock,
 } from 'lucide-react';
 import { QRCodeModal } from '@/components/modals/QRCodeModal';
 
@@ -20,6 +21,7 @@ export default function AdminInvitePage() {
   const [guestName, setGuestName] = useState('');
   const [tier, setTier] = useState<GuestAccessTier>('walima');
   const [langPref, setLangPref] = useState<'ur' | 'en'>('ur');
+  const [allowNav, setAllowNav] = useState(true);
   const [copied, setCopied] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [origin, setOrigin] = useState('https://weddingcards.app');
@@ -30,8 +32,11 @@ export default function AdminInvitePage() {
     }
   }, []);
 
+  const isSingleEvent = tier === 'walima' || tier === 'nikkah' || tier === 'baraat';
+  const targetRoute = isSingleEvent ? `/${tier}` : '';
+  const navParam = isSingleEvent ? '&nav=0' : `&nav=${allowNav ? '1' : '0'}`;
   const nameQuery = guestName.trim() ? `&to=${encodeURIComponent(guestName.trim())}` : '';
-  const guestUrl = `${origin}/?invite=${tier}${nameQuery}`;
+  const guestUrl = `${origin}${targetRoute}?invite=${tier}${nameQuery}${navParam}`;
 
   const coupleNamesEn = `${config.couple.groom.fullName.en} & ${config.couple.bride.fullName.en}`;
   const coupleNamesUr = `${config.couple.groom.fullName.ur} اور ${config.couple.bride.fullName.ur}`;
@@ -166,10 +171,58 @@ export default function AdminInvitePage() {
             </div>
           </div>
 
+          {/* Navigation Bar & Event Browsing Control */}
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-[#5A4D41] font-sans font-semibold mb-1.5 whitespace-nowrap">
+              3. Ceremony Navigation & Browsing
+            </label>
+            {isSingleEvent ? (
+              <div className="p-3 rounded-xl bg-white/80 border border-[#B5965A]/35 flex items-center gap-2.5 shadow-2xs">
+                <div className="w-7 h-7 rounded-full bg-[#702F3D]/10 text-[#702F3D] flex items-center justify-center shrink-0 border border-[#702F3D]/20">
+                  <Lock className="w-3.5 h-3.5" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-[#342C26] block">
+                    Navigation Disabled (Single Event Locked)
+                  </span>
+                  <span className="text-[11px] text-[#81776B] block leading-tight">
+                    Guest cannot browse or view other ceremonies. Navigation header and related events are completely removed.
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <div className="inline-flex rounded-xl border border-[#B5965A]/30 p-1 bg-[#EFE8DA]/60">
+                  <button
+                    type="button"
+                    onClick={() => setAllowNav(true)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-sans transition-colors cursor-pointer whitespace-nowrap ${
+                      allowNav ? 'bg-[#545B43] text-white font-medium shadow-xs' : 'text-[#5A4D41]'
+                    }`}
+                  >
+                    Show Navigation Bar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAllowNav(false)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-sans transition-colors cursor-pointer whitespace-nowrap ${
+                      !allowNav ? 'bg-[#702F3D] text-white font-medium shadow-xs' : 'text-[#5A4D41]'
+                    }`}
+                  >
+                    Hide Navigation (Locked)
+                  </button>
+                </div>
+                <span className="text-[11px] text-[#81776B]">
+                  {allowNav ? 'Guest can switch between ceremonies' : 'Guest sees only this card'}
+                </span>
+              </div>
+            )}
+          </div>
+
           {/* WhatsApp Language Preference */}
           <div>
             <label className="block text-xs uppercase tracking-wider text-[#5A4D41] font-sans font-semibold mb-1.5 whitespace-nowrap">
-              3. WhatsApp Message Language
+              4. WhatsApp Message Language
             </label>
             <div className="inline-flex rounded-xl border border-[#B5965A]/30 p-1 bg-[#EFE8DA]/60">
               <button
