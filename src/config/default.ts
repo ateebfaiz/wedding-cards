@@ -1,12 +1,11 @@
 import { WeddingConfig } from '@/types/wedding';
-import { neutralWeddingConfig } from './neutral-wedding.config';
+import { ahmedArfaWeddingConfig } from './ahmed-arfa.config';
 
 /**
- * Default Active Configuration
- * On main branch: points to the neutral template configuration.
- * On event-specific branches (e.g. ahmad-arfa-invitation): points to the customized instance.
+ * Active Configuration on branch 'ahmad-arfa-invitation'
+ * Configured specifically for Ahmed & Arfa's Wedding Invitation festivities.
  */
-export const activeWeddingConfig: WeddingConfig = neutralWeddingConfig;
+export const activeWeddingConfig: WeddingConfig = ahmedArfaWeddingConfig;
 
 export function getWeddingConfig(): WeddingConfig {
   return activeWeddingConfig;
