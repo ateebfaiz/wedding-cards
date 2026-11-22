@@ -88,16 +88,16 @@ body {
   word-spacing: normal !important;
 }
 
-/* High-Legibility Body Nastaliq for Venues & Schedules */
+/* High-Legibility Body Nastaliq for Venues & Schedules - Prioritizing AlQalam Taj & AA Sameer Zikran */
 .font-nastaliq-body {
-  font-family: 'Noto Nastaliq Urdu', 'AlQalam Taj Nastaleeq', 'Gulzar', serif;
-  line-height: 1.95 !important;
+  font-family: 'AlQalam Taj Nastaleeq', 'AA Sameer Zikran', 'Noto Nastaliq Urdu', 'Gulzar', serif;
+  line-height: 2.1 !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
 }
 
 .font-nastaliq {
-  font-family: 'AlQalam Taj Nastaleeq', 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  font-family: 'AlQalam Taj Nastaleeq', 'AA Sameer Zikran', 'Gulzar', 'Noto Nastaliq Urdu', serif;
   line-height: 2.1 !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;

@@ -29,21 +29,20 @@ export function VenueCard({ venue, lang }: VenueCardProps) {
         <MapPin className="w-6 h-6" />
       </div>
 
-      {/* Venue Details Heading (Strictly One Line, Big & Bold) */}
+      {/* Venue Details Heading (Can wrap naturally if needed, Big & Bold) */}
       <h2
-        className={`text-xl sm:text-2xl md:text-3xl font-black text-[#702F3D] uppercase tracking-wider whitespace-nowrap mb-1.5 ${
+        className={`text-xl sm:text-2xl md:text-3xl font-black text-[#702F3D] uppercase tracking-wider mb-1.5 ${
           lang === 'ur' ? 'font-sameer-zikran' : 'font-cinzel'
         }`}
       >
         {lang === 'ur' ? 'مقامِ تقریب و رہنمائی' : 'Venue Details & Location'}
       </h2>
 
-      {/* Main Venue Name (Big & Bold, Distinct Font, One Line) */}
+      {/* Main Venue Name (Big & Bold, Distinct Font, Natural Wrap) */}
       <h3
-        className={`leading-snug text-[#2E050B] text-2xl sm:text-3xl md:text-4xl font-black my-1 w-full truncate ${
+        className={`leading-snug text-[#2E050B] text-2xl sm:text-3xl md:text-4xl font-black my-1 w-full break-words ${
           lang === 'ur' ? 'font-sameer-zikran' : 'font-playfair'
         }`}
-        title={venue.name[lang]}
       >
         {venue.name[lang]}
       </h3>

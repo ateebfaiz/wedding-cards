@@ -218,12 +218,12 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
       ],
       travelGuidance: {
         originCity: {
-          en: 'Wazirabad / Gujranwala',
-          ur: 'وزیرآباد / گوجرانوالہ',
+          en: 'Wazirabad, Manzoorabad, Sialkot & Surrounding Areas',
+          ur: 'وزیرآباد، منظور آباد، سیالکوٹ اور گردونواح',
         },
         estimatedDuration: {
-          en: 'Direct access opposite GT Road Wazirabad to Veroke Cheema',
-          ur: 'بالمقابل جی ٹی روڈ وزیرآباد تا ویروکے چیمہ',
+          en: 'Direct access via GT Road & Sialkot-Wazirabad Road to Veroke Cheema',
+          ur: 'بالمقابل جی ٹی روڈ اور سیالکوٹ روڈ تا ویروکے چیمہ',
         },
         routeTitle: {
           en: 'Veroke Cheema (Near New Islamia Public Model School)',
@@ -235,8 +235,16 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
         },
         advisories: [
           {
-            en: 'Located right at New Islamia Public Model School Building, Opposite GT Road Wazirabad, Veroke Cheema. Ample guest parking is available.',
-            ur: 'نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ، بالمقابل جی ٹی روڈ وزیرآباد، ویروکے چیمہ۔ احاطے میں مہمانوں کے لیے پارکنگ کی وسیع جگہ موجود ہے۔',
+            en: 'From Manzoorabad / Wazirabad: Take GT Road northbound, direct right turn into Veroke Cheema opposite New Islamia Public Model School Building.',
+            ur: 'منظور آباد اور وزیرآباد سے: جی ٹی روڈ سے ویروکے چیمہ کی طرف سیدھا راستہ، نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ کے عین سامنے۔',
+          },
+          {
+            en: 'From Sialkot & Sambrial: Travel via Sialkot-Wazirabad Road connecting to GT Road junction towards Veroke Cheema.',
+            ur: 'سیالکوٹ اور سمبڑیال سے: براستہ سیالکوٹ-وزیرآباد روڈ تا جی ٹی روڈ جنکشن ویروکے چیمہ۔',
+          },
+          {
+            en: 'Ample guest parking is arranged within the compound premises.',
+            ur: 'احاطے اور اسکول گراؤنڈ میں تمام معزز مہمانوں کے لیے کشادہ کار پارکنگ کی بہترین سہولت موجود ہے۔',
           },
         ],
       },
