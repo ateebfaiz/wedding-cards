@@ -7,6 +7,7 @@ import { getWeddingConfig } from '@/config/default';
 import { InvitationShell } from '@/components/layout/InvitationShell';
 import { filterEventsForTier } from '@/lib/audience';
 import { weddingAudio } from '@/lib/audio';
+import { calculateCountdown } from '@/lib/utils';
 import {
   Calendar,
   ArrowRight,
@@ -201,52 +202,79 @@ function HomeCardContent() {
                     key={event.id}
                     className={`p-6 rounded-2xl border bg-[#FCFAF6]/90 backdrop-blur-xs transition-all shadow-[0_6px_20px_rgba(52,44,38,0.05)] ${accentBorder}`}
                   >
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] uppercase tracking-[0.2em] text-[#81776B] font-sans font-bold">
-                        {event.ceremonyType[lang]}
-                      </span>
-                      <span className={`text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-0.5 rounded-full ${badgeBg}`}>
-                        {event.slug.toUpperCase()}
-                      </span>
-                    </div>
+                    {(() => {
+                      const countdown = calculateCountdown(event.dateISO);
+                      return (
+                        <>
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-[11px] uppercase tracking-[0.2em] text-[#81776B] font-sans font-bold">
+                              {event.ceremonyType[lang]}
+                            </span>
+                            <span className={`text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-0.5 rounded-full ${badgeBg}`}>
+                              {event.slug.toUpperCase()}
+                            </span>
+                          </div>
 
-                    <h3
-                      className={`text-xl sm:text-2xl font-bold text-[#342C26] mb-1.5 ${
-                        lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
-                      }`}
-                    >
-                      {event.title[lang]}
-                    </h3>
-
-                    <div className="flex items-center gap-2 text-xs sm:text-sm text-[#545B43] font-medium my-2">
-                      <Calendar className="w-4 h-4 text-[#B5965A] shrink-0" />
-                      <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
-                        {event.formattedDate[lang]}
-                      </span>
-                    </div>
-
-                    <div className="flex items-start gap-2 text-xs sm:text-sm text-[#5A4D41] my-2">
-                      <MapPin className="w-4 h-4 text-[#B5965A] shrink-0 mt-0.5" />
-                      <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
-                        {event.venue.name[lang]}, {event.venue.city[lang]}
-                      </span>
-                    </div>
-
-                    <div className="pt-3.5 mt-3.5 border-t border-[#B5965A]/25 flex items-center justify-end">
-                      {(() => {
-                        const isSingle = guest.tier === 'walima' || guest.tier === 'nikkah' || guest.tier === 'baraat';
-                        const targetParams = `?invite=${guest.tier}${guest.guestName ? `&to=${encodeURIComponent(guest.guestName)}` : ''}${isSingle ? '&nav=0' : ''}`;
-                        return (
-                          <Link
-                            href={`/${event.slug}${targetParams}`}
-                            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-semibold hover:bg-[#545B43] transition-colors shadow-2xs"
+                          <h3
+                            className={`text-xl sm:text-2xl font-bold text-[#342C26] mb-1.5 ${
+                              lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                            }`}
                           >
-                            <span>{lang === 'ur' ? 'دعوت نامہ دیکھیں' : 'View Invitation'}</span>
-                            <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                          </Link>
-                        );
-                      })()}
-                    </div>
+                            {event.title[lang]}
+                          </h3>
+
+                          {/* Live Status Pill: Happening Now / Happily Ever After */}
+                          {countdown.status === 'happening_now' && (
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-600/30 text-emerald-800 text-[10px] font-sans font-bold uppercase tracking-wider my-1.5 shadow-2xs">
+                              <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+                              </span>
+                              <span>{lang === 'ur' ? 'آج کی مبارک تقریب • جاری ہے' : 'Happening Now • Today'}</span>
+                            </div>
+                          )}
+                          {countdown.status === 'happened' && (
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DFBF73]/20 border border-[#DFBF73]/60 text-[#8B0000] text-[10px] font-sans font-bold uppercase tracking-wider my-1.5 shadow-2xs">
+                              <span>✨</span>
+                              <span>{lang === 'ur' ? 'بحسن و خوبی پایہ تکمیل • سدا شاد و آباد' : 'Happily Ever After • Concluded'}</span>
+                            </div>
+                          )}
+
+                          <div className="flex items-center gap-2 text-xs sm:text-sm text-[#545B43] font-medium my-2">
+                            <Calendar className="w-4 h-4 text-[#B5965A] shrink-0" />
+                            <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
+                              {event.formattedDate[lang]}
+                            </span>
+                          </div>
+
+                          <div className="flex items-start gap-2 text-xs sm:text-sm text-[#5A4D41] my-2">
+                            <MapPin className="w-4 h-4 text-[#B5965A] shrink-0 mt-0.5" />
+                            <span className={lang === 'ur' ? 'font-nastaliq-body' : ''}>
+                              {event.venue.name[lang]}, {event.venue.city[lang]}
+                            </span>
+                          </div>
+
+                          <div className="pt-3.5 mt-3.5 border-t border-[#B5965A]/25 flex items-center justify-end">
+                            {(() => {
+                              const isSingle = guest.tier === 'walima' || guest.tier === 'nikkah' || guest.tier === 'baraat';
+                              const targetParams = `?invite=${guest.tier}${guest.guestName ? `&to=${encodeURIComponent(guest.guestName)}` : ''}${isSingle ? '&nav=0' : ''}`;
+                              const buttonText = countdown.status === 'happened'
+                                ? (lang === 'ur' ? 'دعوت نامہ و یادگار دیکھیں' : 'View Memories & Invitation')
+                                : (lang === 'ur' ? 'دعوت نامہ دیکھیں' : 'View Invitation');
+                              return (
+                                <Link
+                                  href={`/${event.slug}${targetParams}`}
+                                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-semibold hover:bg-[#545B43] transition-colors shadow-2xs"
+                                >
+                                  <span>{buttonText}</span>
+                                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                                </Link>
+                              );
+                            })()}
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                 );
               })}

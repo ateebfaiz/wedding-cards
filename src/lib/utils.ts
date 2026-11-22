@@ -19,30 +19,37 @@ export function t(loc: LocalizedString, lang: SupportedLanguage): string {
   return loc[lang] || loc['en'] || '';
 }
 
+export type EventTemporalStatus = 'upcoming' | 'happening_now' | 'happened';
+
 export interface CountdownState {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
+  status: EventTemporalStatus;
   isPast: boolean;
   isToday: boolean;
 }
 
 export function calculateCountdown(targetIsoDate: string): CountdownState {
-  const target = new Date(targetIsoDate).getTime();
+  const targetDate = new Date(targetIsoDate);
+  const target = targetDate.getTime();
   const now = new Date().getTime();
   const diff = target - now;
 
   if (diff <= 0) {
-    // Check if it happened within the last 12 hours (today's celebration)
-    const isToday = Math.abs(diff) < 14 * 60 * 60 * 1000;
+    const hoursElapsed = Math.abs(diff) / (1000 * 60 * 60);
+    // Celebration window: within 18 hours of event start time is considered "happening_now" / today
+    const isHappeningNow = hoursElapsed <= 18;
+
     return {
       days: 0,
       hours: 0,
       minutes: 0,
       seconds: 0,
+      status: isHappeningNow ? 'happening_now' : 'happened',
       isPast: true,
-      isToday,
+      isToday: isHappeningNow,
     };
   }
 
@@ -56,6 +63,7 @@ export function calculateCountdown(targetIsoDate: string): CountdownState {
     hours,
     minutes,
     seconds,
+    status: 'upcoming',
     isPast: false,
     isToday: days === 0,
   };
