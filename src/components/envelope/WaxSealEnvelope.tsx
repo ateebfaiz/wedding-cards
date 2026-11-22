@@ -79,8 +79,8 @@ export function WaxSealEnvelope({
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_20%,rgba(5,11,20,0.92)_100%] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-radial-[circle,rgba(223,191,115,0.18)_0%,transparent_70%] pointer-events-none blur-2xl animate-pulse" />
 
-      {/* The Postcard / Envelope Composition (No boxed container, natural shadows) */}
-      <div className="relative w-full max-w-[360px] sm:max-w-[460px] md:max-w-[500px] flex flex-col items-center justify-center">
+      {/* The Postcard / Envelope Composition (True Landscape format with natural shadow depth) */}
+      <div className="relative w-full max-w-[480px] sm:max-w-[580px] md:max-w-[650px] flex flex-col items-center justify-center">
         {/* Personalized Invitee Callout Badge on Envelope */}
         {guestName && (
           <div

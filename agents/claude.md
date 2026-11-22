@@ -45,11 +45,12 @@ The visual identity combines traditional stationery craftsmanship with contempor
 ```
 
 ### Typography Hierarchy
-- **English Display & Headings:** `Playfair Display` / `Cormorant Garamond` (Classic serif font with noble character).
-- **Urdu Display & Titles:** `Gulzar` (Traditional Nastaliq with grand calligraphy swashes).
-- **Urdu Body & Notes:** `Noto Nastaliq Urdu` (High-readability Urdu calligraphy).
+- **English Display & Headings:** `Playfair Display` / `Cinzel` / `Cormorant Garamond` (Classic serif font with noble character).
+- **Urdu Display & Titles:** `AA Sameer Zikran` (`.font-sameer-zikran` / `.font-zikran`) — Grand stylized Urdu display calligraphy.
+- **Urdu Subheadings & Announcements:** `AlQalam Taj Nastaleeq` (`.font-alqalam-taj` / `.font-taj`) — Noble traditional Nastaliq script.
 - **English Body & UI Accents:** `Plus Jakarta Sans` / `DM Sans`.
 - **Urdu Ligature Integrity Rule:** **NEVER** apply positive `letter-spacing` to Urdu Nastaliq text. Positive letter spacing breaks Arabic/Nastaliq cursive word ligatures. Always enforce `letter-spacing: normal !important; word-spacing: normal !important;`.
+- **Reading Direction Rule:** Urdu text must always flow naturally from right-to-left (`dir="rtl"` with logical `text-start`).
 
 ---
 
@@ -75,7 +76,7 @@ All agents must strictly uphold these authentic family and event details:
 
 | Ceremony | Route | Date | Time | Venue & Location | Ceremonial Theme |
 |---|---|---|---|---|---|
-| **Nikkah Ceremony** | `/nikkah` | Tuesday, 1 December 2026 | 11:00 PM onwards | Javed Iqbal Sultani Sahib's House, New Islamia Public Model School Building, Opposite GT Road Wazirabad, Veroke Cheema | Olive (`#545B43`) — Sacred Covenant |
+| **Nikkah Ceremony** | `/nikkah` | Tuesday, 1 December 2026 | Daylight (11:00 AM onwards) | Javed Iqbal Sultani Sahib's House, New Islamia Public Model School Building, Opposite GT Road Wazirabad, Veroke Cheema | Olive (`#545B43`) — Sacred Daylight Covenant |
 | **Walima Reception** | `/walima` | Friday, 25 December 2026 | Night Function | Walima Reception, Wazirabad / Gujranwala (Times & dishes updated soon) | Champagne (`#B5965A`) — Celebratory Evening Banquet |
 | **The Wedding Baraat** | `/baraat` | Saturday, 26 December 2026 | Daylight Function | Ashraf Palace, GT Road, Wazirabad / Gujranwala (Times & dishes updated soon) | Burgundy (`#702F3D`) — Daylight Wedding Ceremony |
 

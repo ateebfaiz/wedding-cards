@@ -26,11 +26,11 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
   };
 
   return (
-    <div className="w-full my-6 text-start">
+    <div className="w-full my-4 py-2 text-start">
       {/* Clean Section Header */}
-      <div className="flex flex-col items-start mb-6">
+      <div className="flex flex-col items-start mb-4">
         <span
-          className={`text-xs tracking-[0.15em] text-[#702F3D] font-black flex items-center gap-1.5 mb-1.5 ${
+          className={`text-xs tracking-[0.15em] text-[#702F3D] font-black flex items-center gap-1.5 mb-1 ${
             lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
           }`}
         >
@@ -44,7 +44,7 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
         >
           {lang === 'ur' ? 'مبارک تقریب کا تفصیلی شیڈول' : 'Timeline of Celebrations'}
         </h2>
-        <div className="w-16 h-1 bg-[#B5965A] mt-2 rounded-full" />
+        <div className="w-16 h-1 bg-[#B5965A] mt-1.5 rounded-full" />
       </div>
 
       {/* Left-Aligned Natural Timeline Track (No heavy box wrappers around texts) */}
@@ -52,7 +52,7 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
         {/* Continuous Vertical Guide Line */}
         <div className="absolute left-[18px] sm:left-[20px] top-3 bottom-3 w-[2px] bg-gradient-to-b from-[#B5965A] via-[#DFBF73]/60 to-[#B5965A]/20" />
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {schedule.map((item, index) => {
             const displayTime = lang === 'ur' && item.timeUrdu ? item.timeUrdu : item.time;
 
@@ -65,7 +65,7 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
 
                 {/* Natural Typography Flow (No Box Wrapper) */}
                 <div className="ml-12 sm:ml-15 w-full">
-                  <div className="flex flex-wrap items-baseline gap-2 sm:gap-3 mb-1">
+                  <div className="flex flex-wrap items-baseline gap-2 sm:gap-3 mb-0.5">
                     <h3
                       className={`text-lg sm:text-xl font-bold text-[#2E050B] ${
                         lang === 'ur' ? 'font-sameer-zikran text-2xl' : 'font-playfair'
@@ -82,8 +82,8 @@ export function ScheduleTimeline({ schedule, lang }: ScheduleTimelineProps) {
 
                   {item.description && (
                     <p
-                      className={`text-xs sm:text-sm text-[#5A4D41] leading-relaxed mt-0.5 ${
-                        lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-sans'
+                      className={`text-sm sm:text-base text-[#4A4036] font-medium leading-relaxed mt-0.5 ${
+                        lang === 'ur' ? 'font-alqalam-taj text-base sm:text-lg leading-loose' : 'font-serif italic'
                       }`}
                     >
                       {item.description[lang]}

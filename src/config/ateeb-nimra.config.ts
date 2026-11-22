@@ -143,18 +143,18 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
         ur: 'رسمِ نکاح',
       },
       ceremonyType: {
-        en: 'Sacred Covenant Ceremony',
-        ur: 'مبارک تقریبِ عقدِ نکاح',
+        en: 'Sacred Daylight Covenant Ceremony',
+        ur: 'پُروقار دن کی تقریبِ عقدِ نکاح',
       },
-      dateISO: '2026-12-01T23:00:00+05:00',
+      dateISO: '2026-12-01T11:00:00+05:00',
       formattedDate: {
-        en: 'Tuesday, 1 December 2026',
-        ur: 'منگل، 1 دسمبر 2026',
+        en: 'Tuesday, 1 December 2026 (Daylight)',
+        ur: 'منگل، 1 دسمبر 2026 (دن کا وقت)',
       },
       timezone: 'Asia/Karachi',
       invitationNote: {
-        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira and Javed Iqbal Sultani & Zahida Parveen request the honor of your presence and heartfelt prayers at the sacred Nikkah Ceremony of Ateeb Faiz and Nimra Javed.',
-        ur: 'محترم فیض رسول چیمہ و یاسمین طاہرہ اور جاوید اقبال سلطانی و زاہدہ پروین اپنے بچوں اطیب فیض اور نمرہ جاوید کے مبارک عقدِ نکاح کے پرمسرت موقع پر آپ کی باوقار شرکت اور دعاؤں کے متمنی ہیں۔',
+        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira and Javed Iqbal Sultani & Zahida Parveen request the honor of your presence and heartfelt prayers at the sacred Daylight Nikkah Ceremony of Ateeb Faiz and Nimra Javed.',
+        ur: 'محترم فیض رسول چیمہ و یاسمین طاہرہ اور جاوید اقبال سلطانی و زاہدہ پروین اپنے بچوں اطیب فیض اور نمرہ جاوید کے مبارک عقدِ نکاح کی تقریبِ روز (دن کے وقت) میں آپ کی باوقار شرکت اور دعاؤں کے متمنی ہیں۔',
       },
       venue: {
         name: {
@@ -162,8 +162,8 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
           ur: 'رہائش گاہ جاوید اقبال سلطانی صاحب',
         },
         hallOrSection: {
-          en: 'Right at New Islamia Public Model School Building',
-          ur: 'نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ',
+          en: 'Daylight Ceremony right at New Islamia Public Model School Building',
+          ur: 'دن کا فنکشن، نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ',
         },
         address: {
           en: 'Right at New Islamia Public Model School Building, Opposite GT Road Wazirabad, Veroke Cheema',
@@ -177,40 +177,40 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
       },
       schedule: [
         {
-          time: '11:00 PM onwards',
-          timeUrdu: 'رات 11:00 بجے سے آگے',
+          time: 'Daylight (11:00 AM onwards)',
+          timeUrdu: 'دن 11:00 بجے سے آگے',
           title: {
             en: 'Reception of Guests',
             ur: 'معزز مہمانوں کا استقبال',
           },
           description: {
-            en: 'Warm welcome of family and esteemed guests',
-            ur: 'خوش آمدید اور استقبالیہ',
+            en: 'Warm welcome of family and esteemed guests in daylight',
+            ur: 'خوش آمدید اور پُروقار استقبالیہ',
           },
           iconName: 'reception',
         },
         {
-          time: '11:30 PM',
-          timeUrdu: 'رات 11:30 بجے',
+          time: 'Daylight (11:30 AM)',
+          timeUrdu: 'دن 11:30 بجے',
           title: {
             en: 'Solemnization of Sacred Nikkah',
             ur: 'رسمِ نکاح و ایجاب و قبول',
           },
           description: {
-            en: 'Covenant of marriage and prayers for the couple',
+            en: 'Sacred covenant of marriage and prayers for the couple',
             ur: 'عقدِ نکاح اور نو بیاہتا جوڑے کے لیے دعائے خیر',
           },
           iconName: 'ceremony',
         },
         {
-          time: '12:00 AM',
-          timeUrdu: 'رات 12:00 بجے',
+          time: 'Daylight (12:00 PM)',
+          timeUrdu: 'دوپہر 12:00 بجے',
           title: {
             en: 'Celebratory Refreshments & Sweets',
             ur: 'ضیافت و مٹھائی کی تقسیم',
           },
           description: {
-            en: 'Traditional celebratory refreshments with family',
+            en: 'Traditional celebratory banquet with family',
             ur: 'پُرتکلف ضیافت اور مبارکباد',
           },
           iconName: 'dinner',
@@ -230,8 +230,8 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
           ur: 'ویروکے چیمہ (نزد نیو اسلامیہ پبلک ماڈل اسکول)',
         },
         departureWindowNote: {
-          en: 'Guests are kindly requested to arrive by 11:00 PM.',
-          ur: 'معزز مہمانوں سے گزارش ہے کہ رات 11:00 بجے تک تشریف لائیں۔',
+          en: 'Daylight ceremony. Guests are kindly requested to arrive on time and follow event details on the map.',
+          ur: 'دن کا فنکشن۔ معزز مہمانوں سے گزارش ہے کہ بروقت تشریف لائیں اور کارڈ میں دی گئی تفصیلات و رہنمائی پر عمل فرمائیں۔',
         },
         advisories: [
           {
