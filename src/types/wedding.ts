@@ -91,6 +91,13 @@ export interface WeddingEvent {
   accentColor?: string; // optional event-specific ceremonial tint
 }
 
+export interface ContactPerson {
+  name: LocalizedString;
+  relation?: LocalizedString;
+  phone: string;
+  whatsappUrl?: string;
+}
+
 export interface WeddingConfig {
   meta: {
     id: string;
@@ -123,8 +130,10 @@ export interface WeddingConfig {
     celebrationLine: LocalizedString;
     closingBlessing: LocalizedString;
   };
+  contacts?: ContactPerson[];
+  eventInstructions?: LocalizedString;
   events: Record<string, WeddingEvent>;
-  eventOrder: string[]; // ['nikkah', 'baraat', 'walima']
+  eventOrder: string[]; // ['nikkah', 'walima', 'baraat']
   audio: {
     enabledByDefault: boolean;
     ambientSoundEnabled: boolean;

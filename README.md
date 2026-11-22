@@ -11,17 +11,18 @@ Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, and **Web
 1. **100% Dynamic & Schema-Driven**:
    Zero hardcoded names or family specifics in core components. All dates, venues, ceremony schedules, travel advisories, and bilingual announcements are loaded from a strictly typed configuration object (`WeddingConfig`). Any marriage occasion can be created simply by adding a configuration file.
 2. **Tactile Digital Stationery**:
-   Features an authentic wax-sealed envelope opening experience with procedural 3D physics, wax cracking, paper unfolding, and ambient acoustic soundscapes.
+   Features an authentic landscape wax-sealed envelope opening experience (`aspect-[2282/1388]`) with procedural 3D physics, wax cracking, paper unfolding, and ambient acoustic soundscapes.
 3. **True Bilingual Isolation (English + Urdu Nastaliq)**:
-   Does not invert the entire layout with a naive `dir="rtl"`. Instead, directional blocks are isolated so Latin times (`06:30 PM`), phone numbers, and navigation URLs never reverse, while Nastaliq calligraphy maintains proper line height and ligature rendering.
-4. **Zero-Audio File Lag / Procedural Synthesizer**:
+   Does not invert the entire layout with a naive `dir="rtl"`. Instead, directional blocks are isolated so Latin times (`06:30 PM`), phone numbers, and navigation URLs never reverse, while Nastaliq calligraphy maintains proper line height and ligature rendering using `AA Sameer Zikran` and `AlQalam Taj Nastaleeq`.
+4. **Daylight & Night Ceremony Support**:
+   Supports distinct daylight functions (Nikkah & Baraat) and celebratory evening banquets (Walima Reception).
+5. **Zero-Audio File Lag / Procedural Synthesizer**:
    Uses the browser Web Audio API to synthesize tactile wax snaps, paper rustles, and golden pentatonic chimes with zero external audio assets or network latency.
-5. **Event Utilities**:
+6. **Event Utilities**:
    - Timezone-safe countdown (`Asia/Karachi`).
    - Add to Calendar (`.ics` generation for Apple/Outlook + direct Google Calendar link).
    - Smart Venue Cards with direct Google Maps and Apple Maps routing.
-   - Expandable Motorway & Fog travel advisories.
-   - Printable vector QR code modal with quiet zones.
+   - Expandable Highway and route travel advisories (Manzoorabad, Sialkot, GT Road).
    - WhatsApp quick share with pre-formatted bilingual wedding previews.
 
 ---

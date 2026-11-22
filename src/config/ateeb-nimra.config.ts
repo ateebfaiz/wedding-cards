@@ -2,18 +2,19 @@ import { WeddingConfig } from '@/types/wedding';
 
 /**
  * Ateeb & Nimra — The Heirloom Digital Wedding Invitation Configuration
- * Configured with authentic family names, parentage, and ceremony details.
+ * Configured with authentic family names, parentage, chronological ceremony details,
+ * and emergency/RSVP contacts.
  */
 export const ateebNimraWeddingConfig: WeddingConfig = {
   meta: {
     id: 'ateeb-nimra-wedding',
     title: {
       en: 'Ateeb & Nimra — Wedding Invitation',
-      ur: 'دعوتِ شادی — عاطب و نمرہ',
+      ur: 'دعوتِ شادی — اطیب و نمرہ',
     },
     description: {
       en: 'The digital wedding invitation festivities of Ateeb Faiz & Nimra Javed.',
-      ur: 'عاطب فیض اور نمرہ جاوید کی شادی خانہ آبادی کا باوقار ڈیجیٹل دعوت نامہ۔',
+      ur: 'اطیب فیض اور نمرہ جاوید کی شادی خانہ آبادی کا باوقار ڈیجیٹل دعوت نامہ۔',
     },
     url: 'https://weddingcards.app',
     defaultLanguage: 'en',
@@ -37,7 +38,7 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
   seal: {
     monogram: {
       en: 'A & N',
-      ur: 'ع & ن',
+      ur: 'اط & ن',
     },
     sealSubtitle: {
       en: 'An invitation for you',
@@ -59,15 +60,15 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
     groom: {
       fullName: {
         en: 'Ateeb Faiz',
-        ur: 'عاطب فیض',
+        ur: 'اطیب فیض',
       },
       shortName: {
         en: 'Ateeb',
-        ur: 'عاطب',
+        ur: 'اطیب',
       },
       parents: {
         en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira',
-        ur: 'محترم میاں فیض رسول چیمہ اور یاسمین طاہرہ',
+        ur: 'محترم فیض رسول چیمہ اور یاسمین طاہرہ',
       },
     },
     bride: {
@@ -81,14 +82,14 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
       },
       parents: {
         en: 'Javed Iqbal Sultani & Zahida Parveen',
-        ur: 'میاں جاوید اقبال سلطانی اور زاہدہ پروین',
+        ur: 'جاوید اقبال سلطانی اور زاہدہ پروین',
       },
     },
   },
   invitationIntro: {
     hostsLine: {
       en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira',
-      ur: 'محترم میاں فیض رسول چیمہ اور یاسمین طاہرہ',
+      ur: 'محترم فیض رسول چیمہ اور یاسمین طاہرہ',
     },
     greetingLine: {
       en: 'Request the pleasure of your company and heartfelt prayers at the wedding festivities of their beloved son',
@@ -103,6 +104,36 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
       ur: 'آپ کی تشریف آوری اور پُرخلوص دعائیں ہمارے لیے باعثِ برکت ہوں گی',
     },
   },
+  eventInstructions: {
+    en: 'Please come on time and follow our lead and the details and event details on the map in your personalized invitation card.',
+    ur: 'براہِ کرم وقت کی پابندی فرمائیں، ہماری رہنمائی پر عمل کریں اور اپنے ذاتی دعوتی کارڈ پر دیے گئے نقشے اور تقریب کی تفصیلات ملاحظہ فرمائیں۔',
+  },
+  contacts: [
+    {
+      name: {
+        en: 'Faiz Rasool Cheema',
+        ur: 'فیض رسول چیمہ',
+      },
+      relation: {
+        en: 'Father',
+        ur: 'والدِ محترم',
+      },
+      phone: '03186587882',
+      whatsappUrl: 'https://wa.me/923186587882',
+    },
+    {
+      name: {
+        en: 'Muneeb Faiz',
+        ur: 'منیب فیض',
+      },
+      relation: {
+        en: 'Brother',
+        ur: 'برادر',
+      },
+      phone: '03126587882',
+      whatsappUrl: 'https://wa.me/923126587882',
+    },
+  ],
   events: {
     nikkah: {
       id: 'nikkah',
@@ -112,27 +143,31 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
         ur: 'رسمِ نکاح',
       },
       ceremonyType: {
-        en: 'Sacred Covenant Ceremony',
-        ur: 'مبارک تقریبِ عقدِ نکاح',
+        en: 'Sacred Daylight Covenant Ceremony',
+        ur: 'پُروقار دن کی تقریبِ عقدِ نکاح',
       },
-      dateISO: '2026-12-01T15:00:00+05:00',
+      dateISO: '2026-12-01T11:00:00+05:00',
       formattedDate: {
-        en: 'Tuesday, 1 December 2026',
-        ur: 'منگل، 1 دسمبر 2026',
+        en: 'Tuesday, 1 December 2026 (Daylight)',
+        ur: 'منگل، 1 دسمبر 2026 (دن کا وقت)',
       },
       timezone: 'Asia/Karachi',
       invitationNote: {
-        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira and Javed Iqbal Sultani & Zahida Parveen request the honor of your presence and heartfelt prayers at the sacred Nikkah Ceremony of Ateeb Faiz and Nimra Javed.',
-        ur: 'محترم میاں فیض رسول چیمہ و یاسمین طاہرہ اور میاں جاوید اقبال سلطانی و زاہدہ پروین اپنے بچوں عاطب فیض اور نمرہ جاوید کے مبارک عقدِ نکاح کے پرمسرت موقع پر آپ کی باوقار شرکت اور دعاؤں کے متمنی ہیں۔',
+        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira and Javed Iqbal Sultani & Zahida Parveen request the honor of your presence and heartfelt prayers at the sacred Daylight Nikkah Ceremony of Ateeb Faiz and Nimra Javed.',
+        ur: 'محترم فیض رسول چیمہ و یاسمین طاہرہ اور جاوید اقبال سلطانی و زاہدہ پروین اپنے بچوں اطیب فیض اور نمرہ جاوید کے مبارک عقدِ نکاح کی تقریبِ روز (دن کے وقت) میں آپ کی باوقار شرکت اور دعاؤں کے متمنی ہیں۔',
       },
       venue: {
         name: {
-          en: 'Residence of Mian Javed Iqbal Sultani Sahib',
-          ur: 'رہائش گاہ میاں جاوید اقبال سلطانی صاحب',
+          en: "Javed Iqbal Sultani Sahib's House",
+          ur: 'رہائش گاہ جاوید اقبال سلطانی صاحب',
+        },
+        hallOrSection: {
+          en: 'Daylight Ceremony right at New Islamia Public Model School Building',
+          ur: 'دن کا فنکشن، نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ',
         },
         address: {
-          en: 'Veroke Cheema',
-          ur: 'ویروکے چیمہ',
+          en: 'Right at New Islamia Public Model School Building, Opposite GT Road Wazirabad, Veroke Cheema',
+          ur: 'نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ، بالمقابل جی ٹی روڈ وزیرآباد، ویروکے چیمہ',
         },
         city: {
           en: 'Veroke Cheema',
@@ -142,69 +177,133 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
       },
       schedule: [
         {
-          time: '03:00 PM',
-          timeUrdu: 'سہ پہر 03:00 بجے',
+          time: 'Daylight (11:00 AM onwards)',
+          timeUrdu: 'دن 11:00 بجے سے آگے',
           title: {
             en: 'Reception of Guests',
             ur: 'معزز مہمانوں کا استقبال',
           },
           description: {
-            en: 'Warm welcome of family and esteemed guests',
-            ur: 'خوش آمدید اور استقبالیہ',
+            en: 'Warm welcome of family and esteemed guests in daylight',
+            ur: 'خوش آمدید اور پُروقار استقبالیہ',
           },
           iconName: 'reception',
         },
         {
-          time: '03:45 PM',
-          timeUrdu: 'سہ پہر 03:45 بجے',
+          time: 'Daylight (11:30 AM)',
+          timeUrdu: 'دن 11:30 بجے',
           title: {
             en: 'Solemnization of Sacred Nikkah',
             ur: 'رسمِ نکاح و ایجاب و قبول',
           },
           description: {
-            en: 'Covenant of marriage and prayers for the couple',
+            en: 'Sacred covenant of marriage and prayers for the couple',
             ur: 'عقدِ نکاح اور نو بیاہتا جوڑے کے لیے دعائے خیر',
           },
           iconName: 'ceremony',
         },
         {
-          time: '04:30 PM',
-          timeUrdu: 'شام 04:30 بجے',
+          time: 'Daylight (12:00 PM)',
+          timeUrdu: 'دوپہر 12:00 بجے',
           title: {
-            en: 'Festive High Tea & Refreshments',
-            ur: 'ضیافت و عصرانہ',
+            en: 'Celebratory Refreshments & Sweets',
+            ur: 'ضیافت و مٹھائی کی تقسیم',
           },
           description: {
-            en: 'Traditional celebratory refreshments with family',
-            ur: 'پُرتکلف عصرانہ اور مٹھائی کی تقسیم',
+            en: 'Traditional celebratory banquet with family',
+            ur: 'پُرتکلف ضیافت اور مبارکباد',
           },
           iconName: 'dinner',
         },
       ],
       travelGuidance: {
         originCity: {
-          en: 'Wazirabad / Gujranwala',
-          ur: 'وزیرآباد / گوجرانوالہ',
+          en: 'Wazirabad, Manzoorabad, Sialkot & Surrounding Areas',
+          ur: 'وزیرآباد، منظور آباد، سیالکوٹ اور گردونواح',
         },
         estimatedDuration: {
-          en: 'Direct access to Veroke Cheema',
-          ur: 'براہِ راست ویروکے چیمہ',
+          en: 'Direct access via GT Road & Sialkot-Wazirabad Road to Veroke Cheema',
+          ur: 'بالمقابل جی ٹی روڈ اور سیالکوٹ روڈ تا ویروکے چیمہ',
         },
         routeTitle: {
-          en: 'Veroke Cheema Main Road',
-          ur: 'ویروکے چیمہ روڈ',
+          en: 'Veroke Cheema (Near New Islamia Public Model School)',
+          ur: 'ویروکے چیمہ (نزد نیو اسلامیہ پبلک ماڈل اسکول)',
         },
         departureWindowNote: {
-          en: 'Guests are kindly requested to arrive by 03:00 PM.',
-          ur: 'معزز مہمانوں سے گزارش ہے کہ سہ پہر 03:00 بجے تک تشریف لائیں۔',
+          en: 'Daylight ceremony. Guests are kindly requested to arrive on time and follow event details on the map.',
+          ur: 'دن کا فنکشن۔ معزز مہمانوں سے گزارش ہے کہ بروقت تشریف لائیں اور کارڈ میں دی گئی تفصیلات و رہنمائی پر عمل فرمائیں۔',
         },
         advisories: [
           {
-            en: 'Follow the main approach road to Veroke Cheema. Ample guest parking is available at the premises.',
-            ur: 'ویروکے چیمہ کی مرکزی سڑک کی پیروی فرمائیں۔ احاطے میں مہمانوں کے لیے پارکنگ کی وسیع جگہ موجود ہے۔',
+            en: 'From Manzoorabad / Wazirabad: Take GT Road northbound, direct right turn into Veroke Cheema opposite New Islamia Public Model School Building.',
+            ur: 'منظور آباد اور وزیرآباد سے: جی ٹی روڈ سے ویروکے چیمہ کی طرف سیدھا راستہ، نیو اسلامیہ پبلک ماڈل اسکول بلڈنگ کے عین سامنے۔',
+          },
+          {
+            en: 'From Sialkot & Sambrial: Travel via Sialkot-Wazirabad Road connecting to GT Road junction towards Veroke Cheema.',
+            ur: 'سیالکوٹ اور سمبڑیال سے: براستہ سیالکوٹ-وزیرآباد روڈ تا جی ٹی روڈ جنکشن ویروکے چیمہ۔',
+          },
+          {
+            en: 'Ample guest parking is arranged within the compound premises.',
+            ur: 'احاطے اور اسکول گراؤنڈ میں تمام معزز مہمانوں کے لیے کشادہ کار پارکنگ کی بہترین سہولت موجود ہے۔',
           },
         ],
       },
+    },
+    walima: {
+      id: 'walima',
+      slug: 'walima',
+      title: {
+        en: 'Walima Reception',
+        ur: 'دعوتِ ولیمہ',
+      },
+      ceremonyType: {
+        en: 'Celebratory Evening Banquet',
+        ur: 'پُروقار ضیافتِ ولیمہ',
+      },
+      dateISO: '2026-12-25T20:00:00+05:00',
+      formattedDate: {
+        en: 'Friday, 25 December 2026',
+        ur: 'جمعۃ المبارک، 25 دسمبر 2026',
+      },
+      timezone: 'Asia/Karachi',
+      invitationNote: {
+        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira solicit the honor of your presence and blessings at the Walima Reception of their son Ateeb Faiz with Nimra Javed.',
+        ur: 'محترم فیض رسول چیمہ اور یاسمین طاہرہ اپنے فرزند اطیب فیض کی دعوتِ ولیمہ (ہمراہ نمرہ جاوید) میں آپ کی شرکت اور دعاؤں کے متمنی ہیں۔',
+      },
+      venue: {
+        name: {
+          en: 'Walima Reception',
+          ur: 'دعوتِ ولیمہ',
+        },
+        hallOrSection: {
+          en: 'Night Function (Times & Dishes will be updated soon)',
+          ur: 'رات کا فنکشن (اوقات اور کھانوں کی تفصیلات جلد اپ ڈیٹ کی جائیں گی)',
+        },
+        address: {
+          en: 'Night function, times and dishes will be updated soon',
+          ur: 'رات کا فنکشن، اوقات اور کھانوں کی تفصیلات جلد اپ ڈیٹ کی جائیں گی',
+        },
+        city: {
+          en: 'Wazirabad / Gujranwala',
+          ur: 'وزیرآباد / گوجرانوالہ',
+        },
+        googleMapsUrl: 'https://maps.google.com/?q=Wazirabad',
+      },
+      schedule: [
+        {
+          time: 'Night Function',
+          timeUrdu: 'رات کا وقت',
+          title: {
+            en: 'Walima Reception & Banquet',
+            ur: 'آمدِ مہمانان و ضیافتِ ولیمہ',
+          },
+          description: {
+            en: 'Dishes and detailed night times will be updated soon.',
+            ur: 'کھانوں اور رات کے اوقات کی تفصیلی شیڈول جلد اپ ڈیٹ کر دیا جائے گا۔',
+          },
+          iconName: 'dinner',
+        },
+      ],
     },
     baraat: {
       id: 'baraat',
@@ -214,90 +313,64 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
         ur: 'آمدِ بارات و تقریبِ رخصتی',
       },
       ceremonyType: {
-        en: 'Ceremonial Wedding Procession',
-        ur: 'پُروقار تقریبِ بارات',
+        en: 'Daylight Wedding Ceremony',
+        ur: 'پُروقار دن کی تقریبِ بارات',
       },
-      dateISO: '2026-12-04T18:15:00+05:00',
+      dateISO: '2026-12-26T12:00:00+05:00',
       formattedDate: {
-        en: 'Friday, 4 December 2026',
-        ur: 'جمعۃ المبارک، 4 دسمبر 2026',
+        en: 'Saturday, 26 December 2026',
+        ur: 'ہفتہ، 26 دسمبر 2026',
       },
       timezone: 'Asia/Karachi',
       invitationNote: {
         en: 'We warmly invite you to join the wedding procession and celebrate the marriage of Ateeb Faiz and Nimra Javed with heartfelt prayers and joy.',
-        ur: 'عاطب فیض اور نمرہ جاوید کی تقریبِ بارات میں شرکت فرما کر ہماری خوشیوں کو دوبالا کریں اور نو بیاہتا جوڑے کو اپنی دعاؤں سے نوازیں۔',
+        ur: 'اطیب فیض اور نمرہ جاوید کی تقریبِ بارات میں شرکت فرما کر ہماری خوشیوں کو دوبالا کریں اور نو بیاہتا جوڑے کو اپنی دعاؤں سے نوازیں۔',
       },
       venue: {
         name: {
-          en: 'Imperial Banquet Pavilion',
-          ur: 'امپیریل بینکوئٹ پویلین',
+          en: 'Ashraf Palace',
+          ur: 'اشرف پیلس',
         },
         address: {
-          en: 'Main Boulevard, Gulberg',
-          ur: 'مین بولیووارڈ، گلبرگ',
+          en: 'Ashraf Palace daylight function, times of barat, walima and dishes will be updated soon',
+          ur: 'اشرف پیلس دن کا فنکشن، بارات، ولیمہ کے اوقات اور کھانوں کی تفصیلات جلد اپ ڈیٹ کی جائیں گی',
         },
         city: {
-          en: 'Lahore',
-          ur: 'لاہور',
+          en: 'Wazirabad / Gujranwala',
+          ur: 'وزیرآباد / گوجرانوالہ',
         },
-        googleMapsUrl: 'https://maps.google.com/?q=Gulberg+Lahore',
+        googleMapsUrl: 'https://maps.google.com/?q=Ashraf+Palace+Wazirabad',
       },
       meetingPoint: {
         title: {
-          en: 'Baraat Assembly Point',
-          ur: 'بارات کا اجتماع مقام',
+          en: 'Ashraf Palace Main Foyer',
+          ur: 'اشرف پیلس مین فوائر',
         },
         location: {
-          en: 'Assemble near the Venue Main Foyer Gate',
-          ur: 'مین فوائر گیٹ کے بالمقابل',
+          en: 'Ashraf Palace Daylight Function Gate',
+          ur: 'اشرف پیلس گیٹ',
         },
-        assemblyTime: '06:15 PM',
-        assemblyTimeUrdu: 'شام 06:15 بجے',
-        directionsUrl: 'https://maps.google.com/?q=Gulberg+Lahore',
+        assemblyTime: 'Daylight',
+        assemblyTimeUrdu: 'دن کے وقت',
+        directionsUrl: 'https://maps.google.com/?q=Ashraf+Palace+Wazirabad',
       },
       schedule: [
         {
-          time: '06:15 PM',
-          timeUrdu: 'شام 06:15 بجے',
+          time: 'Daylight Function',
+          timeUrdu: 'دن کا وقت',
           title: {
-            en: 'Baraat Assembly',
-            ur: 'بارات کا اجتماع',
+            en: 'Arrival of Baraat & Banquet',
+            ur: 'آمدِ بارات و ضیافتِ طعام',
           },
           description: {
-            en: 'Gathering of guests and procession lineup',
-            ur: 'معزز مہمانوں کا باقاعدہ اجتماع',
-          },
-          iconName: 'reception',
-        },
-        {
-          time: '06:30 PM',
-          timeUrdu: 'شام 06:30 بجے',
-          title: {
-            en: 'Arrival & Welcome of Baraat',
-            ur: 'آمدِ بارات و پُرتپاک استقبال',
-          },
-          description: {
-            en: 'Grand entrance and greeting by the bride’s family',
-            ur: 'دلہن کے اہلِ خانہ کی جانب سے خیر مقدم',
+            en: 'Daylight function at Ashraf Palace. Times and dishes will be updated soon.',
+            ur: 'اشرف پیلس دن کا فنکشن۔ بارات کے اوقات اور کھانوں کی تفصیلات جلد اپ ڈیٹ کی جائیں گی۔',
           },
           iconName: 'celebration',
         },
         {
-          time: '07:30 PM',
-          timeUrdu: 'شام 07:30 بجے',
-          title: {
-            en: 'Dinner Banquet',
-            ur: 'ضیافتِ طعام',
-          },
-          description: {
-            en: 'Traditional celebratory dinner',
-            ur: 'پُرتکلف روایتی کھانا',
-          },
-          iconName: 'dinner',
-        },
-        {
-          time: '09:00 PM',
-          timeUrdu: 'رات 09:00 بجے',
+          time: 'Afternoon',
+          timeUrdu: 'بعد از دوپہر',
           title: {
             en: 'Rukhsati',
             ur: 'رخصتی',
@@ -313,83 +386,14 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
         enabled: true,
         currentStage: 'Assembly',
         statusNote: {
-          en: 'Guests are kindly requested to assemble by 06:15 PM for the entrance procession.',
-          ur: 'معزز مہمانوں سے گزارش ہے کہ شام 06:15 بجے تک تشریف لائیں۔',
+          en: 'Daylight function at Ashraf Palace. Times will be updated soon.',
+          ur: 'اشرف پیلس دن کا فنکشن۔ اوقات جلد اپ ڈیٹ کیے جائیں گے۔',
         },
-        liveMapUrl: 'https://maps.google.com/?q=Gulberg+Lahore',
+        liveMapUrl: 'https://maps.google.com/?q=Ashraf+Palace+Wazirabad',
       },
-    },
-    walima: {
-      id: 'walima',
-      slug: 'walima',
-      title: {
-        en: 'Walima Reception',
-        ur: 'دعوتِ ولیمہ',
-      },
-      ceremonyType: {
-        en: 'Celebratory Luncheon Feast',
-        ur: 'پُروقار ضیافتِ ولیمہ',
-      },
-      dateISO: '2026-12-06T13:30:00+05:00',
-      formattedDate: {
-        en: 'Sunday, 6 December 2026',
-        ur: 'اتوار، 6 دسمبر 2026',
-      },
-      timezone: 'Asia/Karachi',
-      invitationNote: {
-        en: 'Respected Faiz Rasool Cheema & Yasmeen Tahira solicit the honor of your presence and blessings at the Walima Reception of their son Ateeb Faiz with Nimra Javed.',
-        ur: 'محترم میاں فیض رسول چیمہ اور یاسمین طاہرہ اپنے فرزند عاطب فیض کی دعوتِ ولیمہ (ہمراہ نمرہ جاوید) میں آپ کی شرکت اور دعاؤں کے متمنی ہیں۔',
-      },
-      venue: {
-        name: {
-          en: 'Château d’Amour (Hall No. 20)',
-          ur: 'شاتو دِ امور (ہال نمبر 20)',
-        },
-        hallOrSection: {
-          en: 'Garrison Golf & Country Club',
-          ur: 'گیریژن گالف اینڈ کنٹری کلب',
-        },
-        address: {
-          en: 'Garrison Golf & Country Club, Cantt',
-          ur: 'گیریژن گالف اینڈ کنٹری کلب، کینٹ',
-        },
-        city: {
-          en: 'Lahore',
-          ur: 'لاہور',
-        },
-        googleMapsUrl: 'https://maps.google.com/?q=Garrison+Golf+and+Country+Club+Lahore',
-      },
-      schedule: [
-        {
-          time: '01:30 PM',
-          timeUrdu: 'دوپہر 01:30 بجے',
-          title: {
-            en: 'Arrival of Guests',
-            ur: 'معزز مہمانوں کی آمد',
-          },
-          description: {
-            en: 'Reception in Hall 20 foyer',
-            ur: 'استقبالیہ لان میں خیر مقدم',
-          },
-          iconName: 'reception',
-        },
-        {
-          time: '02:00 PM',
-          timeUrdu: 'دوپہر 02:00 بجے',
-          title: {
-            en: 'Luncheon Banquet',
-            ur: 'ضیافتِ ظہرانہ',
-          },
-          description: {
-            en: 'Formal celebratory banquet lunch',
-            ur: 'پُرتکلف کھانا اور خیرسگالی',
-          },
-          iconName: 'dinner',
-        },
-      ],
     },
   },
-  eventOrder: ['nikkah', 'baraat', 'walima'],
+  eventOrder: ['nikkah', 'walima', 'baraat'],
   audio: {
     enabledByDefault: true,
     ambientSoundEnabled: true,

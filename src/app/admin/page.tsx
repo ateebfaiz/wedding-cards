@@ -45,27 +45,31 @@ export default function AdminInvitePage() {
     walima: {
       titleEn: 'Walima Only (Colleagues & Network)',
       titleUr: 'صرف دعوتِ ولیمہ (احباب و رفقاء)',
-      events: ['Walima Reception (Hall 20, Garrison Club Lahore)'],
+      events: ['Walima Reception (Night Function)'],
     },
     all: {
       titleEn: 'All Events (Family & Close Friends)',
-      titleUr: 'تمام تقریبات (نکاح، بارات اور ولیمہ)',
-      events: ['Nikkah Ceremony (Veroke Cheema)', 'The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
+      titleUr: 'تمام تقریبات (نکاح، ولیمہ اور بارات)',
+      events: [
+        "Nikkah Ceremony (Javed Iqbal Sultani Sahib's House, Veroke Cheema)",
+        'Walima Reception (Night Function)',
+        'The Wedding Baraat (Ashraf Palace)',
+      ],
     },
     reception: {
       titleEn: 'Baraat & Walima',
       titleUr: 'بارات و ولیمہ',
-      events: ['The Wedding Baraat (Lahore)', 'Walima Reception (Lahore)'],
+      events: ['Walima Reception (Night Function)', 'The Wedding Baraat (Ashraf Palace)'],
     },
     nikkah: {
       titleEn: 'Nikkah Ceremony Only',
       titleUr: 'صرف تقریبِ نکاح',
-      events: ['Nikkah Ceremony (Veroke Cheema)'],
+      events: ["Nikkah Ceremony (Javed Iqbal Sultani Sahib's House, Veroke Cheema)"],
     },
     baraat: {
       titleEn: 'Baraat Only',
       titleUr: 'صرف تقریبِ بارات',
-      events: ['The Wedding Baraat (Lahore)'],
+      events: ['The Wedding Baraat (Ashraf Palace)'],
     },
   };
 

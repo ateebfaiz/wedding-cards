@@ -51,7 +51,7 @@ function InvitationShellInner({ config, children }: InvitationShellProps) {
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
       {/* Dynamic Heirloom Background with Rotating Complementary Mandalas & Frosted Light Flares */}
-      {isOpened && <HeirloomAmbientBackground />}
+      {isOpened && <HeirloomAmbientBackground variant="homepage" />}
 
       {/* Interactive Wax-Sealed Opening Experience (With Skip Button) */}
       {!isOpened && (

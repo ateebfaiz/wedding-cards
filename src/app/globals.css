@@ -25,6 +25,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Urdu Custom Typography Fonts */
+@font-face {
+  font-family: 'AlQalam Taj Nastaleeq';
+  src: url('/fonts/alqalam-taj-nastaleeq-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AA Sameer Zikran';
+  src: url('/fonts/aa-sameer-zikran-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* English Editorial Serif Typography */
 .font-serif {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -47,24 +64,40 @@ body {
 }
 
 /* Urdu Typography Hierarchy - Strictly No Artificial Letter Spacing */
-/* Grand Display Nastaliq for Names & Headings */
-.font-nastaliq-display {
-  font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+/* Grand Display Headings with AA Sameer Zikran */
+.font-sameer-zikran, .font-zikran {
+  font-family: 'AA Sameer Zikran', 'Gulzar', 'Noto Nastaliq Urdu', serif;
   line-height: 2.1 !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
 }
 
-/* High-Legibility Body Nastaliq for Venues & Schedules */
+/* Noble Subheadings & Announcements with AlQalam Taj Nastaleeq */
+.font-alqalam-taj, .font-taj {
+  font-family: 'AlQalam Taj Nastaleeq', 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  line-height: 2.1 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* Grand Display Nastaliq for Names & Headings */
+.font-nastaliq-display {
+  font-family: 'AA Sameer Zikran', 'AlQalam Taj Nastaleeq', 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  line-height: 2.1 !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* High-Legibility Body Nastaliq for Venues & Schedules - Prioritizing AlQalam Taj & AA Sameer Zikran */
 .font-nastaliq-body {
-  font-family: 'Noto Nastaliq Urdu', 'Gulzar', serif;
-  line-height: 1.95 !important;
+  font-family: 'AlQalam Taj Nastaleeq', 'AA Sameer Zikran', 'Noto Nastaliq Urdu', 'Gulzar', serif;
+  line-height: 2.1 !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
 }
 
 .font-nastaliq {
-  font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+  font-family: 'AlQalam Taj Nastaleeq', 'AA Sameer Zikran', 'Gulzar', 'Noto Nastaliq Urdu', serif;
   line-height: 2.1 !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;

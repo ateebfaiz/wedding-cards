@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { WeddingConfig, WeddingEvent, SupportedLanguage } from '@/types/wedding';
@@ -15,7 +15,16 @@ import { BaraatStatusCard } from '@/components/events/BaraatStatusCard';
 import { ActionRow } from '@/components/events/ActionRow';
 import { filterEventsForTier } from '@/lib/audience';
 import { HeirloomAmbientBackground } from '@/components/backgrounds/HeirloomAmbientBackground';
-import { ShieldAlert, ArrowLeft, ArrowRight } from 'lucide-react';
+import { AudioController } from '@/components/layout/AudioController';
+import { fireWeddingConfetti } from '@/lib/confetti';
+import {
+  ShieldAlert,
+  ArrowLeft,
+  ArrowRight,
+  Phone,
+  MessageCircle,
+  Clock,
+} from 'lucide-react';
 
 interface EventClientViewProps {
   config: WeddingConfig;
@@ -28,6 +37,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   const tier = (searchParams.get('invite') as any) || 'all';
   const navParam = searchParams.get('nav');
+  const guestName = searchParams.get('to') || '';
 
   // Single-event tiers are strictly locked: no navigation bar and no browsing other events
   const isSingleEventTier = tier === 'walima' || tier === 'nikkah' || tier === 'baraat';
@@ -45,13 +55,23 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
   const otherEvents = Object.values(config.events).filter((e) => e.slug !== event.slug);
 
+  // Trigger confetti for Nikkah and Baraat
+  useEffect(() => {
+    if (event.slug === 'nikkah' || event.slug === 'baraat') {
+      const timer = setTimeout(() => {
+        fireWeddingConfetti();
+      }, 700);
+      return () => clearTimeout(timer);
+    }
+  }, [event.slug]);
+
   return (
     <div
-      className="min-h-screen bg-[#F8F5EE] text-[#342C26] flex flex-col items-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
+      className="min-h-screen text-[#342C26] flex flex-col items-center relative overflow-x-hidden selection:bg-[#B5965A]/25"
       dir={lang === 'ur' ? 'rtl' : 'ltr'}
     >
-      {/* Dynamic Heirloom Ambient Background with Dual Rotating Mandalas & Frosted Light Flares */}
-      <HeirloomAmbientBackground />
+      {/* Full-Bleed Islamic Arch Backdrop Fill-In for Mobile & Desktop */}
+      <HeirloomAmbientBackground variant="invitation" />
 
       {/* 1. Navigation Header: Rendered ONLY when navigation is permitted */}
       {allowNavigation ? (
@@ -62,39 +82,39 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
           showEventTabs={true}
         />
       ) : (
-        /* Floating Unobtrusive Corner Language Switcher (Zero Navigation Bar) */
+        /* Floating Unobtrusive Corner Language Switcher (Non-Overlapping) */
         <div className="fixed top-4 right-4 z-40 select-none">
           <button
             type="button"
             onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
             aria-label="Toggle Language"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#B5965A]/40 bg-[#FCFAF6]/90 text-[#342C26] text-xs font-sans font-medium tracking-wide shadow-xs backdrop-blur-md hover:border-[#B5965A] hover:bg-[#EFE8DA] transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#DFBF73]/60 bg-[#081226]/85 text-[#F8F5EE] text-xs font-sans font-semibold tracking-wide shadow-md backdrop-blur-md hover:border-[#FFDF73] hover:bg-[#0D1B36] transition-all cursor-pointer"
           >
             <span>{lang === 'en' ? 'اردو' : 'English'}</span>
           </button>
         </div>
       )}
 
-      {/* 2. Main Full-Fledged Content Area (Unwrapped & Breathing) */}
-      <main className="w-full max-w-3xl px-4 sm:px-8 py-8 sm:py-14 flex flex-col items-center relative z-10">
+      {/* 2. Main Content Canvas with Generous Top Padding to Preempt Any Toggle Collision */}
+      <main className="w-full max-w-3xl px-4 sm:px-8 pt-16 sm:pt-20 pb-14 flex flex-col items-center relative z-10">
         {/* Audience Gate Check (If tier does not include this event) */}
         {!isAllowed ? (
-          <div className="w-full my-8 text-center p-8 rounded-3xl bg-[#FCFAF6]/90 border border-[#B5965A]/40 shadow-sm backdrop-blur-xs">
+          <div className="w-full my-8 text-center p-8 rounded-3xl bg-[#FCFAF6]/95 border-2 border-[#B5965A]/40 shadow-xl backdrop-blur-md">
             <div className="w-12 h-12 rounded-full bg-[#702F3D]/10 text-[#702F3D] flex items-center justify-center mx-auto mb-4 border border-[#702F3D]/30">
               <ShieldAlert className="w-6 h-6" />
             </div>
 
             <h2
-              className={`text-xl sm:text-2xl text-[#342C26] font-bold mb-3 ${
-                lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+              className={`text-xl sm:text-2xl text-[#2E050B] font-black mb-3 ${
+                lang === 'ur' ? 'font-sameer-zikran text-3xl' : 'font-playfair'
               }`}
             >
               {lang === 'ur' ? 'مخصوص تقریب کا دعوت نامہ' : 'Ceremony Specific Invitation'}
             </h2>
 
             <p
-              className={`text-sm text-[#81776B] max-w-md mx-auto mb-6 leading-relaxed ${
-                lang === 'ur' ? 'font-nastaliq-body text-sm leading-loose' : 'font-sans'
+              className={`text-sm text-[#5A4D41] max-w-md mx-auto mb-6 leading-relaxed ${
+                lang === 'ur' ? 'font-nastaliq-body text-base leading-loose' : 'font-sans'
               }`}
             >
               {lang === 'ur'
@@ -104,15 +124,15 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
 
             {isSingleEventTier ? (
               <Link
-                href={`/${tier}?invite=${tier}${searchParams.get('to') ? `&to=${encodeURIComponent(searchParams.get('to')!)}` : ''}&nav=0`}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
+                href={`/${tier}?invite=${tier}${guestName ? `&to=${encodeURIComponent(guestName)}` : ''}&nav=0`}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-bold hover:bg-[#545B43] transition-colors shadow-2xs"
               >
                 <span>{lang === 'ur' ? 'اپنے مخصوص دعوت نامے پر جائیں' : 'Go to Your Designated Ceremony'}</span>
               </Link>
             ) : (
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-medium hover:bg-[#545B43] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#342C26] text-[#F8F5EE] text-xs font-sans font-bold hover:bg-[#545B43] transition-colors shadow-2xs"
               >
                 <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
                 <span>{lang === 'ur' ? 'مرکزی دعوت نامہ دیکھیں' : 'View Main Wedding Invitation'}</span>
@@ -122,13 +142,35 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
         ) : (
           /* Full Independent Stationery Canvas */
           <div className="w-full flex flex-col items-center space-y-6">
+            {/* Dedicated Personalized Invitee Heading Section (Natural Stationery, RTL-aware) */}
+            {guestName && (
+              <div className="w-full my-4 py-4 border-b border-[#B5965A]/35 flex flex-col items-start text-start transition-all animate-in fade-in slide-in-from-top-4 duration-700">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#702F3D] font-black flex items-center gap-2 mb-2 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
+                  <span className="text-[#B5965A] text-sm">✦</span>
+                  <span>{lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}</span>
+                </span>
+                <h2
+                  className={`text-3xl sm:text-4xl lg:text-5xl font-black text-[#2E050B] leading-tight ${
+                    lang === 'ur' ? 'font-sameer-zikran text-4xl sm:text-5xl' : 'font-playfair'
+                  }`}
+                >
+                  {lang === 'ur' ? `${guestName} و اہلِ خانہ` : `${guestName} & Family`}
+                </h2>
+                <div className="w-20 h-1 bg-[#B5965A] mt-3 rounded-full" />
+              </div>
+            )}
+
             {/* Event Hero */}
             <EventHero event={event} lang={lang} />
 
             {/* Countdown to the Event */}
             <CountdownTimer targetDateISO={event.dateISO} lang={lang} />
 
-            {/* Utility Actions (Add to Calendar, WhatsApp Share, Event QR) */}
+            {/* Utility Actions (Add to Calendar, WhatsApp Share — Zero QR Code) */}
             <ActionRow event={event} coupleNames={coupleNames} lang={lang} />
 
             {/* Ceremonial Progression Milestones (Baraat only) */}
@@ -145,12 +187,12 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
               </div>
             )}
 
-            {/* Ceremony Schedule Timeline */}
+            {/* Left-Aligned Pixel-Perfect Ceremony Schedule Timeline */}
             <div className="w-full">
               <ScheduleTimeline schedule={event.schedule} lang={lang} />
             </div>
 
-            {/* Venue & Directions Card */}
+            {/* Venue & Directions Card (Single-Line Bold Heading) */}
             <div className="w-full">
               <VenueCard venue={event.venue} lang={lang} />
             </div>
@@ -162,27 +204,130 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
               </div>
             )}
 
+            {/* Important Event Instructions */}
+            {config.eventInstructions && (
+              <div className="w-full my-4 py-6 border-t border-[#B5965A]/35 text-start">
+                <div className="flex items-center gap-2 mb-2 text-[#702F3D]">
+                  <Clock className="w-4 h-4 text-[#B5965A] shrink-0" />
+                  <span
+                    className={`text-xs tracking-[0.15em] font-black ${
+                      lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-wider'
+                    }`}
+                  >
+                    {lang === 'ur' ? 'اہم ہدایات برائے معزز مہمانان' : 'Important Event Instructions'}
+                  </span>
+                </div>
+                <p
+                  className={`text-sm sm:text-base text-[#5A4D41] leading-relaxed font-bold ${
+                    lang === 'ur' ? 'font-alqalam-taj text-base leading-loose' : 'font-serif italic'
+                  }`}
+                >
+                  {config.eventInstructions[lang]}
+                </p>
+              </div>
+            )}
+
+            {/* Contact & Info RSVP Section */}
+            {config.contacts && config.contacts.length > 0 && (
+              <div className="w-full my-4 py-6 border-t border-[#B5965A]/35 text-start">
+                <div className="mb-4">
+                  <span
+                    className={`text-xs tracking-[0.15em] text-[#702F3D] font-black block ${
+                      lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                    }`}
+                  >
+                    {lang === 'ur' ? 'رابطہ و معلومات' : 'Contact & Information'}
+                  </span>
+                  <h3
+                    className={`text-xl sm:text-2xl font-black text-[#2E050B] mt-1 ${
+                      lang === 'ur' ? 'font-sameer-zikran text-3xl' : 'font-playfair'
+                    }`}
+                  >
+                    {lang === 'ur' ? 'کسی بھی رہنمائی کے لیے رابطہ فرمائیں' : 'For Inquiries & Guidance'}
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {config.contacts.map((contact, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-2xl border border-[#B5965A]/30 bg-[#FCFAF6]/70 backdrop-blur-xs flex flex-col justify-between shadow-2xs"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-1 mb-1">
+                          <span
+                            className={`text-sm sm:text-base font-bold text-[#2E050B] ${
+                              lang === 'ur' ? 'font-sameer-zikran text-lg' : 'font-sans'
+                            }`}
+                          >
+                            {contact.name[lang]}
+                          </span>
+                          {contact.relation && (
+                            <span className="text-[10px] text-[#702F3D] font-sans font-bold px-2 py-0.5 rounded-full bg-[#FAF7F2] border border-[#B5965A]/25">
+                              {contact.relation[lang]}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-xs text-[#5A4D41] font-mono tracking-wide block mb-3 font-semibold">
+                          {contact.phone}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-2 border-t border-[#B5965A]/20">
+                        <a
+                          href={`tel:${contact.phone}`}
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#342C26] text-[#F8F5EE] text-[11px] font-sans font-semibold hover:bg-[#545B43] transition-colors"
+                        >
+                          <Phone className="w-3 h-3" />
+                          <span>{lang === 'ur' ? 'کال کریں' : 'Call'}</span>
+                        </a>
+                        {contact.whatsappUrl && (
+                          <a
+                            href={contact.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#25D366] text-white text-[11px] font-sans font-semibold hover:bg-[#1EBE5D] transition-colors shadow-2xs"
+                          >
+                            <MessageCircle className="w-3 h-3" />
+                            <span>WhatsApp</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* 3. Bottom Event Switcher: ONLY shown when allowNavigation is true */}
             {allowNavigation && (
               <div className="w-full mt-10 pt-8 border-t border-[#B5965A]/25 text-center">
-                <span className="text-[11px] uppercase tracking-[0.25em] text-[#81776B] font-sans font-bold block mb-4">
+                <span
+                  className={`text-xs tracking-[0.15em] text-[#DFBF73] font-bold block mb-4 ${
+                    lang === 'ur' ? 'font-sameer-zikran text-sm' : 'font-cinzel uppercase tracking-[0.25em]'
+                  }`}
+                >
                   {lang === 'ur' ? 'دیگر تقریباتِ شادی' : 'Explore Other Ceremonies'}
                 </span>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-left">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-start">
                   {otherEvents.map((oEvent) => (
                     <Link
                       key={oEvent.slug}
                       href={`/${oEvent.slug}`}
-                      className="p-4 rounded-2xl border border-[#B5965A]/30 bg-[#FCFAF6]/90 backdrop-blur-xs hover:border-[#B5965A] hover:bg-[#EFE8DA]/50 transition-all flex items-center justify-between group shadow-2xs"
+                      className="p-4 rounded-2xl border border-[#B5965A]/35 bg-[#FCFAF6]/95 backdrop-blur-md hover:border-[#DFBF73] hover:bg-[#EFE8DA]/80 transition-all flex items-center justify-between group shadow-2xs"
                     >
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#81776B] font-sans font-bold block">
+                        <span
+                          className={`text-[10px] tracking-wider text-[#702F3D] font-bold block ${
+                            lang === 'ur' ? 'font-sameer-zikran text-xs' : 'font-cinzel uppercase'
+                          }`}
+                        >
                           {oEvent.ceremonyType[lang]}
                         </span>
                         <h4
-                          className={`text-base font-bold text-[#342C26] ${
-                            lang === 'ur' ? 'font-nastaliq-display' : 'font-serif'
+                          className={`text-base font-bold text-[#2E050B] ${
+                            lang === 'ur' ? 'font-sameer-zikran text-lg' : 'font-playfair'
                           }`}
                         >
                           {oEvent.title[lang]}
@@ -199,7 +344,7 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
                 <div className="pt-4 text-center">
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#342C26] hover:text-[#702F3D] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-serif font-bold text-[#F8F5EE] hover:text-[#DFBF73] transition-colors drop-shadow-md"
                   >
                     <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" />
                     <span>{lang === 'ur' ? 'مرکزی کارڈ پر واپس جائیں' : 'Back to Main Wedding Card'}</span>
@@ -210,13 +355,16 @@ function EventClientViewContent({ config, event }: EventClientViewProps) {
           </div>
         )}
       </main>
+
+      {/* Persistent Audio Controller on ALL invitation pages */}
+      <AudioController />
     </div>
   );
 }
 
 export function EventClientView(props: EventClientViewProps) {
   return (
-    <React.Suspense fallback={<div className="min-h-screen bg-[#F8F5EE]" />}>
+    <React.Suspense fallback={<div className="min-h-screen bg-[#060D1A]" />}>
       <EventClientViewContent {...props} />
     </React.Suspense>
   );
