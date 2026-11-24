@@ -63,7 +63,7 @@ export function WaxSealEnvelope({
   return (
     <div
       onClick={handleOpen}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center px-4 overflow-hidden select-none cursor-pointer bg-[#050B14]/95 transition-opacity duration-700"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center py-4 px-3 sm:py-6 sm:px-6 overflow-y-auto sm:overflow-hidden select-none cursor-pointer bg-[#050B14]/95 transition-opacity duration-700"
     >
       {/* Background Ambience Texture: Moroccan Pattern Backdrop */}
       <div
@@ -78,32 +78,44 @@ export function WaxSealEnvelope({
       {/* Radial Deep Vignette (No Overwhelming Glowing Flares) */}
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_20%,rgba(5,11,20,0.92)_100%] pointer-events-none" />
 
-      {/* The Postcard / Envelope Composition (Adaptive Vertical Height for All Displays) */}
-      <div className="relative w-full max-w-[290px] xs:max-w-[320px] sm:max-w-[560px] md:max-w-[620px] max-h-[90dvh] flex flex-col items-center justify-center my-auto">
-        {/* Personalized Invitee Callout Badge on Envelope (Clean, Single-Line No-Wrap) */}
+      {/* The Postcard / Envelope Composition (Adaptive Vertical Height for All Displays, Zero Scroll/Overflow) */}
+      <div className="relative w-full max-w-sm sm:max-w-[560px] md:max-w-[620px] flex flex-col items-center justify-center gap-2 sm:gap-3 my-auto z-10">
+        {/* Dignified Invitee Callout Header (Fluid, Adaptive, Zero Truncation) */}
         <div
-          className={`mb-2.5 sm:mb-4 px-4 sm:px-6 py-1.5 rounded-full border border-[#DFBF73]/50 bg-[#081226]/90 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.7)] text-center transition-all duration-500 max-w-[92vw] sm:max-w-max mx-auto shrink-0 ${
+          className={`w-full px-2 text-center transition-all duration-500 shrink-0 ${
             stage !== 'idle' ? 'opacity-0 -translate-y-2' : 'opacity-100'
           }`}
         >
-          <span
-            className={`text-xs sm:text-sm text-[#FFDF73] font-medium tracking-wide inline-flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap ${
-              lang === 'ur' ? 'font-sameer-zikran text-base sm:text-lg' : 'font-cinzel'
+          {/* Honorific Ribbon Pill */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full border border-[#DFBF73]/40 bg-[#081226]/85 backdrop-blur-md mb-1 shadow-xs">
+            <span className="text-[#DFBF73] text-[9px] sm:text-[10px]">✦</span>
+            <span
+              className={`text-[10px] sm:text-xs text-[#DFBF73] font-bold uppercase tracking-[0.2em] whitespace-nowrap ${
+                lang === 'ur' ? 'font-sameer-zikran tracking-normal text-xs sm:text-sm text-[#FFDF73]' : 'font-cinzel'
+              }`}
+            >
+              {lang === 'ur' ? 'بخدمتِ گرامی قدر معزز مہمان' : 'Invited with Honor'}
+            </span>
+            <span className="text-[#DFBF73] text-[9px] sm:text-[10px]">✦</span>
+          </div>
+
+          {/* Guest Name Headline (Adapts to Screen, Never Truncated) */}
+          <h2
+            className={`font-bold tracking-wide text-[#FFF8E7] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-tight ${
+              lang === 'ur'
+                ? 'font-sameer-zikran text-xl sm:text-2xl text-[#FFDF73]'
+                : 'font-cinzel text-base sm:text-lg md:text-xl'
             }`}
           >
-            <span className="text-[#DFBF73] shrink-0 text-xs">✦</span>
-            <span className="truncate">
-              {guestName
-                ? (lang === 'ur' ? `بخدمتِ گرامی قدر: ${guestName} و اہلِ خانہ` : `Invited with Honor: ${guestName} & Family`)
-                : (lang === 'ur' ? 'بخدمتِ گرامی قدر: معزز مہمان و اہلِ خانہ' : 'Invited with Honor: Respected Guest & Family')}
-            </span>
-            <span className="text-[#DFBF73] shrink-0 text-xs">✦</span>
-          </span>
+            {guestName
+              ? (lang === 'ur' ? `${guestName} و اہلِ خانہ` : `${guestName} & Family`)
+              : (lang === 'ur' ? 'معزز مہمان و اہلِ خانہ' : 'Respected Guest & Family')}
+          </h2>
         </div>
 
         {/* Luminous Gold Mandala Artwork Display (Clean Stationery Shadow, No Saturated Flares) */}
         <div
-          className={`relative w-full flex flex-col items-center justify-center filter transition-all duration-700 ease-out group ${
+          className={`relative w-full flex flex-col items-center justify-center filter transition-all duration-700 ease-out group shrink-0 ${
             stage === 'cracking'
               ? 'scale-103 drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]'
               : stage === 'opening'
@@ -114,7 +126,7 @@ export function WaxSealEnvelope({
           }`}
         >
           {/* Desktop Version: Landscape (1672x941) */}
-          <div className="hidden sm:block relative w-full aspect-[1672/941] max-h-[48dvh] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="hidden sm:block relative w-full aspect-[1672/941] max-h-[46dvh] rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src="/assets/envelope/mandala-envelope-desktop.webp"
               alt="Luminous Gold Mandala Wedding Seal Envelope Desktop"
@@ -127,8 +139,8 @@ export function WaxSealEnvelope({
             <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(8,18,38,0.4)_100%] pointer-events-none group-hover:opacity-60 transition-opacity" />
           </div>
 
-          {/* Mobile Version: Vertical Optimized with Adaptive Height (941x1672) */}
-          <div className="block sm:hidden relative w-auto h-[46dvh] max-h-[460px] aspect-[941/1672] rounded-2xl overflow-hidden shadow-2xl mx-auto">
+          {/* Mobile Version: Vertical Optimized with Adaptive Height (40dvh, max 380px) */}
+          <div className="block sm:hidden relative w-auto h-[40dvh] max-h-[380px] aspect-[941/1672] rounded-2xl overflow-hidden shadow-2xl mx-auto">
             <Image
               src="/assets/envelope/mandala-envelope-mobile.webp"
               alt="Luminous Gold Mandala Wedding Seal Envelope Mobile"
@@ -158,7 +170,7 @@ export function WaxSealEnvelope({
         </div>
 
         {/* Tactile Tap Prompt & Actions */}
-        <div className="mt-3 sm:mt-5 text-center z-20 space-y-2 shrink-0">
+        <div className="mt-1 sm:mt-3 text-center z-20 space-y-2 shrink-0">
           <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] animate-pulse">
             <span className="text-[#FFDF73]">✦</span>
             <span>{config.seal.openPrompt[lang]}</span>
