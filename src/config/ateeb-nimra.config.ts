@@ -133,6 +133,18 @@ export const ateebNimraWeddingConfig: WeddingConfig = {
       phone: '03126587882',
       whatsappUrl: 'https://wa.me/923126587882',
     },
+    {
+      name: {
+        en: 'Samr Faiz',
+        ur: 'ثمر فیض',
+      },
+      relation: {
+        en: 'Brother',
+        ur: 'برادر',
+      },
+      phone: '03136587860',
+      whatsappUrl: 'https://wa.me/923136587860',
+    },
   ],
   events: {
     nikkah: {
