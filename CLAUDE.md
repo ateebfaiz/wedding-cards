@@ -21,6 +21,7 @@ Please see the comprehensive handbook at [agents/claude.md](file:///home/ateeb/w
 - **Emergency / RSVP Contacts:**
   - Faiz Rasool Cheema: `0318-6587882` (Call & WhatsApp)
   - Muneeb Faiz: `0312-6587882` (Call & WhatsApp)
+  - Samr Faiz: `0313-6587860` (Urdu: `ثمر فیض`, Brother, Call & WhatsApp)
 - **Event Instructions:** "Please come on time and follow our lead and the details and event details on the map in your personalized invitation card."
 - **Envelope Card:** Luxurious Navy Gold Wedding Envelope (`luxurious-navy-envelope.webp`) with authentic drop shadows, interactive center red wax seal, and wax crack SFX.
 - **Celebratory Confetti:** Launched upon opening Nikkah and Baraat with a slight procedural delay.

@@ -65,8 +65,9 @@ All agents must strictly uphold these authentic family and event details:
   - Parents: Javed Iqbal Sultani & Zahida Parveen (`جاوید اقبال سلطانی اور زاہدہ پروین`)
 
 ### Emergency / RSVP Contacts
-- **Faiz Rasool Cheema:** `0318-6587882` (Call & WhatsApp `https://wa.me/923186587882`)
-- **Muneeb Faiz:** `0312-6587882` (Call & WhatsApp `https://wa.me/923126587882`)
+- **Faiz Rasool Cheema:** `0318-6587882` (Father, Call & WhatsApp `https://wa.me/923186587882`)
+- **Muneeb Faiz:** `0312-6587882` (Brother, Call & WhatsApp `https://wa.me/923126587882`)
+- **Samr Faiz:** `0313-6587860` (Brother, Urdu: `ثمر فیض`, Call & WhatsApp `https://wa.me/923136587860`)
 
 ### Event Instructions
 - *"Please come on time and follow our lead and the details and event details on the map in your personalized invitation card."*  

@@ -75,52 +75,51 @@ export function WaxSealEnvelope({
         }}
       />
 
-      {/* Radial Deep Vignette & Golden Ambient Aura */}
+      {/* Radial Deep Vignette (No Overwhelming Glowing Flares) */}
       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_20%,rgba(5,11,20,0.92)_100%] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full bg-radial-[circle,rgba(223,191,115,0.18)_0%,transparent_70%] pointer-events-none blur-2xl animate-pulse" />
 
-      {/* The Postcard / Envelope Composition (Luminous Gold Mandala on Navy, tailored for desktop and mobile) */}
-      <div className="relative w-full max-w-[340px] sm:max-w-[580px] md:max-w-[650px] flex flex-col items-center justify-center">
-        {/* Personalized Invitee Callout Badge on Envelope */}
-        {guestName && (
-          <div
-            className={`mb-4 px-5 py-1.5 rounded-full border border-[#DFBF73]/60 bg-[#081226]/85 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.6)] text-center transition-all duration-500 ${
-              stage !== 'idle' ? 'opacity-0 -translate-y-2' : 'opacity-100'
+      {/* The Postcard / Envelope Composition (Adaptive Vertical Height for All Displays) */}
+      <div className="relative w-full max-w-[290px] xs:max-w-[320px] sm:max-w-[560px] md:max-w-[620px] max-h-[90dvh] flex flex-col items-center justify-center my-auto">
+        {/* Personalized Invitee Callout Badge on Envelope (Clean, Single-Line No-Wrap) */}
+        <div
+          className={`mb-2.5 sm:mb-4 px-4 sm:px-6 py-1.5 rounded-full border border-[#DFBF73]/50 bg-[#081226]/90 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.7)] text-center transition-all duration-500 max-w-[92vw] sm:max-w-max mx-auto shrink-0 ${
+            stage !== 'idle' ? 'opacity-0 -translate-y-2' : 'opacity-100'
+          }`}
+        >
+          <span
+            className={`text-xs sm:text-sm text-[#FFDF73] font-medium tracking-wide inline-flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap ${
+              lang === 'ur' ? 'font-sameer-zikran text-base sm:text-lg' : 'font-cinzel'
             }`}
           >
-            <span
-              className={`text-xs sm:text-sm text-[#FFDF73] font-medium tracking-wide flex items-center justify-center gap-2 ${
-                lang === 'ur' ? 'font-sameer-zikran text-lg' : 'font-cinzel'
-              }`}
-            >
-              <span className="text-[#DFBF73]">✦</span>
-              {lang === 'ur'
-                ? `بخدمتِ گرامی قدر: ${guestName} و اہلِ خانہ`
-                : `Invited with Honor: ${guestName} & Family`}
-              <span className="text-[#DFBF73]">✦</span>
+            <span className="text-[#DFBF73] shrink-0 text-xs">✦</span>
+            <span className="truncate">
+              {guestName
+                ? (lang === 'ur' ? `بخدمتِ گرامی قدر: ${guestName} و اہلِ خانہ` : `Invited with Honor: ${guestName} & Family`)
+                : (lang === 'ur' ? 'بخدمتِ گرامی قدر: معزز مہمان و اہلِ خانہ' : 'Invited with Honor: Respected Guest & Family')}
             </span>
-          </div>
-        )}
+            <span className="text-[#DFBF73] shrink-0 text-xs">✦</span>
+          </span>
+        </div>
 
-        {/* Luminous Gold Mandala Artwork Display with Interactive Glow */}
+        {/* Luminous Gold Mandala Artwork Display (Clean Stationery Shadow, No Saturated Flares) */}
         <div
-          className={`relative w-full filter transition-all duration-700 ease-out group ${
+          className={`relative w-full flex flex-col items-center justify-center filter transition-all duration-700 ease-out group ${
             stage === 'cracking'
-              ? 'scale-103 drop-shadow-[0_0_50px_rgba(255,223,115,0.7)]'
+              ? 'scale-103 drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]'
               : stage === 'opening'
-              ? 'scale-110 opacity-80 blur-[1px] drop-shadow-[0_0_80px_rgba(255,223,115,0.9)]'
+              ? 'scale-110 opacity-80 blur-[1px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.95)]'
               : stage === 'revealed'
               ? 'scale-125 opacity-0'
-              : 'scale-100 hover:scale-[1.02] drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:drop-shadow-[0_0_40px_rgba(223,191,115,0.55)]'
+              : 'scale-100 hover:scale-[1.01] drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]'
           }`}
         >
           {/* Desktop Version: Landscape (1672x941) */}
-          <div className="hidden sm:block relative w-full aspect-[1672/941] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="hidden sm:block relative w-full aspect-[1672/941] max-h-[48dvh] rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src="/assets/envelope/mandala-envelope-desktop.webp"
               alt="Luminous Gold Mandala Wedding Seal Envelope Desktop"
               fill
-              sizes="(max-width: 1024px) 580px, 650px"
+              sizes="(max-width: 1024px) 560px, 620px"
               className="object-cover"
               priority
             />
@@ -128,13 +127,13 @@ export function WaxSealEnvelope({
             <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(8,18,38,0.4)_100%] pointer-events-none group-hover:opacity-60 transition-opacity" />
           </div>
 
-          {/* Mobile Version: Vertical Optimized (941x1672) */}
-          <div className="block sm:hidden relative w-full aspect-[941/1672] rounded-2xl overflow-hidden shadow-2xl">
+          {/* Mobile Version: Vertical Optimized with Adaptive Height (941x1672) */}
+          <div className="block sm:hidden relative w-auto h-[46dvh] max-h-[460px] aspect-[941/1672] rounded-2xl overflow-hidden shadow-2xl mx-auto">
             <Image
               src="/assets/envelope/mandala-envelope-mobile.webp"
               alt="Luminous Gold Mandala Wedding Seal Envelope Mobile"
               fill
-              sizes="340px"
+              sizes="280px"
               className="object-cover"
               priority
             />
@@ -142,33 +141,25 @@ export function WaxSealEnvelope({
             <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,rgba(8,18,38,0.4)_100%] pointer-events-none group-hover:opacity-60 transition-opacity" />
           </div>
 
-          {/* Interactive Center Seal Hotspot with Multi-Tier Radiant Glow */}
+          {/* Interactive Center Seal Hotspot with Ping Animation (Flares Removed) */}
           <div
-            className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 rounded-full flex items-center justify-center cursor-pointer"
+            className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center cursor-pointer"
             title="Click or tap to open invitation"
           >
-            {/* Expanding Pulsing Ring */}
+            {/* Expanding Pulsing Ring (Preserved) */}
             <div
-              className={`absolute inset-0 rounded-full border-2 border-[#DFBF73]/70 transition-all duration-500 ${
+              className={`absolute inset-0 rounded-full border border-[#DFBF73]/70 transition-all duration-500 ${
                 stage === 'cracking'
-                  ? 'scale-150 border-[#FFDF73] bg-[#FFDF73]/30 shadow-[0_0_50px_#FFDF73]'
+                  ? 'scale-140 border-[#DFBF73] bg-[#DFBF73]/15'
                   : 'group-hover:scale-115 group-hover:border-[#FFDF73] animate-ping opacity-35'
-              }`}
-            />
-            {/* Radiant Inner Glow Aura */}
-            <div
-              className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-radial-[circle,rgba(255,223,115,0.35)_0%,transparent_75%] transition-all duration-300 ${
-                stage === 'cracking'
-                  ? 'scale-125 bg-radial-[circle,rgba(255,223,115,0.7)_0%,transparent_70%]'
-                  : 'group-hover:scale-125 group-hover:bg-radial-[circle,rgba(255,223,115,0.55)_0%,transparent_70%]'
               }`}
             />
           </div>
         </div>
 
         {/* Tactile Tap Prompt & Actions */}
-        <div className="mt-6 text-center z-20 space-y-3">
-          <p className="text-xs uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] animate-pulse">
+        <div className="mt-3 sm:mt-5 text-center z-20 space-y-2 shrink-0">
+          <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#DFBF73] font-cinzel font-bold flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] animate-pulse">
             <span className="text-[#FFDF73]">✦</span>
             <span>{config.seal.openPrompt[lang]}</span>
             <span className="text-[#FFDF73]">✦</span>
@@ -179,7 +170,7 @@ export function WaxSealEnvelope({
             <button
               type="button"
               onClick={handleSkip}
-              className="text-[11px] text-[#EFE8DA]/80 hover:text-[#FFDF73] font-cinzel tracking-wider px-4 py-1.5 rounded-full border border-[#DFBF73]/40 bg-[#081226]/80 hover:border-[#DFBF73]/80 hover:bg-[#0D1B36] transition-all cursor-pointer shadow-md"
+              className="text-[10px] sm:text-[11px] text-[#EFE8DA]/80 hover:text-[#FFDF73] font-cinzel tracking-wider px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full border border-[#DFBF73]/40 bg-[#081226]/80 hover:border-[#DFBF73]/80 hover:bg-[#0D1B36] transition-all cursor-pointer shadow-md"
             >
               {lang === 'ur' ? 'براہِ راست دعوت نامہ کھولیں ➔' : 'Skip to Invitation ➔'}
             </button>
